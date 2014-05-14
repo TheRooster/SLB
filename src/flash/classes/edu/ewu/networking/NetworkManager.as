@@ -166,7 +166,7 @@
 			else if (dataObj.OPCODE == NetworkManager.OPCODE_ATTACK)
 			{
 				//TODO: Handle attacks
-				//var attack:Attack = new (dataObj.AttackName)();
+				//var attack:Attack = new (dataObj.AttackName)(dataObj.AttackerName, dataObj.x, dataObj.y, dataObj.angle);
 				//attack.begin();
 			}
 			else if (dataObj.OPCODE == NetworkManager.OPCODE_DEATH)
@@ -207,7 +207,7 @@
 					else if ($sOPCODE == NetworkManager.OPCODE_ATTACK)
 					{
 						//TODO: Handle attacks
-						// _connection.sendObject( { OPCODE:NetworkManager.OPCODE_ATTACK, name:$oObject.AttackName, x:$oObject.x, y:$oObject.y, angle:$oObject.angle } );
+						// _connection.sendObject( { OPCODE:NetworkManager.OPCODE_ATTACK, name:$oObject.AttackName, attackerName:$oObject.AttackerName x:$oObject.x, y:$oObject.y, angle:$oObject.angle } );
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_DEATH)
 					{
