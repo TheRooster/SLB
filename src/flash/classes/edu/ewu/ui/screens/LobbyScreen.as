@@ -2,6 +2,7 @@ package edu.ewu.ui.screens
 {
 	import edu.ewu.components.NamePrompt;
 	import edu.ewu.components.Player;
+	import edu.ewu.components.player.LocalPlayer;
 	import edu.ewu.events.AppEvent;
 	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.sounds.MusicManager;
@@ -55,7 +56,7 @@ package edu.ewu.ui.screens
 			{
 				name = "Anon";
 			}
-			var me:Player = new Player(name);
+			var me:LocalPlayer = new LocalPlayer(name, "RonaldMcDonald");
 			me.x = stage.stageWidth * 0.5;
 			me.y = stage.stageHeight * 0.5;
 			

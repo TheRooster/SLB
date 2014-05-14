@@ -1,7 +1,7 @@
 ﻿package edu.ewu.ui.screens
 {
 	import com.greensock.TweenMax;
-	import edu.ewu.components.Player;
+	import edu.ewu.components.player.Player;
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.text.TextField;

@@ -2,7 +2,8 @@
 {
 	import com.reyco1.multiuser.data.UserObject;
 	import com.reyco1.multiuser.MultiUserSession;
-	import edu.ewu.components.Player;
+	import edu.ewu.components.player.Player;
+	import edu.ewu.components.player.NetworkPlayer;
 	import flash.utils.Dictionary;
 	import org.osflash.signals.Signal;
 	
@@ -127,7 +128,7 @@
 		private function onUserAdded(user:UserObject):void 
 		{
 			trace("User added: " + user.name);
-			var p:Player = new Player(user.name, user.details.color, true);
+			var p:NetworkPlayer = new NetworkPlayer(user.name, user.details.color);
 			this.add(user.name, p);
 			this.playerJoinedSignal.dispatch(p);
 		}
@@ -150,8 +151,8 @@
 				{
 					player.x = dataObj.x;
 					player.y = dataObj.y;
-					player.nLives = dataObj.lives;
-					player.nHealth = dataObj.health;
+					//player.nLives = dataObj.lives;
+					//player.nHealth = dataObj.health;
 				}
 			}
 			else if (dataObj.OPCODE == NetworkManager.OPCODE_MOVED)
@@ -233,7 +234,7 @@
 		 */
 		public function connect($sName:String, $oPlayer:Player):void
 		{
-			_connection.connect($sName, { x:$oPlayer.x, y:$oPlayer.y, color:$oPlayer.PlayerColor } );
+			_connection.connect($sName, { x:$oPlayer.x, y:$oPlayer.y } );
 		}
 	}
 }
