@@ -1,5 +1,7 @@
 ﻿package 
 {
+	import com.greensock.loading.LoaderMax;
+	import com.greensock.loading.XMLLoader;
 	import com.natejc.input.KeyboardManager;
 	import com.natejc.utils.StageRef;
 	import edu.ewu.networking.NetworkManager;
@@ -20,8 +22,9 @@
 	public class Main extends MovieClip
 	{
 		
+		
 		private const SERVER:String = "rtmfp://p2p.rtmfp.net/";
-		private const DEVKEY:String = "";
+		private var   DEVKEY:String = "";
 		private const SERV_KEY:String = SERVER + DEVKEY;
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -33,6 +36,13 @@
 		{
 			KeyboardManager.init(this.stage);
 			StageRef.stage = this.stage;
+			
+			
+			//Load the key from an xml file named serverKey, <serverKey><Key>yourkeyHere</Key></serverKey>
+			var loader:XMLLoader =  new XMLLoader("resources/xml/serverKey.xml", { name:"key", onComplete:function() { DEVKEY = (LoaderMax.getContent("key")).Key;} } );
+			loader.load();
+			
+			
 			
 			MusicManager.instance.add("Lobby", new Music(new LobbyLoop(), 1.0, true)); 
 			MusicManager.instance.add("Game", new Music(new GameLoop(), 1.0, true, 1914)); 
