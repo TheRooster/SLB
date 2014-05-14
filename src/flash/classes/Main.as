@@ -1,5 +1,6 @@
 ﻿package 
 {
+	import com.greensock.events.LoaderEvent;
 	import com.greensock.loading.LoaderMax;
 	import com.greensock.loading.XMLLoader;
 	import com.natejc.input.KeyboardManager;
@@ -25,7 +26,7 @@
 		
 		private const SERVER:String = "rtmfp://p2p.rtmfp.net/";
 		private var   DEVKEY:String = "";
-		private const SERV_KEY:String = SERVER + DEVKEY;
+		private var SERV_KEY:String = "";
 		
 		/* ---------------------------------------------------------------------------------------- */
 		
@@ -39,7 +40,7 @@
 			
 			
 			//Load the key from an xml file named serverKey, <serverKey><Key>yourkeyHere</Key></serverKey>
-			var loader:XMLLoader =  new XMLLoader("resources/xml/serverKey.xml", { name:"key", onComplete:function() { DEVKEY = (LoaderMax.getContent("key")).Key;} } );
+			var loader:XMLLoader =  new XMLLoader("resources/xml/serverKey.xml", { name:"key", onComplete:initNetwork} );
 			loader.load();
 			
 			
@@ -57,10 +58,19 @@
 			this.addChild(lobbyScreen);
 			this.addChild(gameScreen);
 			
-			NetworkManager.instance.initConnection(SERV_KEY);
+			
 			
 			ScreenManager.instance.switchScreen("Lobby");
 			ScreenManager.instance.mcActiveScreen.begin();
+		}
+		
+		/* ---------------------------------------------------------------------------------------- */
+		
+		private function initNetwork(event:LoaderEvent):void 
+		{
+			DEVKEY = (LoaderMax.getContent("key")).Key; 
+			SERV_KEY = SERVER + DEVKEY; 
+			NetworkManager.instance.initConnection(SERV_KEY);
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
