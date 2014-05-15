@@ -242,7 +242,7 @@ package edu.ewu.components.player
 			var distanceY : Number = $e.stageY - this.y;
 			var angleInRadians : Number = Math.atan2(distanceY, distanceX);
 			var angleInDegrees : Number = angleInRadians * (180 / Math.PI);
-			this._sSprite.rotationX = angleInDegrees;
+			this.rotation = angleInDegrees;
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
