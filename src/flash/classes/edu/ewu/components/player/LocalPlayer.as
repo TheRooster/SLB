@@ -11,6 +11,7 @@ package edu.ewu.components.player
 	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.sounds.SoundManager;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	
@@ -42,7 +43,7 @@ package edu.ewu.components.player
 		{
 			super($pName, $charName);
 			
-			
+			this.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
 				
 			KeyboardManager.instance.addKeyDownListener(KeyCode.W, wDownHandler);
 			KeyboardManager.instance.addKeyDownListener(KeyCode.A, aDownHandler);
@@ -204,6 +205,23 @@ package edu.ewu.components.player
 		protected function heartbeat($e:TimerEvent = null):void
 		{
 			NetworkManager.instance.sendData(NetworkManager.OPCODE_HEARTBEAT, this);
+		}
+		
+		/* ---------------------------------------------------------------------------------------- */
+		
+		/**
+		 * @private
+		 * Rotate player to face mouse.
+		 * 
+		 * @param	$e		The dispatched MouseEvent.
+		 */
+		protected function mouseMoveHandler($e:MouseEvent = null):void
+		{
+			var distanceX : Number = $e.stageX - this.x;
+			var distanceY : Number = $e.stageY - this.y;
+			var angleInRadians : Number = Math.atan2(distanceY, distanceX);
+			var angleInDegrees : Number = angleInRadians * (180 / Math.PI);
+			this.rotation = angleInDegrees;
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
