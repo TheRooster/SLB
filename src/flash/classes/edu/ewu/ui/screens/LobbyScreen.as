@@ -50,9 +50,9 @@ package edu.ewu.ui.screens
 		private function onSubmit():void 
 		{
 			var name:String = _txtPlayerName.text;
-			if (name == "")
+			if (name == "Anon" || name == "")
 			{
-				name = "Anon";
+				name = "Anon" + uint(Math.random() * 10000).toString();
 			}
 			var me:LocalPlayer = new LocalPlayer(name, "RonaldMcDonald");
 			me.x = stage.stageWidth * 0.5;
