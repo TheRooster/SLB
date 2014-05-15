@@ -15,6 +15,8 @@ package edu.ewu.components.attacks
 	{
 		/** Player that created the attack */
 		public var 		sCreator	:String;
+		/** Whether the attack was created locally or not */
+		protected var	_bNetwork	:Boolean;
 		
 		public var 		damage		:Number;
 		public var 		force		:Number;
@@ -22,7 +24,7 @@ package edu.ewu.components.attacks
 		protected var 	_timer  	:Timer;
 		
 		//$nTime is the time the attack will last in milliseconds.
-		public function Attack($sCreator:String,$nX:uint, $nY:uint, $nAngle:uint, $nForce:uint = 100, $nDamage:uint = 0, $nTime:uint = 1000) 
+		public function Attack($sCreator:String,$nX:uint, $nY:uint, $nAngle:uint, $nForce:uint = 100, $nDamage:uint = 0, $nTime:uint = 1000, $bNetwork:Boolean = false) 
 		{
 			this.sCreator = $sCreator; 
 			this.x = $nX;
@@ -30,6 +32,7 @@ package edu.ewu.components.attacks
 			this.damage = $nDamage;
 			this.force = $nForce;
 			this.angle = $nAngle;
+			this._bNetwork = $bNetwork;
 			
 			this.sCollisionType = CollisionManager.TYPE_ATTACK;
 			
@@ -39,7 +42,10 @@ package edu.ewu.components.attacks
 			_timer.addEventListener(TimerEvent.TIMER_COMPLETE, destroy);
 			_timer.start();
 			
-			NetworkManager.instance.sendData(NetworkManager.OPCODE_ATTACK, this);
+			if (this._bNetwork == false)
+			{
+				NetworkManager.instance.sendData(NetworkManager.OPCODE_ATTACK, this);
+			}
 		}
 		
 		public function destroy()
