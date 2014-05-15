@@ -1,6 +1,7 @@
 ﻿package edu.ewu.components.player 
 {
 	import com.greensock.easing.Linear;
+	import com.greensock.events.LoaderEvent;
 	import com.greensock.TweenMax;
 	import com.natejc.input.KeyboardManager;
 	import com.natejc.input.KeyCode;
@@ -44,8 +45,7 @@
 		public function LocalPlayer($pName:String, $charName:String) 
 		{
 			super($pName, $charName);
-			StageRef.stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
-			StageRef.stage.addEventListener(MouseEvent.CLICK, mouseClickHandler);
+			
 				
 			KeyboardManager.instance.addKeyDownListener(KeyCode.W, wDownHandler);
 			KeyboardManager.instance.addKeyDownListener(KeyCode.A, aDownHandler);
@@ -70,10 +70,21 @@
 		
 		/* ---------------------------------------------------------------------------------------- */
 		
+		override protected function init(e:LoaderEvent):void
+		{
+			super.init(e);
+			//need to move these here so that we're sure the sprite is loaded before we try to 
+			//trigger the animations
+			StageRef.stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
+			StageRef.stage.addEventListener(MouseEvent.CLICK, mouseClickHandler);
+		}
+		
+		/* ---------------------------------------------------------------------------------------- */
+		
 		private function wDownHandler():void 
 		{
 			this._up = true;
-			//_sSprite.gotoAndPlay("Walk_Enter");
+			_sSprite.gotoAndPlay("Walk_Enter");
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -88,7 +99,7 @@
 		private function sDownHandler():void 
 		{
 			this._down = true;
-			//_sSprite.gotoAndPlay("Walk_Enter");
+			_sSprite.gotoAndPlay("Walk_Enter");
 		}
 				
 		/* ---------------------------------------------------------------------------------------- */
@@ -103,7 +114,7 @@
 		private function wUpHandler():void 
 		{
 			this._up = false;
-			//_sSprite.gotoAndPlay("Walk_Exit");
+			_sSprite.gotoAndPlay("Walk_Exit");
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -118,7 +129,7 @@
 		private function sUpHandler():void 
 		{
 			this._down = false;
-			//_sSprite.gotoAndPlay("Walk_Exit");
+			_sSprite.gotoAndPlay("Walk_Exit");
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -210,7 +221,7 @@
 		protected function mouseMoveHandler($e:MouseEvent = null):void
 		{
 			
-			//we may need to use the mouse movements to update a dummy object here, as it is the mouse movement is kinda wonky.  I'll look into refactoring it -Jon
+			//TODO: we may need to use the mouse movements to update a dummy object here, as it is the mouse movement is kinda wonky.  I'll look into refactoring it -Jon
 			
 			if (this._bAlive)
 			{
@@ -221,8 +232,15 @@
 				//this._sSprite.rotation = angleInDegrees;
 				if (angleInDegrees < 0)
 				{
+					//TODO: this looks terrible -Jon
+					//this._sSprite.gotoAndPlay("Turn_Left");
 					angleInDegrees += 360;
 				}
+				else
+				{
+					//this._sSprite.gotoAndPlay("Turn_Right");
+				}
+				
 				this.rotation = angleInDegrees;
 			}
 		}
@@ -239,6 +257,7 @@
 		{
 			if (this._bAlive)
 			{
+				this._sSprite.gotoAndPlay("Light_Attack");
 				//new Attack(this.PlayerName, this.x, this.y, this._sSprite.rotation);
 				new Attack(this.PlayerName, this.x, this.y, this.rotation + 360);
 			}

@@ -153,7 +153,7 @@
 				{
 					player.x = dataObj.x;
 					player.y = dataObj.y;
-					//player.rotationX = dataObj._sSprite.rotation;
+					player.rotation = dataObj.rotation;
 					//player.nLives = dataObj.lives;
 					//player.nHealth = dataObj.health;
 				}
