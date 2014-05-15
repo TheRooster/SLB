@@ -43,11 +43,8 @@ package edu.ewu.components.player
 		{
 			super($pName, $charName);
 			
-<<<<<<< HEAD
-			trace("init kb");
-=======
+
 			this.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
->>>>>>> 5941e9013b9e30c9869303147550fe452f54669f
 				
 			KeyboardManager.instance.addKeyDownListener(KeyCode.W, wDownHandler);
 			KeyboardManager.instance.addKeyDownListener(KeyCode.A, aDownHandler);
@@ -145,33 +142,26 @@ package edu.ewu.components.player
 					this._nLastX = this.x;
 					this._nLastY = this.y;
 				}
-				if (_left && this.x - 5 > 0)
+				if (_left && this.x - this._nSpeed > 0)
 				{
-<<<<<<< HEAD
+
 					this.x -= this._nSpeed;
 				}
 				else if(_left)
 				{
 					this.x = 0;
-=======
+
 					this._nLastX = this.x;
-					this._nXPos -= this._nSpeed;
 				}
-				else if(_left)
-				{
-					this._nLastX = this.x;
-					this._nXPos = 0;
->>>>>>> 5941e9013b9e30c9869303147550fe452f54669f
-				}
+
 					
-				if (_right && this.x + (this.width/2) + 5 < StageRef.stage.stageWidth)
+				if (_right && this.x + (this.width/2) + this._nSpeed < StageRef.stage.stageWidth)
 				{
-<<<<<<< HEAD
+
 					this.x += this._nSpeed;
-=======
+
 					this._nLastX = this.x;
 					this._nXPos += this._nSpeed;
->>>>>>> 5941e9013b9e30c9869303147550fe452f54669f
 				}
 				else if (_right)
 				{
@@ -179,7 +169,7 @@ package edu.ewu.components.player
 					this.x = StageRef.stage.stageWidth - this.width / 4;
 				}
 					
-				if (_up && this.y - 5 > 0)
+				if (_up && this.y - this._nSpeed > 0)
 				{
 					this._nLastY = this.y;
 					this.y -= this._nSpeed;
@@ -190,7 +180,7 @@ package edu.ewu.components.player
 					this.y = 0;
 				}
 					
-				if (_down && this.y + (this.height/2) + 5 < StageRef.stage.stageHeight)
+				if (_down && this.y + (this.height/2) + this._nSpeed < StageRef.stage.stageHeight)
 				{
 					this._nLastY = this.y;
 					this.y += this._nSpeed;
