@@ -1,12 +1,14 @@
-﻿package edu.ewu.components.player
+package edu.ewu.components.player
 {
 	import com.greensock.events.LoaderEvent;
 	import com.greensock.loading.display.ContentDisplay;
 	import com.greensock.loading.LoaderMax;
+	import com.greensock.loading.LoaderStatus;
 	import com.greensock.loading.SWFLoader;
 	import com.greensock.loading.XMLLoader;
 	import flash.display.DisplayObject;
 	import edu.ewu.components.Collideable;
+	import flash.display.Loader;
 
 	import flash.display.MovieClip;
 	import flash.text.TextField;
@@ -44,17 +46,17 @@
 			
 			this._charName = $charName;
 			
+
 			LoaderMax.activate([SWFLoader]);
 			var loader:XMLLoader = new XMLLoader("resources/xml/" + _charName + ".xml", { name:this._charName, onComplete:init  } );
 			loader.load();
-			
 			
 			var fmt:TextFormat = new TextFormat("Courier New", 10, 0xFFFFFF);
 			_namePlate = new TextField();
 			_namePlate.defaultTextFormat = fmt;
 			_namePlate.text = $pName.substr(0, 30); //max 30 character names
 			_namePlate.x = this.width / 2 - _namePlate.textWidth * .5;
-			_namePlate.y = -_namePlate.textHeight;
+			_namePlate.y = -_namePlate.textHeight - 20;
 			_namePlate.selectable = false;
 			
 			this.addChild(_namePlate);
@@ -69,7 +71,15 @@
 		{
 			//init with xml
 			var stats:XML = LoaderMax.getContent(this._charName );
-			this._sSprite = MovieClip(MovieClip(SWFLoader(LoaderMax.getLoader(this._charName + "_Sprite")).rawContent).getChildAt(0));//this just keeps getting more crazy... but it worked this time.. yay
+			this._sSprite = MovieClip(SWFLoader(LoaderMax.getLoader(this._charName + "_Sprite")).rawContent)
+			if (this._sSprite.numChildren > 0)
+			{
+				this._sSprite = MovieClip(this._sSprite.getChildAt(0)).;//hacky fix for testing
+			}
+			else
+			{
+				trace("Has no children");
+			}
 			this._sSprite.rotationZ = 90;
 			
 			this._sSprite.scaleX = .3;
