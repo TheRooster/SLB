@@ -264,7 +264,7 @@
 			{
 				this._sSprite.gotoAndPlay("Light_Attack");
 				//new Attack(this.PlayerName, this.x, this.y, this._sSprite.rotation);
-				new Attack(this.PlayerName, this.x, this.y, this.rotation + 360);
+				new Attack(this.PlayerName, this.x, this.y, this.rotation < 0 ? this.rotation + 360 : this.rotation);
 			}
 		}
 		
