@@ -202,8 +202,7 @@
 				{
 					if ($sOPCODE == NetworkManager.OPCODE_HEARTBEAT)
 					{
-						//rotationX:$oObject._sSprite.rotation
-						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_MOVED, name:$oObject.PlayerName, x:$oObject.x, y:$oObject.y } );
+						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_MOVED, name:$oObject.PlayerName, x:$oObject.x, y:$oObject.y, rotation:$oObject.rotation } );
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_MOVED)
 					{
