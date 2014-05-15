@@ -14,6 +14,7 @@ package edu.ewu.components.player
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
+	import edu.ewu.ui.screens.ScreenManager;
 	
 	/**
 	 * ...
@@ -64,8 +65,6 @@ package edu.ewu.components.player
 			
 			this.addCollidesWithType(CollisionManager.TYPE_PLAYER);
 			this.addCollidesWithType(CollisionManager.TYPE_WALL);
-			
-			CollisionManager.instance.begin();
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -238,11 +237,19 @@ package edu.ewu.components.player
 		 */
 		protected function mouseMoveHandler($e:MouseEvent = null):void
 		{
-			var distanceX : Number = $e.stageX - this.x;
-			var distanceY : Number = $e.stageY - this.y;
-			var angleInRadians : Number = Math.atan2(distanceY, distanceX);
-			var angleInDegrees : Number = angleInRadians * (180 / Math.PI);
-			this.rotation = angleInDegrees;
+			if (this._bAlive)
+			{
+				var distanceX : Number = $e.stageX - this.x;
+				var distanceY : Number = $e.stageY - this.y;
+				var angleInRadians : Number = Math.atan2(distanceY, distanceX);
+				var angleInDegrees : Number = angleInRadians * (180 / Math.PI);
+				//this._sSprite.rotation = angleInDegrees;
+				if (angleInDegrees < 0)
+				{
+					angleInDegrees += 360;
+				}
+				this.rotation = angleInDegrees;
+			}
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -255,7 +262,11 @@ package edu.ewu.components.player
 		 */
 		protected function mouseClickHandler($e:MouseEvent = null):void
 		{
-			new Attack(this.PlayerName, this._sSprite.x, this._sSprite.y, this._sSprite.rotation);
+			if (this._bAlive)
+			{
+				//new Attack(this.PlayerName, this.x, this.y, this._sSprite.rotation);
+				new Attack(this.PlayerName, this.x, this.y, this.rotation + 360);
+			}
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */

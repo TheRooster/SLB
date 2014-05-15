@@ -22,7 +22,7 @@ package edu.ewu.components.player
 	{
 
 		
-		protected var _sSprite:ContentDisplay;
+		public var _sSprite:ContentDisplay;
 		protected var _namePlate:TextField;
 		public var _charName:String;
 		

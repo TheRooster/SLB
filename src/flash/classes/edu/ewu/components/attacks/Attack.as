@@ -1,4 +1,4 @@
-package edu.ewu.components.attacks  
+﻿package edu.ewu.components.attacks  
 {
 	import com.greensock.easing.Linear;
 	import com.greensock.TweenMax;
@@ -9,6 +9,7 @@ package edu.ewu.components.attacks
 	import edu.ewu.sounds.SoundManager;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
+	import com.natejc.utils.StageRef;
 	
 	/**
 	 * ...
@@ -39,15 +40,18 @@ package edu.ewu.components.attacks
 			this.damage = $nDamage;
 			this.force = $nForce;
 			this.angle = $nAngle;
+			this.rotation = $nAngle;
 			this._bNetwork = $bNetwork;
 			
 			this.sCollisionType = CollisionManager.TYPE_ATTACK;
 			
 			CollisionManager.instance.add(this);
 			
-			_timer = new Timer($nTime, 0);
+			_timer = new Timer($nTime, 1);
 			_timer.addEventListener(TimerEvent.TIMER_COMPLETE, destroy);
 			_timer.start();
+			
+			StageRef.stage.addChild(this);
 			
 			if (this._bNetwork == false)
 			{
@@ -55,11 +59,12 @@ package edu.ewu.components.attacks
 			}
 		}
 		
-		public function destroy()
+		public function destroy($e:TimerEvent = null)
 		{
 			_timer.stop();
 			_timer.removeEventListener(TimerEvent.TIMER_COMPLETE, destroy);
 			
+			this.stage.removeChild(this);
 			CollisionManager.instance.remove(this);
 		}
 		

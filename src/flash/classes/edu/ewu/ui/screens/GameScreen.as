@@ -7,6 +7,7 @@
 	import flash.text.TextField;
 	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.sounds.MusicManager;
+	import edu.ewu.components.CollisionManager;
 	
 	/**
 	 * Drives the GameScreen class.
@@ -27,9 +28,6 @@
 		{
 			super();
 			
-			this.mouseEnabled	= false;
-			this.mouseChildren	= false;
-			
 			this.bPlaying 		= false;
 		}
 		
@@ -45,7 +43,7 @@
 			NetworkManager.instance.playerRemovedSignal.add(playerRemoved);
 			MusicManager.instance.crossSwitchMusic("Game");
 			this.bPlaying = true;
-			//CollisionManager.instance.begin();
+			CollisionManager.instance.begin();
 			super.begin();
 		}
 		
@@ -85,7 +83,7 @@
 		{
 			this.removeEventListener(Event.ENTER_FRAME, this.enterFrameHandler);
 			this.bPlaying = false;
-			//CollisionManager.instance.end();
+			CollisionManager.instance.end();
 			super.end();
 		}
 		
