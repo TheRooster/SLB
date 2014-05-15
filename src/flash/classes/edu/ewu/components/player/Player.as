@@ -5,19 +5,29 @@ package edu.ewu.components.player
 	import com.greensock.loading.LoaderMax;
 	import com.greensock.loading.SWFLoader;
 	import com.greensock.loading.XMLLoader;
+<<<<<<< HEAD
 	import flash.display.DisplayObject;
+=======
+	import edu.ewu.components.Collideable;
+>>>>>>> 5941e9013b9e30c9869303147550fe452f54669f
 	import flash.display.MovieClip;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
+	import flash.display.Sprite;
+	import edu.ewu.components.CollisionManager;
 	
 	/**
 	 * ...
 	 * @author Jon Roster
 	 */
-	public class Player extends MovieClip
+	public class Player extends Collideable
 	{
+<<<<<<< HEAD
 		
 		protected var _sSprite:ContentDisplay;
+=======
+		protected var _sSprite:MovieClip;
+>>>>>>> 5941e9013b9e30c9869303147550fe452f54669f
 		protected var _namePlate:TextField;
 		public var _charName:String;
 		
@@ -53,7 +63,9 @@ package edu.ewu.components.player
 			_namePlate.selectable = false;
 			
 			this.addChild(_namePlate);
-		
+			
+			this.sCollisionType = CollisionManager.TYPE_PLAYER;
+			CollisionManager.instance.add(this);
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */

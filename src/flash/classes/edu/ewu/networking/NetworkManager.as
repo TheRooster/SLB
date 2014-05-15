@@ -2,6 +2,7 @@
 {
 	import com.reyco1.multiuser.data.UserObject;
 	import com.reyco1.multiuser.MultiUserSession;
+	import edu.ewu.components.attacks.Attack;
 	import edu.ewu.components.player.Player;
 	import edu.ewu.components.player.NetworkPlayer;
 	import flash.utils.Dictionary;
@@ -151,6 +152,7 @@
 				{
 					player.x = dataObj.x;
 					player.y = dataObj.y;
+					player.rotation = dataObj.rotation;
 					//player.nLives = dataObj.lives;
 					//player.nHealth = dataObj.health;
 				}
@@ -166,9 +168,9 @@
 			}
 			else if (dataObj.OPCODE == NetworkManager.OPCODE_ATTACK)
 			{
-				//TODO: Handle attacks
-				//var attack:Attack = new (dataObj.AttackName)(dataObj.AttackerName, dataObj.x, dataObj.y, dataObj.angle);
-				//attack.begin();
+				//var attack:Attack = new (dataObj.sAttackName)(dataObj.creator, dataObj.x, dataObj.y, dataObj.angle);
+				//Damage values etc. will be removed when we have specific versions of each attack.
+				var attack:Attack = new Attack(dataObj.creator, dataObj.x, dataObj.y, dataObj.angle, 100, 0, 1000, true);
 			}
 			else if (dataObj.OPCODE == NetworkManager.OPCODE_DEATH)
 			{
@@ -199,7 +201,7 @@
 				{
 					if ($sOPCODE == NetworkManager.OPCODE_HEARTBEAT)
 					{
-						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_MOVED, name:$oObject.PlayerName, x:$oObject.x, y:$oObject.y } );
+						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_MOVED, name:$oObject.PlayerName, x:$oObject.x, y:$oObject.y, rotation:$oObject.rotation } );
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_MOVED)
 					{
@@ -207,8 +209,8 @@
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_ATTACK)
 					{
-						//TODO: Handle attacks
-						// _connection.sendObject( { OPCODE:NetworkManager.OPCODE_ATTACK, name:$oObject.AttackName, attackerName:$oObject.AttackerName x:$oObject.x, y:$oObject.y, angle:$oObject.angle } );
+						//_connection.sendObject( { OPCODE:NetworkManager.OPCODE_ATTACK, name:$oObject.sAttackName, creator:$oObject.sCreator, x:$oObject.x, y:$oObject.y, angle:$oObject.angle } );
+						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_ATTACK, creator:$oObject.sCreator, x:$oObject.x, y:$oObject.y, angle:$oObject.angle } );
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_DEATH)
 					{

@@ -1,14 +1,15 @@
 package edu.ewu.ui.screens
 {
+<<<<<<< HEAD
 	import edu.ewu.components.NamePrompt;
+=======
+>>>>>>> 5941e9013b9e30c9869303147550fe452f54669f
 	import edu.ewu.components.player.LocalPlayer;
-	import edu.ewu.events.AppEvent;
 	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.sounds.MusicManager;
-	import org.osflash.signals.Signal;
-	import com.natejc.utils.StageRef;
-	import flash.text.TextField;
 	import edu.ewu.ui.buttons.SoundButton;
+	import flash.text.TextField;
+	import org.osflash.signals.Signal;
 	
 	/**
 	 * Drives the LobbyScreen class.
