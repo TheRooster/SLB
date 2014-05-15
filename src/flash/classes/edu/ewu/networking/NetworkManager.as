@@ -138,8 +138,11 @@
 		{
 			trace("User left:" + user.name);
 			var p:Player = _dPlayers[user.name];
-			p.destroy();
-			this.playerRemovedSignal.dispatch(p);
+			if (p != null)
+			{
+				p.destroy();
+				this.playerRemovedSignal.dispatch(p);
+			}
 			this.remove(user.name);
 		}
 		
