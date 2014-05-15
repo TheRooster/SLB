@@ -70,6 +70,7 @@ package edu.ewu.components.player
 			//init with xml
 			var stats:XML = LoaderMax.getContent(this._charName );
 			this._sSprite = MovieClip(MovieClip(SWFLoader(LoaderMax.getLoader(this._charName + "_Sprite")).rawContent).getChildAt(0));//this just keeps getting more crazy... but it worked this time.. yay
+			this._sSprite.rotationZ = 90;
 			this._sSprite.width = 60;
 			this._sSprite.height = 40;
 			this._sSprite.scaleMode = "proportionalInside";

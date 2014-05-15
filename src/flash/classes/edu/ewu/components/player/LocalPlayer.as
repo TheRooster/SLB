@@ -172,6 +172,11 @@
 					
 				if (_up && (this.y - this._nSpeed) > 0)
 				{
+					//Move toward mouse rather than global up 
+					//TODO: this is buggy, but works well for a movement scheme, will need to fix bugs before alpha -Jon
+					//this.x += this._nSpeed * Math.cos(rotation);
+					//this.y += this._nSpeed * Math.sin(rotation);
+					
 					this.y -= this._nSpeed;
 				}
 				else if(_up)
