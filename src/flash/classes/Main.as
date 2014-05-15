@@ -49,6 +49,7 @@
 			MusicManager.instance.add("Game", new Music(new GameLoop(), 1.0, true, 1914)); 
 			
 			SoundManager.instance.add("ButtonClick", new ClickSound());
+			SoundManager.instance.add("Thump", new ThumpSound());
 			
 			var lobbyScreen:LobbyScreen = new LobbyScreen();
 			ScreenManager.instance.add("Lobby", lobbyScreen);

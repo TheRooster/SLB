@@ -1,11 +1,10 @@
 package edu.ewu.components.attacks  
 {
 	import edu.ewu.components.Collideable;
-	import flash.display.MovieClip;
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
 	import edu.ewu.components.CollisionManager;
 	import edu.ewu.networking.NetworkManager;
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
 	
 	/**
 	 * ...
@@ -17,6 +16,8 @@ package edu.ewu.components.attacks
 		public var 		sCreator	:String;
 		/** Whether the attack was created locally or not */
 		protected var	_bNetwork	:Boolean;
+		/** Name of the sound to play on hit. */
+		public var		sHitSound	:String;
 		
 		public var 		damage		:Number;
 		public var 		force		:Number;
@@ -26,6 +27,8 @@ package edu.ewu.components.attacks
 		//$nTime is the time the attack will last in milliseconds.
 		public function Attack($sCreator:String,$nX:uint, $nY:uint, $nAngle:uint, $nForce:uint = 100, $nDamage:uint = 0, $nTime:uint = 1000, $bNetwork:Boolean = false) 
 		{
+			//TODO: Change for specific attacks later
+			this.sHitSound = "Thump";
 			this.sCreator = $sCreator; 
 			this.x = $nX;
 			this.y = $nY;

@@ -1,4 +1,4 @@
-﻿package edu.ewu.components.player
+package edu.ewu.components.player
 {
 	import com.greensock.loading.LoaderMax;
 	import com.greensock.loading.SWFLoader;
@@ -60,7 +60,7 @@
 			this.addChild(_namePlate);
 			
 			this.sCollisionType = CollisionManager.TYPE_PLAYER;
-		
+			CollisionManager.instance.add(this);
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */

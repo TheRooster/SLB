@@ -1,22 +1,18 @@
 package edu.ewu.components.player 
 {
-	import com.greensock.loading.LoaderMax;
-	import com.greensock.loading.SWFLoader;
-	import com.greensock.loading.XMLLoader;
+	import com.greensock.easing.Linear;
+	import com.greensock.TweenMax;
 	import com.natejc.input.KeyboardManager;
 	import com.natejc.input.KeyCode;
 	import com.natejc.utils.StageRef;
 	import edu.ewu.components.attacks.Attack;
 	import edu.ewu.components.Collideable;
+	import edu.ewu.components.CollisionManager;
 	import edu.ewu.networking.NetworkManager;
-	import flash.display.Loader;
-	import flash.display.MovieClip;
+	import edu.ewu.sounds.SoundManager;
 	import flash.events.Event;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
-	import edu.ewu.components.CollisionManager;
-	import com.greensock.TweenMax;
-	import com.greensock.easing.Linear;
 	
 	/**
 	 * ...
@@ -64,7 +60,6 @@ package edu.ewu.components.player
 			this._heartbeatTimer.addEventListener(TimerEvent.TIMER, heartbeat);
 			this._heartbeatTimer.start();
 			
-			CollisionManager.instance.add(this);
 			this.addCollidesWithType(CollisionManager.TYPE_PLAYER);
 			this.addCollidesWithType(CollisionManager.TYPE_WALL);
 			
@@ -229,6 +224,7 @@ package edu.ewu.components.player
 			{
 				//TODO: Handle health multiplying force
 				var attack:Attack = $oObjectCollidedWith as Attack;
+				SoundManager.instance.playSound(attack.sHitSound);
 				TweenMax.to(this._sSprite, 1.0, { x:this.x + attack.force * Math.cos(attack.angle), y:this.y + attack.force * Math.sin(attack.angle) , ease: Linear.easeNone } );
 				attack.destroy();
 			}
