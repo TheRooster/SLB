@@ -30,7 +30,7 @@
 		protected var 	_timer  	:Timer;
 		
 		//$nTime is the time the attack will last in milliseconds.
-		public function Attack($sCreator:String, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint = 200, $nDamage:uint = 0, $nTime:uint = 1000, $bNetwork:Boolean = false) 
+		public function Attack($sCreator:String, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint = 200, $nDamage:uint = 0, $nTime:uint = 500, $bNetwork:Boolean = false) 
 		{
 			//TODO: Change for specific attacks later
 			this.sHitSound = "Thump";
