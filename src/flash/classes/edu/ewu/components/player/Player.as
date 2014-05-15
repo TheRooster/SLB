@@ -1,4 +1,4 @@
-package edu.ewu.components.player
+﻿package edu.ewu.components.player
 {
 	import com.greensock.events.LoaderEvent;
 	import com.greensock.loading.display.ContentDisplay;
@@ -71,9 +71,12 @@ package edu.ewu.components.player
 			var stats:XML = LoaderMax.getContent(this._charName );
 			this._sSprite = MovieClip(MovieClip(SWFLoader(LoaderMax.getLoader(this._charName + "_Sprite")).rawContent).getChildAt(0));//this just keeps getting more crazy... but it worked this time.. yay
 			this._sSprite.rotationZ = 90;
-			this._sSprite.width = 60;
-			this._sSprite.height = 40;
-			this._sSprite.scaleMode = "proportionalInside";
+			
+			this._sSprite.scaleX = .3;
+			this._sSprite.scaleY = .3;
+			//this._sSprite.width = 60;
+			//this._sSprite.height = 40;
+			//this._sSprite.scaleMode = "proportionalInside";
 			
 			
 			

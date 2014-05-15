@@ -92,6 +92,7 @@
 		private function aDownHandler():void 
 		{
 			this._left = true;
+			_sSprite.gotoAndPlay("Walk_Enter");
 		}
 				
 		/* ---------------------------------------------------------------------------------------- */
@@ -107,6 +108,7 @@
 		private function dDownHandler():void 
 		{
 			this._right = true;
+			_sSprite.gotoAndPlay("Walk_Enter");
 		}
 				
 		/* ---------------------------------------------------------------------------------------- */
@@ -122,6 +124,7 @@
 		private function aUpHandler():void 
 		{
 			this._left = false;
+			_sSprite.gotoAndPlay("Walk_Exit");
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -137,6 +140,7 @@
 		private function dUpHandler():void 
 		{
 			this._right = false;
+			_sSprite.gotoAndPlay("Walk_Exit");
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
