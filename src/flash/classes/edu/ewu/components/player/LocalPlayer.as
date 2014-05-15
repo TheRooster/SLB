@@ -15,6 +15,7 @@ package edu.ewu.components.player
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	import edu.ewu.ui.screens.ScreenManager;
+	import com.reyco1.multiuser.events.P2PDispatcher;
 	
 	/**
 	 * ...
@@ -43,7 +44,6 @@ package edu.ewu.components.player
 		public function LocalPlayer($pName:String, $charName:String) 
 		{
 			super($pName, $charName);
-			
 			StageRef.stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
 			StageRef.stage.addEventListener(MouseEvent.CLICK, mouseClickHandler);
 				
@@ -142,33 +142,21 @@ package edu.ewu.components.player
 					this._nLastY = this.y;
 				}
 				
-				
 				if (_left && (this.x - this._nSpeed) > 0)
 				{
-
 					this._nLastX = this.x;
 					this.x -= this._nSpeed;
-					
 				}
 				else if(_left)
 				{
-					
 					this._nLastX = this.x;
 					this.x = 0;
-
-					
 				}
 
-					
 				if (_right && (this.x + (this.width/2) + this._nSpeed) < StageRef.stage.stageWidth)
 				{
-					
-					
 					this._nLastX = this.x;
 					this.x += this._nSpeed;
-
-					
-					
 				}
 				else if (_right)
 				{
@@ -176,8 +164,6 @@ package edu.ewu.components.player
 					this.x = StageRef.stage.stageWidth - this.width / 4;
 				}
 					
-				
-				
 				if (_up && (this.y - this._nSpeed) > 0)
 				{
 					this._nLastY = this.y;
@@ -189,8 +175,6 @@ package edu.ewu.components.player
 					this.y = 0;
 				}
 				
-				
-				
 				if (_down && (this.y + (this.height/2) + this._nSpeed) < StageRef.stage.stageHeight)
 				{
 					this._nLastY = this.y;
@@ -201,9 +185,6 @@ package edu.ewu.components.player
 					this._nLastY = this.y;
 					this.y = StageRef.stage.stageHeight - this.height / 4;
 				}
-				
-				
-				
 				
 				if (_down || _left || _right || _up)
 				{
@@ -280,8 +261,15 @@ package edu.ewu.components.player
 		{
 			if ($oObjectCollidedWith.sCollisionType == CollisionManager.TYPE_PLAYER || $oObjectCollidedWith.sCollisionType == CollisionManager.TYPE_WALL)
 			{
-				this.x = this._nLastX;
-				this.y = this._nLastY;
+				if ($oObjectCollidedWith is Player)
+				{
+					var player:Player = $oObjectCollidedWith as Player;
+					if (this.PlayerName != player.PlayerName)
+					{
+						this.x = this._nLastX;
+						this.y = this._nLastY;
+					}
+				}
 			}
 			else if ($oObjectCollidedWith.sCollisionType == CollisionManager.TYPE_ATTACK)
 			{
