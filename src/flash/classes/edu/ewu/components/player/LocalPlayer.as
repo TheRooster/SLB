@@ -1,4 +1,4 @@
-package edu.ewu.components.player 
+﻿package edu.ewu.components.player 
 {
 	import com.greensock.easing.Linear;
 	import com.greensock.TweenMax;
@@ -64,6 +64,7 @@ package edu.ewu.components.player
 			this._heartbeatTimer.start();
 			
 			this.addCollidesWithType(CollisionManager.TYPE_PLAYER);
+			this.addCollidesWithType(CollisionManager.TYPE_ATTACK);
 			this.addCollidesWithType(CollisionManager.TYPE_WALL);
 		}
 		
@@ -138,51 +139,41 @@ package edu.ewu.components.player
 				{
 					this._bSentInitial = true;
 					NetworkManager.instance.sendData(NetworkManager.OPCODE_MOVED, this);
-					this._nLastX = this.x;
-					this._nLastY = this.y;
 				}
 				
 				if (_left && (this.x - this._nSpeed) > 0)
 				{
-					this._nLastX = this.x;
 					this.x -= this._nSpeed;
 				}
 				else if(_left)
 				{
-					this._nLastX = this.x;
 					this.x = 0;
 				}
 
 				if (_right && (this.x + (this.width/2) + this._nSpeed) < StageRef.stage.stageWidth)
 				{
-					this._nLastX = this.x;
 					this.x += this._nSpeed;
 				}
 				else if (_right)
 				{
-					this._nLastX = this.x;
 					this.x = StageRef.stage.stageWidth - this.width / 4;
 				}
 					
 				if (_up && (this.y - this._nSpeed) > 0)
 				{
-					this._nLastY = this.y;
 					this.y -= this._nSpeed;
 				}
 				else if(_up)
 				{
-					this._nLastY = this.y;
 					this.y = 0;
 				}
 				
 				if (_down && (this.y + (this.height/2) + this._nSpeed) < StageRef.stage.stageHeight)
 				{
-					this._nLastY = this.y;
 					this.y += this._nSpeed;
 				}
 				else if (_down)
 				{
-					this._nLastY = this.y;
 					this.y = StageRef.stage.stageHeight - this.height / 4;
 				}
 				
@@ -266,6 +257,7 @@ package edu.ewu.components.player
 					var player:Player = $oObjectCollidedWith as Player;
 					if (this.PlayerName != player.PlayerName)
 					{
+						TweenMax.killTweensOf(this);
 						this.x = this._nLastX;
 						this.y = this._nLastY;
 					}
@@ -276,6 +268,18 @@ package edu.ewu.components.player
 				var attack:Attack = $oObjectCollidedWith as Attack;
 				attack.apply(this);
 			}
+		}
+		
+		override public function set x($x:Number):void
+		{
+			this._nLastX = this.x;
+			super.x = $x
+		}
+		
+		override public function set y($y:Number):void
+		{
+			this._nLastY = this.y;
+			super.y = $y
 		}
 	}
 

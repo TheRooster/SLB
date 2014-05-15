@@ -82,11 +82,8 @@
 			if (this.sCreator != $oPlayer.PlayerName)
 			{
 				SoundManager.instance.playSound(this.sHitSound);
-				var distanceX : Number = $oPlayer.x - this.x;
-				var distanceY : Number = $oPlayer.y - this.y;
-				var angleInRadians : Number = Math.atan2(distanceY, distanceX);
-				var angleInDegrees : Number = angleInRadians * (180 / Math.PI);
-				TweenMax.to($oPlayer, 1.0, { x:$oPlayer.x + this.force * Math.cos(angleInDegrees), y:$oPlayer.y + this.force * Math.sin(angleInDegrees) , ease: Linear.easeNone } );
+				TweenMax.killTweensOf($oPlayer);
+				TweenMax.to($oPlayer, 1.0, { x:$oPlayer.x + this.force * Math.cos(this.angle), y:$oPlayer.y + this.force * Math.sin(this.angle) , ease: Linear.easeNone } );
 				this.destroy();
 			}
 		}

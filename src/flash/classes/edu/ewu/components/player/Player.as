@@ -90,6 +90,16 @@ package edu.ewu.components.player
 			return this._namePlate.text;
 		}
 		
+		
+		/* ---------------------------------------------------------------------------------------- */
+		
+		/**
+		 * Destroys player
+		 */
+		public function destroy():void
+		{
+			CollisionManager.instance.remove(this);
+		}
 
 	
 	}
