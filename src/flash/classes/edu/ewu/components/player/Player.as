@@ -1,4 +1,4 @@
-package edu.ewu.components.player
+﻿package edu.ewu.components.player
 {
 	import com.greensock.events.LoaderEvent;
 	import com.greensock.loading.display.ContentDisplay;
@@ -74,7 +74,7 @@ package edu.ewu.components.player
 			this._sSprite = MovieClip(SWFLoader(LoaderMax.getLoader(this._charName + "_Sprite")).rawContent)
 			if (this._sSprite.numChildren > 0)
 			{
-				this._sSprite = MovieClip(this._sSprite.getChildAt(0)).;//hacky fix for testing
+				this._sSprite = MovieClip(this._sSprite.getChildAt(0));//hacky fix for testing
 			}
 			else
 			{
