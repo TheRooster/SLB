@@ -22,7 +22,7 @@ package edu.ewu.components.player
 	{
 
 		
-		public var _sSprite:ContentDisplay;
+		public var _sSprite:MovieClip;
 		protected var _namePlate:TextField;
 		public var _charName:String;
 		
@@ -69,7 +69,7 @@ package edu.ewu.components.player
 		{
 			//init with xml
 			var stats:XML = LoaderMax.getContent(this._charName );
-			this._sSprite = ContentDisplay(LoaderMax.getContent(this._charName + "_Sprite"));
+			this._sSprite = SWFLoader(LoaderMax.getLoader(this._charName + "_Sprite")).rawContent;
 			this._sSprite.centerRegistration = true;
 			this._sSprite.width = 60;
 			this._sSprite.height = 40;
@@ -78,7 +78,6 @@ package edu.ewu.components.player
 			
 			
 			
-			//this._sSprite.visible = true;
 			this.addChild(this._sSprite);
 		
 		}
