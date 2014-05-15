@@ -209,6 +209,9 @@
 		 */
 		protected function mouseMoveHandler($e:MouseEvent = null):void
 		{
+			
+			//we may need to use the mouse movements to update a dummy object here, as it is the mouse movement is kinda wonky.  I'll look into refactoring it -Jon
+			
 			if (this._bAlive)
 			{
 				var distanceX : Number = $e.stageX - this.x;
