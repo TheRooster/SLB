@@ -43,13 +43,8 @@ package edu.ewu.components.player
 		{
 			super($pName, $charName);
 			
-<<<<<<< HEAD
 			StageRef.stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
 			StageRef.stage.addEventListener(MouseEvent.CLICK, mouseClickHandler);
-=======
-
-			this.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
->>>>>>> bb2fc49bd6b9f89297254362f433e8b3262a83c4
 				
 			KeyboardManager.instance.addKeyDownListener(KeyCode.W, wDownHandler);
 			KeyboardManager.instance.addKeyDownListener(KeyCode.A, aDownHandler);
