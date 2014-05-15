@@ -2,6 +2,7 @@
 {
 	import com.reyco1.multiuser.data.UserObject;
 	import com.reyco1.multiuser.MultiUserSession;
+	import edu.ewu.components.attacks.Attack;
 	import edu.ewu.components.player.Player;
 	import edu.ewu.components.player.NetworkPlayer;
 	import flash.utils.Dictionary;
@@ -166,9 +167,7 @@
 			}
 			else if (dataObj.OPCODE == NetworkManager.OPCODE_ATTACK)
 			{
-				//TODO: Handle attacks
-				//var attack:Attack = new (dataObj.AttackName)(dataObj.AttackerName, dataObj.x, dataObj.y, dataObj.angle);
-				//attack.begin();
+				var attack:Attack = new Attack(dataObj.creator, dataObj.x, dataObj.y, dataObj.angle);
 			}
 			else if (dataObj.OPCODE == NetworkManager.OPCODE_DEATH)
 			{
@@ -207,8 +206,8 @@
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_ATTACK)
 					{
-						//TODO: Handle attacks
-						// _connection.sendObject( { OPCODE:NetworkManager.OPCODE_ATTACK, name:$oObject.AttackName, attackerName:$oObject.AttackerName x:$oObject.x, y:$oObject.y, angle:$oObject.angle } );
+						//_connection.sendObject( { OPCODE:NetworkManager.OPCODE_ATTACK, name:$oObject.AttackName, creator:$oObject.sCreator, x:$oObject.x, y:$oObject.y, angle:$oObject.angle } );
+						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_ATTACK, creator:$oObject.sCreator, x:$oObject.x, y:$oObject.y, angle:$oObject.angle } );
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_DEATH)
 					{
