@@ -238,7 +238,6 @@
 				var distanceY : Number = $e.stageY - this.y;
 				var angleInRadians : Number = Math.atan2(distanceY, distanceX);
 				var angleInDegrees : Number = angleInRadians * (180 / Math.PI);
-				//this._sSprite.rotation = angleInDegrees;
 				if (angleInDegrees < 0)
 				{
 					//TODO: this looks terrible -Jon
@@ -250,7 +249,8 @@
 					//this._sSprite.gotoAndPlay("Turn_Right");
 				}
 				
-				this.rotation = angleInDegrees;
+				this.rotation = angleInDegrees; //TODO: consider rotating sprite here instead of whole player, solves the nameplate dissapearing issue
+				
 			}
 		}
 		
@@ -268,7 +268,7 @@
 			{
 				this._sSprite.gotoAndPlay("Light_Attack");
 				//new Attack(this.PlayerName, this.x, this.y, this._sSprite.rotation);
-				new Attack(this.PlayerName, this.x, this.y, this.rotation < 0 ? this.rotation + 360 : this.rotation);
+				new Attack(this.PlayerName, this.x, this.y, this.rotation < 0 ? this.rotation + 360 : this.rotation);  //If the sprite is rotated instead of the player, the math here will need to be changed
 			}
 		}
 		
