@@ -274,7 +274,6 @@ package edu.ewu.components.player
 			}
 			else if ($oObjectCollidedWith.sCollisionType == CollisionManager.TYPE_ATTACK)
 			{
-				//TODO: Handle health multiplying force
 				var attack:Attack = $oObjectCollidedWith as Attack;
 				attack.apply(this);
 			}

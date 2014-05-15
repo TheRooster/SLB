@@ -73,6 +73,7 @@ package edu.ewu.components.attacks
 		 */
 		public function apply($oPlayer:LocalPlayer):void
 		{
+			//TODO: Handling health affecting force
 			if (this.sCreator != $oPlayer.PlayerName)
 			{
 				SoundManager.instance.playSound(this.sHitSound);
