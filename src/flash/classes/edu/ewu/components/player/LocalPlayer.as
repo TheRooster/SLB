@@ -43,7 +43,13 @@ package edu.ewu.components.player
 		{
 			super($pName, $charName);
 			
+<<<<<<< HEAD
+			StageRef.stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
+			StageRef.stage.addEventListener(MouseEvent.CLICK, mouseClickHandler);
+=======
+
 			this.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
+>>>>>>> bb2fc49bd6b9f89297254362f433e8b3262a83c4
 				
 			KeyboardManager.instance.addKeyDownListener(KeyCode.W, wDownHandler);
 			KeyboardManager.instance.addKeyDownListener(KeyCode.A, aDownHandler);
@@ -141,21 +147,34 @@ package edu.ewu.components.player
 					this._nLastX = this.x;
 					this._nLastY = this.y;
 				}
-				if (_left && this.x - 5 > 0)
+				
+				
+				if (_left && (this.x - this._nSpeed) > 0)
 				{
+
 					this._nLastX = this.x;
-					this._nXPos -= this._nSpeed;
+					this.x -= this._nSpeed;
+					
 				}
 				else if(_left)
 				{
-					this._nLastX = this.x;
-					this._nXPos = 0;
-				}
 					
-				if (_right && this.x + (this.width/2) + 5 < StageRef.stage.stageWidth)
-				{
 					this._nLastX = this.x;
-					this._nXPos += this._nSpeed;
+					this.x = 0;
+
+					
+				}
+
+					
+				if (_right && (this.x + (this.width/2) + this._nSpeed) < StageRef.stage.stageWidth)
+				{
+					
+					
+					this._nLastX = this.x;
+					this.x += this._nSpeed;
+
+					
+					
 				}
 				else if (_right)
 				{
@@ -163,7 +182,9 @@ package edu.ewu.components.player
 					this.x = StageRef.stage.stageWidth - this.width / 4;
 				}
 					
-				if (_up && this.y - 5 > 0)
+				
+				
+				if (_up && (this.y - this._nSpeed) > 0)
 				{
 					this._nLastY = this.y;
 					this.y -= this._nSpeed;
@@ -173,8 +194,10 @@ package edu.ewu.components.player
 					this._nLastY = this.y;
 					this.y = 0;
 				}
-					
-				if (_down && this.y + (this.height/2) + 5 < StageRef.stage.stageHeight)
+				
+				
+				
+				if (_down && (this.y + (this.height/2) + this._nSpeed) < StageRef.stage.stageHeight)
 				{
 					this._nLastY = this.y;
 					this.y += this._nSpeed;
@@ -184,7 +207,10 @@ package edu.ewu.components.player
 					this._nLastY = this.y;
 					this.y = StageRef.stage.stageHeight - this.height / 4;
 				}
-					
+				
+				
+				
+				
 				if (_down || _left || _right || _up)
 				{
 					NetworkManager.instance.sendData(NetworkManager.OPCODE_MOVED, this);
@@ -221,7 +247,20 @@ package edu.ewu.components.player
 			var distanceY : Number = $e.stageY - this.y;
 			var angleInRadians : Number = Math.atan2(distanceY, distanceX);
 			var angleInDegrees : Number = angleInRadians * (180 / Math.PI);
-			this.rotation = angleInDegrees;
+			this._sSprite.rotationX = angleInDegrees;
+		}
+		
+		/* ---------------------------------------------------------------------------------------- */
+		
+		/**
+		 * @private
+		 * Create first attack.
+		 * 
+		 * @param	$e		The dispatched MouseEvent.
+		 */
+		protected function mouseClickHandler($e:MouseEvent = null):void
+		{
+			new Attack(this.PlayerName, this._sSprite.x, this._sSprite.y, this._sSprite.rotation);
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -242,9 +281,7 @@ package edu.ewu.components.player
 			{
 				//TODO: Handle health multiplying force
 				var attack:Attack = $oObjectCollidedWith as Attack;
-				SoundManager.instance.playSound(attack.sHitSound);
-				TweenMax.to(this._sSprite, 1.0, { x:this.x + attack.force * Math.cos(attack.angle), y:this.y + attack.force * Math.sin(attack.angle) , ease: Linear.easeNone } );
-				attack.destroy();
+				attack.apply(this);
 			}
 		}
 	}

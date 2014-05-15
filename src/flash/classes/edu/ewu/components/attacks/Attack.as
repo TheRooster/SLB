@@ -1,8 +1,12 @@
 package edu.ewu.components.attacks  
 {
+	import com.greensock.easing.Linear;
+	import com.greensock.TweenMax;
 	import edu.ewu.components.Collideable;
 	import edu.ewu.components.CollisionManager;
+	import edu.ewu.components.player.LocalPlayer;
 	import edu.ewu.networking.NetworkManager;
+	import edu.ewu.sounds.SoundManager;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	
@@ -57,6 +61,28 @@ package edu.ewu.components.attacks
 			_timer.removeEventListener(TimerEvent.TIMER_COMPLETE, destroy);
 			
 			CollisionManager.instance.remove(this);
+		}
+		
+		
+		/* ---------------------------------------------------------------------------------------- */
+		
+		/**
+		 * Apply attack to player
+		 *
+		 * @param	$oPlayer	Player attack is applying to.
+		 */
+		public function apply($oPlayer:LocalPlayer):void
+		{
+			if (this.sCreator != $oPlayer.PlayerName)
+			{
+				SoundManager.instance.playSound(this.sHitSound);
+				var distanceX : Number = $oPlayer.x - this.x;
+				var distanceY : Number = $oPlayer.y - this.y;
+				var angleInRadians : Number = Math.atan2(distanceY, distanceX);
+				var angleInDegrees : Number = angleInRadians * (180 / Math.PI);
+				TweenMax.to($oPlayer, 1.0, { x:$oPlayer.x + this.force * Math.cos(angleInDegrees), y:$oPlayer.y + this.force * Math.sin(angleInDegrees) , ease: Linear.easeNone } );
+				this.destroy();
+			}
 		}
 	}
 

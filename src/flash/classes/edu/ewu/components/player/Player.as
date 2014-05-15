@@ -1,9 +1,13 @@
 package edu.ewu.components.player
 {
+	import com.greensock.events.LoaderEvent;
+	import com.greensock.loading.display.ContentDisplay;
 	import com.greensock.loading.LoaderMax;
 	import com.greensock.loading.SWFLoader;
 	import com.greensock.loading.XMLLoader;
+	import flash.display.DisplayObject;
 	import edu.ewu.components.Collideable;
+
 	import flash.display.MovieClip;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
@@ -16,12 +20,12 @@ package edu.ewu.components.player
 	 */
 	public class Player extends Collideable
 	{
-		protected var _sSprite:MovieClip;
-		protected var _namePlate:TextField;
-		protected var _charName:String;
+
 		
-		protected var _nXPos:uint;
-		protected var _nYPos:uint;
+		protected var _sSprite:ContentDisplay;
+		protected var _namePlate:TextField;
+		public var _charName:String;
+		
 		
 		protected var _nSpeed:uint = 5;
 		
@@ -36,18 +40,14 @@ package edu.ewu.components.player
 		public function Player($pName:String, $charName:String)
 		{
 			super();
+			this._bAlive = true;
 			
 			this._charName = $charName;
-			if (LoaderMax.getContent(this._charName) == null)
-			{
-				//if the content isn't already loaded
-				LoaderMax.activate([SWFLoader]);
-				var loader:XMLLoader = new XMLLoader(this._charName, {onComplete: init});
-			}
-			else
-			{
-				init();
-			}
+			
+			LoaderMax.activate([SWFLoader]);
+			var loader:XMLLoader = new XMLLoader("resources/xml/" + _charName + ".xml", { name:this._charName, onComplete:init  } );
+			loader.load();
+			
 			
 			var fmt:TextFormat = new TextFormat("Courier New", 10, 0xFFFFFF);
 			_namePlate = new TextField();
@@ -65,14 +65,20 @@ package edu.ewu.components.player
 		
 		/* ---------------------------------------------------------------------------------------- */
 		
-		private function init():void
+		protected function init(e:LoaderEvent):void
 		{
 			//init with xml
+			var stats:XML = LoaderMax.getContent(this._charName );
+			this._sSprite = ContentDisplay(LoaderMax.getContent(this._charName + "_Sprite"));
+			this._sSprite.centerRegistration = true;
+			this._sSprite.width = 60;
+			this._sSprite.height = 40;
+			this._sSprite.scaleMode = "proportionalInside";
+			this._sSprite.y += 20;
 			
-			var stats:XML = LoaderMax.getContent(this._charName);
-			this._sSprite = LoaderMax.getContent(this._charName + "_Sprite").getSWFChild("character");
 			
-			this._sSprite.visible = true;
+			
+			//this._sSprite.visible = true;
 			this.addChild(this._sSprite);
 		
 		}
