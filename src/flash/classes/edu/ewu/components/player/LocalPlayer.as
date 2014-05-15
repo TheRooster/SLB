@@ -37,7 +37,7 @@ package edu.ewu.components.player
 		{
 			super($pName, $charName);
 			
-			
+			trace("init kb");
 				
 			KeyboardManager.instance.addKeyDownListener(KeyCode.W, wDownHandler);
 			KeyboardManager.instance.addKeyDownListener(KeyCode.A, aDownHandler);
@@ -131,16 +131,16 @@ package edu.ewu.components.player
 				}
 				if (_left && this.x - 5 > 0)
 				{
-					this._nXPos -= this._nSpeed;
+					this.x -= this._nSpeed;
 				}
 				else if(_left)
 				{
-					this._nXPos = 0;
+					this.x = 0;
 				}
 					
 				if (_right && this.x + (this.width/2) + 5 < StageRef.stage.stageWidth)
 				{
-					this._nXPos += this._nSpeed;
+					this.x += this._nSpeed;
 				}
 				else if (_right)
 				{

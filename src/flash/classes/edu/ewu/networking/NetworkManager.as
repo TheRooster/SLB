@@ -128,7 +128,7 @@
 		private function onUserAdded(user:UserObject):void 
 		{
 			trace("User added: " + user.name);
-			var p:NetworkPlayer = new NetworkPlayer(user.name, user.details.color);
+			var p:NetworkPlayer = new NetworkPlayer(user.name, user.details.charName);// user.details.color);
 			this.add(user.name, p);
 			this.playerJoinedSignal.dispatch(p);
 		}
@@ -203,7 +203,7 @@
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_MOVED)
 					{
-						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_MOVED, name:$oObject.PlayerName, x:$oObject.x, y:$oObject.y, health:$oObject.nHealth, lives:$oObject.nLives } );
+						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_MOVED, name:$oObject.PlayerName, x:$oObject.x, y:$oObject.y/*, health:$oObject.nHealth, lives:$oObject.nLives*/ } );
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_ATTACK)
 					{
@@ -218,6 +218,7 @@
 				}
 				catch (e:Error)
 				{
+					trace(e.message);
 					trace("Error sending data.");
 				}
 			}
@@ -234,7 +235,7 @@
 		 */
 		public function connect($sName:String, $oPlayer:Player):void
 		{
-			_connection.connect($sName, { x:$oPlayer.x, y:$oPlayer.y } );
+			_connection.connect($sName,  {charName:$oPlayer._charName, x:$oPlayer.x, y:$oPlayer.y } );
 		}
 	}
 }

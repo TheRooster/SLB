@@ -1,7 +1,6 @@
 package edu.ewu.ui.screens
 {
 	import edu.ewu.components.NamePrompt;
-	import edu.ewu.components.Player;
 	import edu.ewu.components.player.LocalPlayer;
 	import edu.ewu.events.AppEvent;
 	import edu.ewu.networking.NetworkManager;
