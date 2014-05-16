@@ -24,6 +24,7 @@
 	{
 		
 		
+		
 		private const SERVER:String = "rtmfp://p2p.rtmfp.net/";
 		private var   DEVKEY:String = "";
 		private var SERV_KEY:String = "";
