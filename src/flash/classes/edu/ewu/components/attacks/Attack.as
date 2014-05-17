@@ -29,8 +29,10 @@
 		public var		angle		:Number;
 		protected var 	_timer  	:Timer;
 		
+		public var		sAttackName	:String;
+		
 		//$nTime is the time the attack will last in milliseconds.
-		public function Attack($sCreator:String, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint = 200, $nDamage:uint = 0, $nTime:uint = 500, $bNetwork:Boolean = false) 
+		public function Attack($sCreator:String, $nX:uint, $nY:uint, $nAngle:uint, $bNetwork:Boolean = false, $nForce:uint = 200, $nDamage:uint = 0, $nTime:uint = 500) 
 		{
 			//TODO: Change for specific attacks later
 			this.sHitSound = "Thump";
@@ -42,6 +44,7 @@
 			this.angle = $nAngle;
 			this.rotation = $nAngle;
 			this._bNetwork = $bNetwork;
+			this.sAttackName = "edu.ewu.components.attacks.Attack";
 			
 			this.sCollisionType = CollisionManager.TYPE_ATTACK;
 			

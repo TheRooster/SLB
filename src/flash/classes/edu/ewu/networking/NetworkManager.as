@@ -8,6 +8,7 @@
 	import flash.utils.Dictionary;
 	import org.osflash.signals.Signal;
 	import edu.ewu.sounds.SoundManager;
+	import flash.utils.getDefinitionByName;
 	
 	/**
 	 * Allow for easy managment of Playerss.
@@ -28,6 +29,9 @@
 		public static const		OPCODE_SOUND		:String = "OPCODE_SOUND";
 		/** String for sound OPCODE. */
 		public static const		OPCODE_ANIM			:String = "OPCODE_ANIM";
+		
+		//** List of attack types for dynamic creation */
+		private var 			_attack				:Attack;
 		
 		
 		/** Stores a reference to the singleton instance. */  
@@ -177,9 +181,8 @@
 			}
 			else if (dataObj.OPCODE == NetworkManager.OPCODE_ATTACK)
 			{
-				//var attack:Attack = new (dataObj.sAttackName)(dataObj.creator, dataObj.x, dataObj.y, dataObj.angle);
-				//Damage values etc. will be removed when we have specific versions of each attack.
-				var attack:Attack = new Attack(dataObj.creator, dataObj.x, dataObj.y, dataObj.angle, 100, 0, 1000, true);
+				var customAttack:Class = getDefinitionByName(dataObj.name) as Class;
+				var attack:* = new customAttack(dataObj.creator, dataObj.x, dataObj.y, dataObj.angle, true);
 			}
 			else if (dataObj.OPCODE == NetworkManager.OPCODE_DEATH)
 			{
@@ -230,8 +233,7 @@
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_ATTACK)
 					{
-						//_connection.sendObject( { OPCODE:NetworkManager.OPCODE_ATTACK, name:$oObject.sAttackName, creator:$oObject.sCreator, x:$oObject.x, y:$oObject.y, angle:$oObject.angle } );
-						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_ATTACK, creator:$oObject.sCreator, x:$oObject.x, y:$oObject.y, angle:$oObject.angle } );
+						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_ATTACK, name:$oObject.sAttackName, creator:$oObject.sCreator, x:$oObject.x, y:$oObject.y, angle:$oObject.angle } );
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_DEATH)
 					{

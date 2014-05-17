@@ -46,8 +46,8 @@
 			
 			
 			
-			MusicManager.instance.add("Lobby", new Music(new LobbyLoop(), 0.0, true)); 
-			MusicManager.instance.add("Game", new Music(new GameLoop(), 0.0, true, 1914)); 
+			MusicManager.instance.add("Lobby", new Music(new LobbyLoop(), 0.15, true)); 
+			MusicManager.instance.add("Game", new Music(new GameLoop(), 0.15, true, 1914)); 
 			
 			SoundManager.instance.add("ButtonClick", new ClickSound());
 			SoundManager.instance.add("Thump", new ThumpSound());
