@@ -15,6 +15,7 @@
 	import flash.text.TextFormat;
 	import flash.display.Sprite;
 	import edu.ewu.components.CollisionManager;
+	import edu.ewu.networking.NetworkManager;
 	
 	/**
 	 * ...
@@ -112,6 +113,18 @@
 			CollisionManager.instance.remove(this);
 		}
 
+		public function gotoAndPlaySprite($sAnimationName:String, $bNetworked:Boolean = false):void
+		{
+			if (this._sSprite != null)
+			{
+				this._sSprite.gotoAndPlay($sAnimationName);
+				
+				if ($bNetworked == false)
+				{
+					NetworkManager.instance.sendData(NetworkManager.OPCODE_ANIM, { name:this.PlayerName, animName:$sAnimationName } );
+				}
+			}
+		}
 	
 	}
 

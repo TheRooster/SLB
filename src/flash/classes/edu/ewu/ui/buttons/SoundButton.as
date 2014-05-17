@@ -37,7 +37,7 @@ package edu.ewu.ui.buttons
 		 */
 		protected function clickHandler($e:MouseEvent):void
 		{
-			SoundManager.instance.playSound("ButtonClick");
+			SoundManager.instance.playSound("ButtonClick", true);
 			this.clickedSignal.dispatch();
 		}
 	}

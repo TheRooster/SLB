@@ -84,7 +84,7 @@
 		private function wDownHandler():void 
 		{
 			this._up = true;
-			_sSprite.gotoAndPlay("Walk_Enter");
+			this.gotoAndPlaySprite("Walk_Enter");
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -92,7 +92,7 @@
 		private function aDownHandler():void 
 		{
 			this._left = true;
-			_sSprite.gotoAndPlay("Walk_Enter");
+			this.gotoAndPlaySprite("Walk_Enter");
 		}
 				
 		/* ---------------------------------------------------------------------------------------- */
@@ -100,7 +100,7 @@
 		private function sDownHandler():void 
 		{
 			this._down = true;
-			_sSprite.gotoAndPlay("Walk_Enter");
+			this.gotoAndPlaySprite("Walk_Enter");
 		}
 				
 		/* ---------------------------------------------------------------------------------------- */
@@ -108,7 +108,7 @@
 		private function dDownHandler():void 
 		{
 			this._right = true;
-			_sSprite.gotoAndPlay("Walk_Enter");
+			this.gotoAndPlaySprite("Walk_Enter");
 		}
 				
 		/* ---------------------------------------------------------------------------------------- */
@@ -116,7 +116,7 @@
 		private function wUpHandler():void 
 		{
 			this._up = false;
-			_sSprite.gotoAndPlay("Walk_Exit");
+			this.gotoAndPlaySprite("Walk_Exit");
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -124,7 +124,7 @@
 		private function aUpHandler():void 
 		{
 			this._left = false;
-			_sSprite.gotoAndPlay("Walk_Exit");
+			this.gotoAndPlaySprite("Walk_Exit");
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -132,7 +132,7 @@
 		private function sUpHandler():void 
 		{
 			this._down = false;
-			_sSprite.gotoAndPlay("Walk_Exit");
+			this.gotoAndPlaySprite("Walk_Exit");
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -140,7 +140,7 @@
 		private function dUpHandler():void 
 		{
 			this._right = false;
-			_sSprite.gotoAndPlay("Walk_Exit");
+			this.gotoAndPlaySprite("Walk_Exit");
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -241,12 +241,12 @@
 				if (angleInDegrees < 0)
 				{
 					//TODO: this looks terrible -Jon
-					//this._sSprite.gotoAndPlay("Turn_Left");
+					//this.this.gotoAndPlaySprite("Turn_Left");
 					angleInDegrees += 360;
 				}
 				else
 				{
-					//this._sSprite.gotoAndPlay("Turn_Right");
+					//this.this.gotoAndPlaySprite("Turn_Right");
 				}
 				
 				this.rotation = angleInDegrees; //TODO: consider rotating sprite here instead of whole player, solves the nameplate dissapearing issue
@@ -266,7 +266,7 @@
 		{
 			if (this._bAlive)
 			{
-				this._sSprite.gotoAndPlay("Light_Attack");
+				this.gotoAndPlaySprite("Light_Attack");
 				//new Attack(this.PlayerName, this.x, this.y, this._sSprite.rotation);
 				new Attack(this.PlayerName, this.x, this.y, this.rotation < 0 ? this.rotation + 360 : this.rotation);  //If the sprite is rotated instead of the player, the math here will need to be changed
 			}

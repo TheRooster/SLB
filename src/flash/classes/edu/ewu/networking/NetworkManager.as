@@ -7,6 +7,7 @@
 	import edu.ewu.components.player.NetworkPlayer;
 	import flash.utils.Dictionary;
 	import org.osflash.signals.Signal;
+	import edu.ewu.sounds.SoundManager;
 	
 	/**
 	 * Allow for easy managment of Playerss.
@@ -23,6 +24,10 @@
 		public static const		OPCODE_DEATH		:String = "OPCODE_DEATH";
 		/** String for heartbeat OPCODE. */
 		public static const		OPCODE_HEARTBEAT	:String = "OPCODE_HEARTBEAT";
+		/** String for animation OPCODE. */
+		public static const		OPCODE_SOUND		:String = "OPCODE_SOUND";
+		/** String for sound OPCODE. */
+		public static const		OPCODE_ANIM			:String = "OPCODE_ANIM";
 		
 		
 		/** Stores a reference to the singleton instance. */  
@@ -185,6 +190,18 @@
 				//	player.defeated();
 				//}
 			}
+			else if (dataObj.OPCODE == NetworkManager.OPCODE_SOUND)
+			{
+				SoundManager.instance.playSound(dataObj.name, true);
+			}
+			else if (dataObj.OPCODE == NetworkManager.OPCODE_ANIM)
+			{
+				var player:Player = _dPlayers[dataObj.name];
+				if (player)
+				{
+					player.gotoAndPlaySprite(dataObj.animName, true);
+				}
+			}
 		}
 		
 		private function handleConnect(user:UserObject):void 
@@ -220,6 +237,14 @@
 					{
 						//TODO: Handle death
 						// _connection.sendObject( { OPCODE:NetworkManager.OPCODE_DEATH, name:$oObject.PlayerName, x:$oObject.x, y:$oObject.y } );
+					}
+					else if ($sOPCODE == NetworkManager.OPCODE_SOUND)
+					{
+						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_SOUND, name:$oObject.name } );
+					}
+					else if ($sOPCODE == NetworkManager.OPCODE_ANIM)
+					{
+						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_ANIM, name:$oObject.name, animName:$oObject.animName } );
 					}
 				}
 				catch (e:Error)
