@@ -125,7 +125,27 @@
 				}
 			}
 		}
+		
+		//90 is because the sprite is by default facing 90 off of what flash considers 0 (Right)
+		public function get SpriteRotation():Number
+		{
+			if (this._sSprite)
+			{
+				return this._sSprite.rotation - 90;
+			}
+			else
+			{
+				return 0;
+			}
+		}
 	
+		public function set SpriteRotation($nRotation:Number):void
+		{
+			if (this._sSprite)
+			{
+				this._sSprite.rotation = $nRotation + 90;
+			}
+		}
 	}
 
 }

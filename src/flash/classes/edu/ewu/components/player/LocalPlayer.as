@@ -17,6 +17,7 @@
 	import flash.utils.Timer;
 	import edu.ewu.ui.screens.ScreenManager;
 	import com.reyco1.multiuser.events.P2PDispatcher;
+	import edu.ewu.components.attacks.RonaldBasicAttack;
 	
 	/**
 	 * ...
@@ -46,7 +47,6 @@
 		{
 			super($pName, $charName);
 			
-				
 			KeyboardManager.instance.addKeyDownListener(KeyCode.W, wDownHandler);
 			KeyboardManager.instance.addKeyDownListener(KeyCode.A, aDownHandler);
 			KeyboardManager.instance.addKeyDownListener(KeyCode.S, sDownHandler);
@@ -59,7 +59,7 @@
 			
 			this.addEventListener(Event.ENTER_FRAME, update);
 			
-			this._heartbeatTimer = new Timer(167);
+			this._heartbeatTimer = new Timer(88.8);
 			this._heartbeatTimer.addEventListener(TimerEvent.TIMER, heartbeat);
 			this._heartbeatTimer.start();
 			
@@ -76,6 +76,7 @@
 			//need to move these here so that we're sure the sprite is loaded before we try to 
 			//trigger the animations
 			StageRef.stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
+			KeyboardManager.instance.addKeyDownListener(KeyCode.E, eDownHandler);
 			StageRef.stage.addEventListener(MouseEvent.CLICK, mouseClickHandler);
 		}
 		
@@ -145,6 +146,14 @@
 		
 		/* ---------------------------------------------------------------------------------------- */
 		
+		private function eDownHandler():void 
+		{
+			//TODO: Switch name with whatever it actually is.
+			//this.gotoAndPlaySprite("Range_Attack");
+		}
+		
+		/* ---------------------------------------------------------------------------------------- */
+		
 		private function update(e:Event):void
 		{
 			
@@ -202,11 +211,7 @@
 					NetworkManager.instance.sendData(NetworkManager.OPCODE_MOVED, this);
 				}
 			}
-			
-			
-			
 		}
-		
 		
 		/**
 		 * @private
@@ -249,7 +254,7 @@
 					//this.this.gotoAndPlaySprite("Turn_Right");
 				}
 				
-				this.rotation = angleInDegrees; //TODO: consider rotating sprite here instead of whole player, solves the nameplate dissapearing issue
+				this.SpriteRotation = angleInDegrees; //TODO: consider rotating sprite here instead of whole player, solves the nameplate dissapearing issue
 				
 			}
 		}
@@ -267,8 +272,8 @@
 			if (this._bAlive)
 			{
 				this.gotoAndPlaySprite("Light_Attack");
-				//new Attack(this.PlayerName, this.x, this.y, this._sSprite.rotation);
-				new Attack(this.PlayerName, this.x, this.y, this.rotation < 0 ? this.rotation + 360 : this.rotation);  //If the sprite is rotated instead of the player, the math here will need to be changed
+				//TODO: Switch based upon sprite.
+				new RonaldBasicAttack(this.PlayerName, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation);  //If the sprite is rotated instead of the player, the math here will need to be changed
 			}
 		}
 		

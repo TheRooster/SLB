@@ -165,7 +165,7 @@
 				{
 					player.x = dataObj.x;
 					player.y = dataObj.y;
-					player.rotation = dataObj.rotation;
+					player.SpriteRotation = dataObj.rotation;
 					//player.nLives = dataObj.lives;
 					//player.nHealth = dataObj.health;
 				}
@@ -225,7 +225,7 @@
 				{
 					if ($sOPCODE == NetworkManager.OPCODE_HEARTBEAT)
 					{
-						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_MOVED, name:$oObject.PlayerName, x:$oObject.x, y:$oObject.y, rotation:$oObject.rotation } );
+						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_HEARTBEAT, name:$oObject.PlayerName, x:$oObject.x, y:$oObject.y, rotation:$oObject.SpriteRotation } );
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_MOVED)
 					{
