@@ -3,6 +3,8 @@
 	import com.reyco1.multiuser.data.UserObject;
 	import com.reyco1.multiuser.MultiUserSession;
 	import edu.ewu.components.attacks.Attack;
+	import edu.ewu.components.attacks.RonaldMcDonaldBasicAttack;
+	import edu.ewu.components.attacks.RonaldMcDonaldRangedAttack;
 	import edu.ewu.components.player.Player;
 	import edu.ewu.components.player.NetworkPlayer;
 	import flash.utils.Dictionary;
@@ -30,8 +32,10 @@
 		/** String for sound OPCODE. */
 		public static const		OPCODE_ANIM			:String = "OPCODE_ANIM";
 		
-		//** List of attack types for dynamic creation */
+		/** Here for the compiler */
 		private var 			_attack				:Attack;
+		private var 			_rmdBasicAttack		:RonaldMcDonaldBasicAttack;
+		private var 			_rmdRangedAttack	:RonaldMcDonaldRangedAttack;
 		
 		
 		/** Stores a reference to the singleton instance. */  

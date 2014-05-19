@@ -7,6 +7,7 @@
 	import com.natejc.input.KeyCode;
 	import com.natejc.utils.StageRef;
 	import edu.ewu.components.attacks.Attack;
+	import edu.ewu.components.attacks.RonaldMcDonaldRangedAttack;
 	import edu.ewu.components.Collideable;
 	import edu.ewu.components.CollisionManager;
 	import edu.ewu.networking.NetworkManager;
@@ -17,7 +18,9 @@
 	import flash.utils.Timer;
 	import edu.ewu.ui.screens.ScreenManager;
 	import com.reyco1.multiuser.events.P2PDispatcher;
-	import edu.ewu.components.attacks.RonaldBasicAttack;
+	import edu.ewu.components.attacks.RonaldMcDonaldBasicAttack;
+	import edu.ewu.components.attacks.BKBasicAttack;
+	import flash.utils.getDefinitionByName;
 	
 	/**
 	 * ...
@@ -39,7 +42,10 @@
 		private var _heartbeatTimer:Timer;
 		private var _bSentInitial:Boolean = false;
 		
-		
+		/** List of attacks for the compiler */
+		private var _attack:Attack;
+		private var _rmdBasicAttack:RonaldMcDonaldBasicAttack;
+		private var _rmdRangedAttack:RonaldMcDonaldRangedAttack;
 		
 		/* ---------------------------------------------------------------------------------------- */
 		
@@ -272,8 +278,8 @@
 			if (this._bAlive)
 			{
 				this.gotoAndPlaySprite("Light_Attack");
-				//TODO: Switch based upon sprite.
-				new RonaldBasicAttack(this.PlayerName, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation);  //If the sprite is rotated instead of the player, the math here will need to be changed
+				var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "BasicAttack") as Class;
+				new customAttack(this.PlayerName, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation);
 			}
 		}
 		
