@@ -72,7 +72,9 @@ package edu.ewu.components.player
 			//init with xml
 			var stats:XML = LoaderMax.getContent(this._charName );
 			
-			SpriteManager.instance.load(this._charName, this);
+			var loader:SWFLoader = new SWFLoader("resources/swfs/" + this._charName + ".swf", { name:this._charName + "_Sprite", onComplete:function() { initSprite( MovieClip(MovieClip(loader.rawContent).getChildAt(0))); }} );
+			loader.load();
+			//SpriteManager.instance.load(this._charName, this);
 		
 		}
 		
