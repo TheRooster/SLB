@@ -40,6 +40,9 @@ package edu.ewu.components.player
 		protected var _mcHeavyAttack:String;
 		protected var _mcChargedAttack:String;
 		
+		public var nLives:uint;
+		public var nHealth:uint;
+		
 		public function Player($pName:String, $charName:String)
 		{
 			super();
@@ -75,6 +78,9 @@ package edu.ewu.components.player
 			var loader:SWFLoader = new SWFLoader("resources/swfs/" + this._charName + ".swf", { name:this._charName + "_Sprite", onComplete:function() { initSprite( MovieClip(MovieClip(loader.rawContent).getChildAt(0))); }} );
 			loader.load();
 			//SpriteManager.instance.load(this._charName, this);
+			
+			this.nLives = 3;
+			this.nHealth = 0;
 		
 		}
 		

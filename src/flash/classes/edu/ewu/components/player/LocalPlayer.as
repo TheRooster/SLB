@@ -38,7 +38,6 @@
 		private var _up:Boolean = false;
 		private var _down:Boolean = false;
 
-		
 		private var _heartbeatTimer:Timer;
 		private var _bSentInitial:Boolean = false;
 		
@@ -46,6 +45,9 @@
 		private var _attack:Attack;
 		private var _rmdBasicAttack:RonaldMcDonaldBasicAttack;
 		private var _rmdRangedAttack:RonaldMcDonaldRangedAttack;
+		
+		/** To help keep track of score */
+		public var sLastHitBy:String;
 		
 		/* ---------------------------------------------------------------------------------------- */
 		
@@ -72,6 +74,7 @@
 			this.addCollidesWithType(CollisionManager.TYPE_PLAYER);
 			this.addCollidesWithType(CollisionManager.TYPE_ATTACK);
 			this.addCollidesWithType(CollisionManager.TYPE_WALL);
+			this.addCollidesWithType(CollisionManager.TYPE_PIT);
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -306,11 +309,24 @@
 						this.y = this._nLastY;
 					}
 				}
+				else
+				{
+					TweenMax.killTweensOf(this);
+					this.x = this._nLastX;
+					this.y = this._nLastY;
+				}
 			}
 			else if ($oObjectCollidedWith.sCollisionType == CollisionManager.TYPE_ATTACK)
 			{
 				var attack:Attack = $oObjectCollidedWith as Attack;
 				attack.apply(this);
+			}
+			else if ($oObjectCollidedWith.sCollisionType == CollisionManager.TYPE_PIT)
+			{
+				if (this._bAlive)
+				{
+					this.defeated();
+				}
 			}
 		}
 		
@@ -324,6 +340,31 @@
 		{
 			this._nLastY = this.y;
 			super.y = $y
+		}
+		
+		public function defeated():void
+		{
+			this._bAlive = false;
+			this.nLives--;
+			//TODO: Play death animation;
+			//this.gotoAndPlaySprite("Death");
+			if (this.nLives < 0)
+			{
+				//TODO: Handle switching to results.
+				//ScreenManager.instance.switchScreen("Results");
+			}
+			else
+			{
+				this.respawn();
+			}
+		}
+		
+		public function respawn():void
+		{
+			//TODO: Add invulnerability timer
+			this.x = stage.stageWidth * 0.5;
+			this.y = stage.stageHeight * 0.5;
+			this._bAlive = true;
 		}
 	}
 }
