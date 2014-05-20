@@ -63,6 +63,7 @@
 			KeyboardManager.instance.addKeyUpListener(KeyCode.S, sUpHandler);
 			KeyboardManager.instance.addKeyUpListener(KeyCode.D, dUpHandler);
 			
+			
 			this.addEventListener(Event.ENTER_FRAME, update);
 			
 			this._heartbeatTimer = new Timer(88.8);
@@ -154,8 +155,7 @@
 		
 		private function eDownHandler():void 
 		{
-			//TODO: Switch name with whatever it actually is.
-			//this.gotoAndPlaySprite("Range_Attack");
+			this._sSprite.gotoAndPlay("Ranged_Attack");
 			//var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "RangedAttack") as Class;
 			//new customAttack(this.PlayerName, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation);
 		}
