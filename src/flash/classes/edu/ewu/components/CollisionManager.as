@@ -12,12 +12,14 @@ package edu.ewu.components
 	{
 		/** String for Hero collision type. */
 		public static const		TYPE_PLAYER						:String = "TypePlayer";
-		/** String for Enemy collision type. */
+		/** String for Attack collision type. */
 		public static const		TYPE_ATTACK						:String = "TypeAttack";
-		/** String for Hero collision type. */
+		/** String for Collectable collision type. */
 		public static const		TYPE_COLLECTABLE				:String = "TypeCollectable";
-		/** String for Hero collision type. */
+		/** String for Wall collision type. */
 		public static const		TYPE_WALL						:String = "TypeWall";
+		/** String for Pit collision type. */
+		public static const		TYPE_PIT						:String = "TypePit";
 		
 		/** Stores a reference to the singleton instance. */  
 		private static const 	_instance						:CollisionManager 	= new CollisionManager(SingletonLock);

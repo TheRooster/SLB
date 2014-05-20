@@ -17,7 +17,7 @@ package edu.ewu.components.attacks
 	{
 		public function RonaldMcDonaldBasicAttack($sCreator:String, $nX:uint, $nY:uint, $nAngle:uint, $bNetwork:Boolean = false) 
 		{
-			super($sCreator, $nX, $nY, $nAngle, 200, 10, 500, "edu.ewu.components.attacks.RonaldBasicAttack", "Thump", $bNetwork);
+			super($sCreator, $nX, $nY, $nAngle, 200, 10, 500, "edu.ewu.components.attacks.RonaldMcDonaldBasicAttack", "Thump", $bNetwork);
 		}		
 	}
 

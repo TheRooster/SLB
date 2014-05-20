@@ -84,6 +84,7 @@
 		{
 			if (this.sCreator != $oPlayer.PlayerName)
 			{
+				$oPlayer.sLastHitBy = this.sCreator;
 				SoundManager.instance.playSound(this.sHitSound);
 				TweenMax.killTweensOf($oPlayer);
 				TweenMax.to($oPlayer, 0.5, { x:$oPlayer.x + this.force * Math.cos(this.angle), y:$oPlayer.y + this.force * Math.sin(this.angle) , ease: Linear.easeNone } );
