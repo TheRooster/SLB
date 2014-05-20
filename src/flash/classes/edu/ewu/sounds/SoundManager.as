@@ -3,6 +3,7 @@
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
 	import flash.utils.Dictionary;
+	import edu.ewu.networking.NetworkManager;
 	
 	/**
 	 * Allow for easy managment of soundss.
@@ -48,13 +49,17 @@
 		 * 
 		 * @param	$soundName	Name of the sound (specified during add()) to play.
 		 */
-		public function playSound($soundName:String):void
+		public function playSound($soundName:String, $bNetworked:Boolean = false):void
 		{
 			var oSound:Sound = this._dSound[$soundName];
 			if (oSound)
 			{
 				var oSoundChannel:SoundChannel = oSound.play();
 				oSoundChannel.soundTransform.volume = this._nVolume;
+				if ($bNetworked == false)
+				{
+					NetworkManager.instance.sendData(NetworkManager.OPCODE_SOUND, { name:$soundName } );
+				}
 			}
 		}
 		
