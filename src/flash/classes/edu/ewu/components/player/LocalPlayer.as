@@ -156,8 +156,8 @@
 		{
 			//TODO: Switch name with whatever it actually is.
 			//this.gotoAndPlaySprite("Range_Attack");
-			//var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "RangedAttack") as Class;
-			//new customAttack(this.PlayerName, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation);
+			var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "RangedAttack") as Class;
+			new customAttack(this.PlayerName, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation);
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
