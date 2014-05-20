@@ -2,9 +2,7 @@ package edu.ewu.ui.screens
 {
 
 
-	import edu.ewu.components.CreditsButton;
 	import edu.ewu.components.player.LocalPlayer;
-	import edu.ewu.components.SubmitButton;
 	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.sounds.MusicManager;
 	import edu.ewu.ui.buttons.SoundButton;
@@ -23,9 +21,7 @@ package edu.ewu.ui.screens
 		/** Reference to the input text field */
 		public var			_txtPlayerName			:TextField;
 		/** Reference to the Submit button */
-		public var			_btSubmit				:SubmitButton;
-		/** Reference to the Credits button */
-		public var			_btCredits				:CreditsButton;
+		public var			_btSubmit				:SoundButton;
 		
 		/* ---------------------------------------------------------------------------------------- */
 		
@@ -34,7 +30,6 @@ package edu.ewu.ui.screens
 		 */
 		public function LobbyScreen()
 		{	
-			
 			super();
 		}
 		
@@ -47,7 +42,6 @@ package edu.ewu.ui.screens
 		{
 			MusicManager.instance.crossSwitchMusic("Lobby");
 			_btSubmit.clickedSignal.addOnce(onSubmit);
-			_btCredits.clickedSignal.addOnce(toCredits);
 			super.begin();
 		}
 		
@@ -67,17 +61,9 @@ package edu.ewu.ui.screens
 			ScreenManager.instance.crossSwitchScreen("Game");
 			ScreenManager.instance.mcActiveScreen.begin();
 			
-			
 			NetworkManager.instance.add(name, me);
 			NetworkManager.instance.connect(name, me);
 			ScreenManager.instance.mcActiveScreen.addChild(me);
-		}
-		
-		
-		private function toCredits():void 
-		{	
-			ScreenManager.instance.crossSwitchScreen("Credits");
-			ScreenManager.instance.mcActiveScreen.begin();
 		}
 	}
 }

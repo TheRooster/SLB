@@ -5,12 +5,10 @@
 	import com.greensock.loading.XMLLoader;
 	import com.natejc.input.KeyboardManager;
 	import com.natejc.utils.StageRef;
-	import edu.ewu.components.CreditsButton;
 	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.sounds.Music;
 	import edu.ewu.sounds.MusicManager;
 	import edu.ewu.sounds.SoundManager;
-	import edu.ewu.ui.screens.CreditsScreen;
 	import edu.ewu.ui.screens.GameScreen;
 	import edu.ewu.ui.screens.LobbyScreen;
 	import edu.ewu.ui.screens.ScreenManager;
@@ -59,12 +57,9 @@
 			ScreenManager.instance.add("Lobby", lobbyScreen);
 			var gameScreen:GameScreen = new GameScreen();
 			ScreenManager.instance.add("Game", gameScreen);
-			var creditsScreen:CreditsScreen = new CreditsScreen();
-			ScreenManager.instance.add("Credits", creditsScreen);
 			
 			this.addChild(lobbyScreen);
 			this.addChild(gameScreen);
-			this.addChild(creditsScreen);
 			
 			
 			
