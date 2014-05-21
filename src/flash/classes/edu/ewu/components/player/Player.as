@@ -1,4 +1,4 @@
-﻿package edu.ewu.components.player
+package edu.ewu.components.player
 {
 	import com.greensock.events.LoaderEvent;
 	import com.greensock.loading.display.ContentDisplay;
@@ -40,6 +40,9 @@
 		protected var _mcHeavyAttack:String;
 		protected var _mcChargedAttack:String;
 		
+		public var nLives:uint;
+		public var nHealth:uint;
+		
 		public function Player($pName:String, $charName:String)
 		{
 			super();
@@ -48,7 +51,6 @@
 			this._charName = $charName;
 			
 
-			LoaderMax.activate([SWFLoader]);
 			var loader:XMLLoader = new XMLLoader("resources/xml/" + _charName + ".xml", { name:this._charName, onComplete:init  } );
 			loader.load();
 			
@@ -72,27 +74,26 @@
 		{
 			//init with xml
 			var stats:XML = LoaderMax.getContent(this._charName );
-			this._sSprite = MovieClip(SWFLoader(LoaderMax.getLoader(this._charName + "_Sprite")).rawContent)
-			if (this._sSprite.numChildren > 0)
-			{
-				this._sSprite = MovieClip(this._sSprite.getChildAt(0));//hacky fix for testing
-			}
-			else
-			{
-				trace("Has no children");
-			}
+			
+			var loader:SWFLoader = new SWFLoader("resources/swfs/" + this._charName + ".swf", { name:this._charName + "_Sprite", onComplete:function() { initSprite( MovieClip(MovieClip(loader.rawContent).getChildAt(0))); }} );
+			loader.load();
+			//SpriteManager.instance.load(this._charName, this);
+			
+			this.nLives = 3;
+			this.nHealth = 0;
+		
+		}
+		
+		
+		public function initSprite($sprite:MovieClip)
+		{
+			this._sSprite = $sprite;
 			this._sSprite.rotationZ = 90;
 			
 			this._sSprite.scaleX = .3;
 			this._sSprite.scaleY = .3;
-			//this._sSprite.width = 60;
-			//this._sSprite.height = 40;
-			//this._sSprite.scaleMode = "proportionalInside";
-			
-			
 			
 			this.addChild(this._sSprite);
-		
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -125,7 +126,26 @@
 				}
 			}
 		}
+		
+		//90 is because the sprite is by default facing 90 off of what flash considers 0 (Right)
+		public function get SpriteRotation():Number
+		{
+			if (this._sSprite)
+			{
+				return this._sSprite.rotation - 90;
+			}
+			else
+			{
+				return 0;
+			}
+		}
 	
+		public function set SpriteRotation($nRotation:Number):void
+		{
+			if (this._sSprite)
+			{
+				this._sSprite.rotation = $nRotation + 90;
+			}
+		}
 	}
-
 }

@@ -1,4 +1,4 @@
-﻿package edu.ewu.components.attacks  
+﻿﻿package edu.ewu.components.attacks  
 {
 	import com.greensock.easing.Linear;
 	import com.greensock.TweenMax;
@@ -32,10 +32,35 @@
 		public var		sAttackName	:String;
 		
 		//$nTime is the time the attack will last in milliseconds.
-		public function Attack($sCreator:String, $nX:uint, $nY:uint, $nAngle:uint, $bNetwork:Boolean = false, $nForce:uint = 200, $nDamage:uint = 0, $nTime:uint = 500) 
+		public function Attack($sCreator:String, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint, $nDamage:uint, $nTime:uint, $sAttackName:String, $sHitSound:String, $bNetwork:Boolean = false) 
 		{
-			//TODO: Change for specific attacks later
+			//Changed so everything is passed to super.
+			//On each attack creation they pass their values up instead of setting them all in their own attack.
+			this.sCreator = $sCreator; 
+			this.x = $nX;
+			this.y = $nY;
+			this.angle = $nAngle;
+			this.rotation = $nAngle;
+			this._bNetwork = $bNetwork;
 			
+			this.force = $nForce;
+			this.damage = $nDamage;
+			this.sHitSound = $sHitSound;
+			this.sAttackName = $sAttackName;
+			
+			this.sCollisionType = CollisionManager.TYPE_ATTACK;
+			CollisionManager.instance.add(this);
+			
+			_timer = new Timer($nTime, 1);
+			_timer.addEventListener(TimerEvent.TIMER_COMPLETE, destroy);
+			_timer.start();
+			
+			StageRef.stage.addChild(this);
+			
+			if (this._bNetwork == false)
+			{
+				NetworkManager.instance.sendData(NetworkManager.OPCODE_ATTACK, this);
+			}
 		}
 		
 		public function destroy($e:TimerEvent = null)
@@ -57,9 +82,14 @@
 		 */
 		public function apply($oPlayer:LocalPlayer):void
 		{
-			//TODO: Handling health affecting force
-			
+			if (this.sCreator != $oPlayer.PlayerName)
+			{
+				$oPlayer.sLastHitBy = this.sCreator;
+				SoundManager.instance.playSound(this.sHitSound);
+				TweenMax.killTweensOf($oPlayer);
+				TweenMax.to($oPlayer, 0.5, { x:$oPlayer.x + this.force * Math.cos(this.angle), y:$oPlayer.y + this.force * Math.sin(this.angle) , ease: Linear.easeNone } );
+				this.destroy();
+			}
 		}
 	}
-
 }

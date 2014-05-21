@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <data>
-	<testString>I'm a test</testString>
 	<stats>	
 	</stats>
-	<SWFLoader url="resources/swfs/RonaldMcDonald.swf" name="RonaldMcDonald_Sprite" load="true" />
 </data>

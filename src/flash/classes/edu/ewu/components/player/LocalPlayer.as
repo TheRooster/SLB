@@ -1,4 +1,5 @@
-﻿package edu.ewu.components.player 
+﻿﻿
+package edu.ewu.components.player 
 {
 	import com.greensock.easing.Linear;
 	import com.greensock.events.LoaderEvent;
@@ -7,6 +8,7 @@
 	import com.natejc.input.KeyCode;
 	import com.natejc.utils.StageRef;
 	import edu.ewu.components.attacks.Attack;
+	import edu.ewu.components.attacks.RonaldMcDonaldRangedAttack;
 	import edu.ewu.components.Collideable;
 	import edu.ewu.components.CollisionManager;
 	import edu.ewu.networking.NetworkManager;
@@ -17,6 +19,9 @@
 	import flash.utils.Timer;
 	import edu.ewu.ui.screens.ScreenManager;
 	import com.reyco1.multiuser.events.P2PDispatcher;
+	import edu.ewu.components.attacks.RonaldMcDonaldBasicAttack;
+	import edu.ewu.components.attacks.BKBasicAttack;
+	import flash.utils.getDefinitionByName;
 	
 	/**
 	 * ...
@@ -34,11 +39,16 @@
 		private var _up:Boolean = false;
 		private var _down:Boolean = false;
 
-		
 		private var _heartbeatTimer:Timer;
 		private var _bSentInitial:Boolean = false;
 		
+		/** List of attacks for the compiler */
+		private var _attack:Attack;
+		private var _rmdBasicAttack:RonaldMcDonaldBasicAttack;
+		private var _rmdRangedAttack:RonaldMcDonaldRangedAttack;
 		
+		/** To help keep track of score */
+		public var sLastHitBy:String;
 		
 		/* ---------------------------------------------------------------------------------------- */
 		
@@ -46,7 +56,6 @@
 		{
 			super($pName, $charName);
 			
-				
 			KeyboardManager.instance.addKeyDownListener(KeyCode.W, wDownHandler);
 			KeyboardManager.instance.addKeyDownListener(KeyCode.A, aDownHandler);
 			KeyboardManager.instance.addKeyDownListener(KeyCode.S, sDownHandler);
@@ -57,15 +66,17 @@
 			KeyboardManager.instance.addKeyUpListener(KeyCode.S, sUpHandler);
 			KeyboardManager.instance.addKeyUpListener(KeyCode.D, dUpHandler);
 			
+			
 			this.addEventListener(Event.ENTER_FRAME, update);
 			
-			this._heartbeatTimer = new Timer(167);
+			this._heartbeatTimer = new Timer(88.8);
 			this._heartbeatTimer.addEventListener(TimerEvent.TIMER, heartbeat);
 			this._heartbeatTimer.start();
 			
 			this.addCollidesWithType(CollisionManager.TYPE_PLAYER);
 			this.addCollidesWithType(CollisionManager.TYPE_ATTACK);
 			this.addCollidesWithType(CollisionManager.TYPE_WALL);
+			this.addCollidesWithType(CollisionManager.TYPE_PIT);
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -76,6 +87,7 @@
 			//need to move these here so that we're sure the sprite is loaded before we try to 
 			//trigger the animations
 			StageRef.stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
+			KeyboardManager.instance.addKeyDownListener(KeyCode.E, eDownHandler);
 			StageRef.stage.addEventListener(MouseEvent.CLICK, mouseClickHandler);
 		}
 		
@@ -145,6 +157,18 @@
 		
 		/* ---------------------------------------------------------------------------------------- */
 		
+		private function eDownHandler():void 
+		{
+
+			this._sSprite.gotoAndPlay("Ranged_Attack");
+
+			var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "RangedAttack") as Class;
+			new customAttack(this.PlayerName, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation);
+
+		}
+		
+		/* ---------------------------------------------------------------------------------------- */
+		
 		private function update(e:Event):void
 		{
 			
@@ -202,11 +226,7 @@
 					NetworkManager.instance.sendData(NetworkManager.OPCODE_MOVED, this);
 				}
 			}
-			
-			
-			
 		}
-		
 		
 		/**
 		 * @private
@@ -249,7 +269,7 @@
 					//this.this.gotoAndPlaySprite("Turn_Right");
 				}
 				
-				this.rotation = angleInDegrees; //TODO: consider rotating sprite here instead of whole player, solves the nameplate dissapearing issue
+				this.SpriteRotation = angleInDegrees; //TODO: consider rotating sprite here instead of whole player, solves the nameplate dissapearing issue
 				
 			}
 		}
@@ -267,8 +287,8 @@
 			if (this._bAlive)
 			{
 				this.gotoAndPlaySprite("Light_Attack");
-				//new Attack(this.PlayerName, this.x, this.y, this._sSprite.rotation);
-				new Attack(this.PlayerName, this.x, this.y, this.rotation < 0 ? this.rotation + 360 : this.rotation);  //If the sprite is rotated instead of the player, the math here will need to be changed
+				var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "BasicAttack") as Class;
+				new customAttack(this.PlayerName, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation);
 			}
 		}
 		
@@ -293,11 +313,24 @@
 						this.y = this._nLastY;
 					}
 				}
+				else
+				{
+					TweenMax.killTweensOf(this);
+					this.x = this._nLastX;
+					this.y = this._nLastY;
+				}
 			}
 			else if ($oObjectCollidedWith.sCollisionType == CollisionManager.TYPE_ATTACK)
 			{
 				var attack:Attack = $oObjectCollidedWith as Attack;
 				attack.apply(this);
+			}
+			else if ($oObjectCollidedWith.sCollisionType == CollisionManager.TYPE_PIT)
+			{
+				if (this._bAlive)
+				{
+					this.defeated();
+				}
 			}
 		}
 		
@@ -312,6 +345,30 @@
 			this._nLastY = this.y;
 			super.y = $y
 		}
+		
+		public function defeated():void
+		{
+			this._bAlive = false;
+			this.nLives--;
+			//TODO: Play death animation;
+			//this.gotoAndPlaySprite("Death");
+			if (this.nLives < 0)
+			{
+				//TODO: Handle switching to results.
+				//ScreenManager.instance.switchScreen("Results");
+			}
+			else
+			{
+				this.respawn();
+			}
+		}
+		
+		public function respawn():void
+		{
+			//TODO: Add invulnerability timer
+			this.x = stage.stageWidth * 0.5;
+			this.y = stage.stageHeight * 0.5;
+			this._bAlive = true;
+		}
 	}
-
 }

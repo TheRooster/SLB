@@ -1,8 +1,11 @@
+﻿
 ﻿package edu.ewu.networking
 {
 	import com.reyco1.multiuser.data.UserObject;
 	import com.reyco1.multiuser.MultiUserSession;
 	import edu.ewu.components.attacks.Attack;
+	import edu.ewu.components.attacks.RonaldMcDonaldBasicAttack;
+	import edu.ewu.components.attacks.RonaldMcDonaldRangedAttack;
 	import edu.ewu.components.player.Player;
 	import edu.ewu.components.player.NetworkPlayer;
 	import flash.utils.Dictionary;
@@ -21,8 +24,6 @@
 		public static const		OPCODE_MOVED		:String = "OPCODE_MOVED";
 		/** String for attack OPCODE. */
 		public static const		OPCODE_ATTACK		:String = "OPCODE_ATTACK";
-		/** String for death OPCODE. */
-		public static const		OPCODE_DEATH		:String = "OPCODE_DEATH";
 		/** String for heartbeat OPCODE. */
 		public static const		OPCODE_HEARTBEAT	:String = "OPCODE_HEARTBEAT";
 		/** String for animation OPCODE. */
@@ -30,8 +31,10 @@
 		/** String for sound OPCODE. */
 		public static const		OPCODE_ANIM			:String = "OPCODE_ANIM";
 		
-		//** List of attack types for dynamic creation */
+		/** Here for the compiler */
 		private var 			_attack				:Attack;
+		private var 			_rmdBasicAttack		:RonaldMcDonaldBasicAttack;
+		private var 			_rmdRangedAttack	:RonaldMcDonaldRangedAttack;
 		
 		
 		/** Stores a reference to the singleton instance. */  
@@ -165,9 +168,9 @@
 				{
 					player.x = dataObj.x;
 					player.y = dataObj.y;
-					player.rotation = dataObj.rotation;
-					//player.nLives = dataObj.lives;
-					//player.nHealth = dataObj.health;
+					player.SpriteRotation = dataObj.rotation;
+					player.nLives = dataObj.lives;
+					player.nHealth = dataObj.health;
 				}
 			}
 			else if (dataObj.OPCODE == NetworkManager.OPCODE_MOVED)
@@ -183,15 +186,6 @@
 			{
 				var customAttack:Class = getDefinitionByName(dataObj.name) as Class;
 				var attack:* = new customAttack(dataObj.creator, dataObj.x, dataObj.y, dataObj.angle, true);
-			}
-			else if (dataObj.OPCODE == NetworkManager.OPCODE_DEATH)
-			{
-				//TODO: Handle death
-				//var player:Player = _dPlayers[dataObj.name];
-				//if (player)
-				//{
-				//	player.defeated();
-				//}
 			}
 			else if (dataObj.OPCODE == NetworkManager.OPCODE_SOUND)
 			{
@@ -225,20 +219,15 @@
 				{
 					if ($sOPCODE == NetworkManager.OPCODE_HEARTBEAT)
 					{
-						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_MOVED, name:$oObject.PlayerName, x:$oObject.x, y:$oObject.y, rotation:$oObject.rotation } );
+						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_HEARTBEAT, name:$oObject.PlayerName, x:$oObject.x, y:$oObject.y, rotation:$oObject.SpriteRotation , health:$oObject.nHealth, lives:$oObject.nLives } );
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_MOVED)
 					{
-						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_MOVED, name:$oObject.PlayerName, x:$oObject.x, y:$oObject.y/*, health:$oObject.nHealth, lives:$oObject.nLives*/ } );
+						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_MOVED, name:$oObject.PlayerName, x:$oObject.x, y:$oObject.y } );
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_ATTACK)
 					{
 						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_ATTACK, name:$oObject.sAttackName, creator:$oObject.sCreator, x:$oObject.x, y:$oObject.y, angle:$oObject.angle } );
-					}
-					else if ($sOPCODE == NetworkManager.OPCODE_DEATH)
-					{
-						//TODO: Handle death
-						// _connection.sendObject( { OPCODE:NetworkManager.OPCODE_DEATH, name:$oObject.PlayerName, x:$oObject.x, y:$oObject.y } );
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_SOUND)
 					{
@@ -274,4 +263,3 @@
 }
 
 class SingletonLock{};
-
