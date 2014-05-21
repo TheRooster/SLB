@@ -2,6 +2,7 @@
 {
 	import com.greensock.TweenMax;
 	import edu.ewu.components.player.Player;
+	import edu.ewu.components.player.LocalPlayer;
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.text.TextField;
@@ -70,6 +71,22 @@
 			super.begin();
 		}
 		
+		/* ---------------------------------------------------------------------------------------- */
+		
+		/**
+		 * Creates the Local Player.
+		 */
+		override public function setPlayer(name:String):void
+		{
+			//player will now be created in GameScreen.
+			var me:LocalPlayer = new LocalPlayer(name, "RonaldMcDonald");
+			me.x = stage.stageWidth * 0.5;
+			me.y = stage.stageHeight * 0.5;
+			
+			NetworkManager.instance.add(name, me);
+			NetworkManager.instance.connect(name, me);
+			ScreenManager.instance.mcActiveScreen.addChild(me);
+		}
 		
 		/* ---------------------------------------------------------------------------------------- */
 		

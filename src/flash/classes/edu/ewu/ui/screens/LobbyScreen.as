@@ -1,7 +1,5 @@
 package edu.ewu.ui.screens
 {
-
-
 	import edu.ewu.components.CreditsButton;
 	import edu.ewu.components.player.LocalPlayer;
 	import edu.ewu.components.SubmitButton;
@@ -58,16 +56,10 @@ package edu.ewu.ui.screens
 			{
 				name = "Anon" + uint(Math.random() * 10000).toString();
 			}
-			var me:LocalPlayer = new LocalPlayer(name, "RonaldMcDonald");
-			me.x = stage.stageWidth * 0.5;
-			me.y = stage.stageHeight * 0.5;
 			
 			ScreenManager.instance.crossSwitchScreen("Game");
 			ScreenManager.instance.mcActiveScreen.begin();
-			
-			NetworkManager.instance.add(name, me);
-			NetworkManager.instance.connect(name, me);
-			ScreenManager.instance.mcActiveScreen.addChild(me);
+			ScreenManager.instance.mcActiveScreen.setPlayer(name);
 		}
 		
 		

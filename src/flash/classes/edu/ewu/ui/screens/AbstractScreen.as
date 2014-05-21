@@ -126,6 +126,13 @@ package edu.ewu.ui.screens
 		{
 			this.endCompletedSignal.dispatch();
 		}
+		
+		/* ---------------------------------------------------------------------------------------- */
+		
+		/**
+		 * Creates the Local Player.
+		 */
+		public function setPlayer(name:String):void{}
 	}
 }
 
