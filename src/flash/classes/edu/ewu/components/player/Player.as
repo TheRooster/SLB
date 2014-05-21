@@ -147,5 +147,10 @@ package edu.ewu.components.player
 				this._sSprite.rotation = $nRotation + 90;
 			}
 		}
+		
+		public function get alive()
+		{
+			return this._bAlive;
+		}
 	}
 }

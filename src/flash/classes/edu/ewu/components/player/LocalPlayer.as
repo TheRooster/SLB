@@ -66,6 +66,8 @@ package edu.ewu.components.player
 			KeyboardManager.instance.addKeyUpListener(KeyCode.S, sUpHandler);
 			KeyboardManager.instance.addKeyUpListener(KeyCode.D, dUpHandler);
 			
+			KeyboardManager.instance.addKeyDownListener(KeyCode.T, this.defeated);
+			
 			
 			this.addEventListener(Event.ENTER_FRAME, update);
 			
@@ -172,7 +174,7 @@ package edu.ewu.components.player
 		private function update(e:Event):void
 		{
 			
-			if (this._bAlive)
+			if (this._bAlive && this.nLives>0)
 			{
 				if (this._bSentInitial == false)
 				{
@@ -348,6 +350,7 @@ package edu.ewu.components.player
 		
 		public function defeated():void
 		{
+
 			this._bAlive = false;
 			this.nLives--;
 			//TODO: Play death animation;
@@ -355,11 +358,25 @@ package edu.ewu.components.player
 			if (this.nLives < 0)
 			{
 				//TODO: Handle switching to results.
-				//ScreenManager.instance.switchScreen("Results");
+				var allDead:Boolean = true;
+				for (var p:String in NetworkManager.instance.players)
+				{
+					if (Player(NetworkManager.instance.players[p]).alive)
+					{
+						trace(p + ": is alive");
+						allDead = false;
+						break;
+					}
+				}
+				if (allDead)
+				{
+					trace("All Dead");
+					//ScreenManager.instance.switchScreen("Results");
+				}
 			}
 			else
 			{
-				this.respawn();
+				TweenMax.delayedCall(5, respawn);
 			}
 		}
 		
