@@ -18,8 +18,31 @@
 	{
 		/** Whether the game is currently running or not. */
 		public var		bPlaying				:Boolean;
+		/** Text box that contains the name of a player. */
+		public var      txtLocal;
+		/** Text box that contains the name of a player. */
+		public var      txtp2;
+		/** Text box that contains the name of a player. */
+		public var      txtp3;
+		/** Text box that contains the name of a player. */
+		public var      txtp4;
+		/** Text box that contains the lives of a player. */
+		public var      txtLocalLives;
+		/** Text box that contains the lives of a player. */
+		public var      txtp2Lives;
+		/** Text box that contains the lives of a player. */
+		public var      txtp3Lives;
+		/** Text box that contains the lives of a player. */
+		public var      txtp4Lives;
 		
-		/* ---------------------------------------------------------------------------------------- */
+		public var      txtLocalHealth;
+		/** Text box that contains the lives of a player. */
+		public var      txtP2Health;
+		/** Text box that contains the lives of a player. */
+		public var      txtP3Health;
+		/** Text box that contains the lives of a player. */
+		public var      txtP4Health;
+/* ---------------------------------------------------------------------------------------- */
 		
 		/**
 		 * Constructs the GameScreen object.

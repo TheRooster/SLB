@@ -20,7 +20,6 @@ package edu.ewu.components
 		public static const		TYPE_WALL						:String = "TypeWall";
 		/** String for Pit collision type. */
 		public static const		TYPE_PIT						:String = "TypePit";
-		
 		/** Stores a reference to the singleton instance. */  
 		private static const 	_instance						:CollisionManager 	= new CollisionManager(SingletonLock);
 		/** Keeps track of objects in sub arrays based on type that ar being tracked */
