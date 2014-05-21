@@ -54,6 +54,7 @@
 			
 			SoundManager.instance.add("ButtonClick", new ClickSound());
 			SoundManager.instance.add("Thump", new ThumpSound());
+			SoundManager.instance.add("Death", new DeathSound());
 			
 			var lobbyScreen:LobbyScreen = new LobbyScreen();
 			ScreenManager.instance.add("Lobby", lobbyScreen);

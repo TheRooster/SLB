@@ -692,7 +692,7 @@ package edu.ewu.components.player
 
 		{
 
-
+			SoundManager.instance.playSound("Death");
 
 			this._bAlive = false;
 
