@@ -5,6 +5,8 @@ package edu.ewu.ui.screens
 	import edu.ewu.components.SubmitButton;
 	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.sounds.MusicManager;
+	import edu.ewu.ui.buttons.BKButton;
+	import edu.ewu.ui.buttons.RonButton;
 	import edu.ewu.ui.buttons.SoundButton;
 	import flash.text.TextField;
 	import org.osflash.signals.Signal;
@@ -22,8 +24,13 @@ package edu.ewu.ui.screens
 		public var			_txtPlayerName			:TextField;
 		/** Reference to the Submit button */
 		public var			_btSubmit				:SubmitButton;
+		/** Reference to the Ron button */
+		public var			_btRon				:RonButton;	
+		/** Reference to the BK button */
+		public var			_btBK				:BKButton;	
 		/** Reference to the Credits button */
 		public var			_btCredits				:CreditsButton;	
+		public var			character				:String = "RonaldMcDonald";
 		/* ---------------------------------------------------------------------------------------- */
 		
 		/**
@@ -44,9 +51,21 @@ package edu.ewu.ui.screens
 			MusicManager.instance.crossSwitchMusic("Lobby");
 			_btSubmit.clickedSignal.addOnce(onSubmit);
 			_btCredits.clickedSignal.addOnce(toCredits);
+			_btRon.clickedSignal.addOnce(changeCharacterToRon);
+			_btBK.clickedSignal.addOnce(changeCharacterToBK);
 			super.begin();
 		}
 		
+		
+		public function changeCharacterToRon():void
+		{
+			this.character = "RonaldMcDonald";
+		}
+		
+		public function changeCharacterToBK():void
+		{
+			this.character = "BurgerKing";
+		}
 		/* ---------------------------------------------------------------------------------------- */
 		
 		private function onSubmit():void 
@@ -59,7 +78,7 @@ package edu.ewu.ui.screens
 			
 			ScreenManager.instance.crossSwitchScreen("Game");
 			ScreenManager.instance.mcActiveScreen.begin();
-			ScreenManager.instance.mcActiveScreen.setPlayer(name);
+			ScreenManager.instance.mcActiveScreen.setPlayer(name, character);
 		}
 		
 		
