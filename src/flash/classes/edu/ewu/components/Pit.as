@@ -10,7 +10,7 @@ package edu.ewu.components
 		public function Pit() 
 		{
 			super();
-			
+			this.visible = false;
 			this.sCollisionType = CollisionManager.TYPE_PIT;
 			CollisionManager.instance.add(this);
 		}

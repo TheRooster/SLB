@@ -10,7 +10,7 @@ package edu.ewu.components
 		public function Wall() 
 		{
 			super();
-			
+			this.visible = false;
 			this.sCollisionType = CollisionManager.TYPE_WALL;
 			CollisionManager.instance.add(this);
 		}

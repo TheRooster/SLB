@@ -163,7 +163,7 @@
 		{
 			if (this.bPlaying)
 			{
-				//txtLocalHealth.text = p1.nhealth;
+				txtLocalHealth.text = p1.getHealth() + "%";
 				if(p2!=null)
 					txtP2Health.text = p2.nHealth + "%";
 				if(p3!=null)

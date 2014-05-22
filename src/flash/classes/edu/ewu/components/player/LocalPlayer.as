@@ -770,6 +770,11 @@ package edu.ewu.components.player
 			this.visible = true;
 
 		}
+		
+		public function getHealth():int
+		{
+			return this.nHealth;
+		}
 
 	}
 }
