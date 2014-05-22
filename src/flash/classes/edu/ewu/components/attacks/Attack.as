@@ -168,7 +168,7 @@ package edu.ewu.components.attacks
 			if (this.sCreator != $oPlayer.PlayerName)
 
 			{
-
+				$oPlayer.nHealth++; 
 				$oPlayer.sLastHitBy = this.sCreator;
 				SoundManager.instance.playSound(this.sHitSound);
 

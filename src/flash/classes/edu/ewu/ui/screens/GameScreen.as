@@ -9,6 +9,7 @@
 	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.sounds.MusicManager;
 	import edu.ewu.components.CollisionManager;
+	import flash.text.TextFormat;
 	
 	/**
 	 * Drives the GameScreen class.
@@ -38,11 +39,17 @@
 		
 		public var      txtLocalHealth;
 		/** Text box that contains the lives of a player. */
-		public var      txtP2Health;
+		public var      txtP2Health:TextField = new TextField();
 		/** Text box that contains the lives of a player. */
 		public var      txtP3Health;
 		/** Text box that contains the lives of a player. */
 		public var      txtP4Health;
+		
+		/** References to each player. */
+		public var p1;
+		public var p2;
+		public var p3;
+		public var p4;
 /* ---------------------------------------------------------------------------------------- */
 		
 		/**
@@ -50,9 +57,8 @@
 		 */
 		public function GameScreen()
 		{
-			super();
-			
 			this.bPlaying 		= false;
+			super();
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -71,6 +77,7 @@
 			super.begin();
 		}
 		
+		
 		/* ---------------------------------------------------------------------------------------- */
 		
 		/**
@@ -80,12 +87,15 @@
 		{
 			//player will now be created in GameScreen.
 			var me:LocalPlayer = new LocalPlayer(name, "RonaldMcDonald");
+			p1 = me;
 			me.x = stage.stageWidth * 0.5;
 			me.y = stage.stageHeight * 0.5;
 			
 			NetworkManager.instance.add(name, me);
 			NetworkManager.instance.connect(name, me);
 			ScreenManager.instance.mcActiveScreen.addChild(me);
+			
+			txtLocal.text = name;
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -99,6 +109,21 @@
 		protected function playerAdded($oPlayer:Player):void
 		{
 			this.addChild($oPlayer);
+			if (p2 == null)
+			{
+				p2 = $oPlayer;
+				txtp2.text = p2._charName;
+			}
+			else if (p3 == null)
+			{
+				p3 = $oPlayer;
+				txtp3.text = p3._charName;
+			}
+			else if (p4 == null)
+			{
+				p4 = $oPlayer;
+				txtp4.text = p4._charName;
+			}
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -138,7 +163,13 @@
 		{
 			if (this.bPlaying)
 			{
-				
+				//txtLocalHealth.text = p1.nhealth;
+				if(p2!=null)
+					txtP2Health.text = p2.nHealth + "%";
+				if(p3!=null)
+					txtP3Health.text = p3.nHealth + "%";
+				if(p4!=null)
+					txtP4Health.text = p4.nHealth + "%";
 			}
 		}
 	}
