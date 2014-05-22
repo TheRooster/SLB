@@ -1,5 +1,6 @@
 package edu.ewu.ui.screens
 {
+	import edu.ewu.components.BackButton;
 	import edu.ewu.components.CreditsButton;
 	import edu.ewu.ui.buttons.QuitButton;
 	import edu.ewu.components.player.LocalPlayer;
@@ -22,7 +23,7 @@ package edu.ewu.ui.screens
 		/** Reference to the input text field */
 		public var			_txtPlayerName			:TextField;
 		/** Reference to the Submit button */
-		public var			_btLobby				:SubmitButton;
+		public var			_btLobby				:BackButton;
 		/** Reference to the Credits button */
 		public var			_btCredits				:CreditsButton;	
 		/** Reference to the Credits button */

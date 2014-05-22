@@ -693,7 +693,6 @@ package edu.ewu.components.player
 		{
 
 			SoundManager.instance.playSound("Death");
-			//play animation?
 			
 			this.visible = false;
 
@@ -705,7 +704,7 @@ package edu.ewu.components.player
 
 			//this.gotoAndPlaySprite("Death");
 
-			if (this.nLives < 0)
+			if (this.nLives == 0)
 
 			{
 
@@ -736,7 +735,8 @@ package edu.ewu.components.player
 				{
 
 					trace("All Dead");
-
+					ScreenManager.instance.crossSwitchScreen("Results");
+					ScreenManager.instance.mcActiveScreen.begin();
 					//ScreenManager.instance.switchScreen("Results");
 
 				}
