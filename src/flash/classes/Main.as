@@ -13,6 +13,7 @@
 	import edu.ewu.ui.screens.CreditsScreen;
 	import edu.ewu.ui.screens.GameScreen;
 	import edu.ewu.ui.screens.LobbyScreen;
+	import edu.ewu.ui.screens.LoadingScreen;
 	import edu.ewu.ui.screens.ScreenManager;
 	import flash.display.MovieClip;
 	
@@ -56,6 +57,9 @@
 			SoundManager.instance.add("Thump", new ThumpSound());
 			SoundManager.instance.add("Death", new DeathSound());
 			
+			
+			var loadingScreen:LoadingScreen = new LoadingScreen();
+			ScreenManager.instance.add("Loading", loadingScreen);
 			var lobbyScreen:LobbyScreen = new LobbyScreen();
 			ScreenManager.instance.add("Lobby", lobbyScreen);
 			var gameScreen:GameScreen = new GameScreen();
@@ -63,13 +67,14 @@
 			var creditsScreen:CreditsScreen = new CreditsScreen();
 			ScreenManager.instance.add("Credits", creditsScreen);
 			
+			this.addChild(loadingScreen);
 			this.addChild(lobbyScreen);
 			this.addChild(gameScreen);
 			this.addChild(creditsScreen);
 			
 			
 			
-			ScreenManager.instance.switchScreen("Lobby");
+			ScreenManager.instance.switchScreen("Loading");
 			ScreenManager.instance.mcActiveScreen.begin();
 		}
 		

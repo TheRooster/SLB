@@ -6,6 +6,7 @@ package edu.ewu.ui.screens
 	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.sounds.MusicManager;
 	import edu.ewu.ui.buttons.SoundButton;
+	import flash.display.SimpleButton;
 	import flash.text.TextField;
 	import org.osflash.signals.Signal;
 	
@@ -21,6 +22,8 @@ package edu.ewu.ui.screens
 		/** Reference to the back button */
 		public var			_btLobby				:SoundButton;
 		
+		public var txtLoading:TextField = new TextField();
+		
 		/* ---------------------------------------------------------------------------------------- */
 		
 		/**
@@ -28,7 +31,6 @@ package edu.ewu.ui.screens
 		 */
 		public function LoadingScreen()
 		{	
-			
 			super();
 		}
 		
