@@ -80,7 +80,7 @@ package edu.ewu.components.player
 			loader.load();
 			//SpriteManager.instance.load(this._charName, this);
 			
-			this.nLives = 1;
+			this.nLives = 3;
 			this.nHealth = 0;
 		
 		}

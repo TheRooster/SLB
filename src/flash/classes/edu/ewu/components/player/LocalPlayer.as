@@ -99,6 +99,12 @@ package edu.ewu.components.player
 		/** To help keep track of score */
 
 		public var sLastHitBy:String;
+		
+		public var nP1Score:int = 0;
+		public var nP2Score:int = 0;
+		public var nP3Score:int = 0;
+		public var nP4Score:int = 0;
+		
 
 	
 		/* ---------------------------------------------------------------------------------------- */
@@ -704,6 +710,16 @@ package edu.ewu.components.player
 			this._bAlive = false;
 
 			this.nLives--;
+			
+			//keep track of who killed you.
+			if (sLastHitBy == NetworkManager.instance.players[0])
+				nP1Score++;
+			else if (sLastHitBy == NetworkManager.instance.players[1])
+				nP2Score++;
+			else if (sLastHitBy == NetworkManager.instance.players[2])
+				nP3Score++;
+			else if (sLastHitBy == NetworkManager.instance.players[3])
+				nP4Score++;
 
 			//TODO: Play death animation;
 
