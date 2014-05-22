@@ -14,6 +14,7 @@
 	import edu.ewu.ui.screens.GameScreen;
 	import edu.ewu.ui.screens.LobbyScreen;
 	import edu.ewu.ui.screens.LoadingScreen;
+	import edu.ewu.ui.screens.ResultsScreen;
 	import edu.ewu.ui.screens.ScreenManager;
 	import flash.display.MovieClip;
 	
@@ -66,11 +67,14 @@
 			ScreenManager.instance.add("Game", gameScreen);
 			var creditsScreen:CreditsScreen = new CreditsScreen();
 			ScreenManager.instance.add("Credits", creditsScreen);
+			var resultsScreen:ResultsScreen = new ResultsScreen();
+			ScreenManager.instance.add("Results", resultsScreen);
 			
 			this.addChild(loadingScreen);
 			this.addChild(lobbyScreen);
 			this.addChild(gameScreen);
 			this.addChild(creditsScreen);
+			this.addChild(resultsScreen);
 			
 			
 			
