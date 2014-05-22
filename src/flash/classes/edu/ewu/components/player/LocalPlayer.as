@@ -2,6 +2,7 @@ package edu.ewu.components.player
 {
 
 	import com.greensock.easing.Linear;
+	import edu.ewu.components.attacks.BurgerKingRangedAttack;
 
 	import com.greensock.events.LoaderEvent;
 
@@ -39,7 +40,7 @@ package edu.ewu.components.player
 
 	import edu.ewu.components.attacks.RonaldMcDonaldBasicAttack;
 
-	import edu.ewu.components.attacks.BKBasicAttack;
+	import edu.ewu.components.attacks.BurgerKingBasicAttack;
 
 	import flash.utils.getDefinitionByName;
 
@@ -89,6 +90,10 @@ package edu.ewu.components.player
 		private var _rmdBasicAttack:RonaldMcDonaldBasicAttack;
 
 		private var _rmdRangedAttack:RonaldMcDonaldRangedAttack;
+		
+		private var _bkBasicAttack:BurgerKingBasicAttack;
+
+		private var _bkRangedAttack:BurgerKingRangedAttack;
 
 		
 		/** To help keep track of score */
