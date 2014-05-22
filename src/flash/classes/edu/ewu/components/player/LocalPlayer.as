@@ -693,6 +693,9 @@ package edu.ewu.components.player
 		{
 
 			SoundManager.instance.playSound("Death");
+			//play animation?
+			
+			this.visible = false;
 
 			this._bAlive = false;
 
@@ -763,6 +766,8 @@ package edu.ewu.components.player
 			this.y = stage.stageHeight * 0.5;
 
 			this._bAlive = true;
+			
+			this.visible = true;
 
 		}
 
