@@ -91,8 +91,8 @@ package edu.ewu.components.player
 			this._sSprite = $sprite;
 			this._sSprite.rotationZ = 90;
 			
-			this._sSprite.scaleX = .3;
-			this._sSprite.scaleY = .3;
+			this._sSprite.scaleX = .5;
+			this._sSprite.scaleY = .5;
 			
 			this.addChild(this._sSprite);
 		}

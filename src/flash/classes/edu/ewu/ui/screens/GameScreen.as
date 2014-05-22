@@ -86,7 +86,7 @@
 		override public function setPlayer(name:String):void
 		{
 			//player will now be created in GameScreen.
-			var me:LocalPlayer = new LocalPlayer(name, "RonaldMcDonald");
+			var me:LocalPlayer = new LocalPlayer(name, "BurgerKing");
 			p1 = me;
 			me.x = stage.stageWidth * 0.5;
 			me.y = stage.stageHeight * 0.5;
