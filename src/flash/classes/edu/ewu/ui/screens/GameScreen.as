@@ -112,17 +112,17 @@
 			if (p2 == null)
 			{
 				p2 = $oPlayer;
-				txtp2.text = p2._charName;
+				txtp2.text = p2._pName;
 			}
 			else if (p3 == null)
 			{
 				p3 = $oPlayer;
-				txtp3.text = p3._charName;
+				txtp3.text = p3._pName;
 			}
 			else if (p4 == null)
 			{
 				p4 = $oPlayer;
-				txtp4.text = p4._charName;
+				txtp4.text = p4._pName;
 			}
 		}
 		

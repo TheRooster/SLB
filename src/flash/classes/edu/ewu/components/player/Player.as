@@ -28,6 +28,7 @@ package edu.ewu.components.player
 		public var _sSprite:MovieClip;
 		protected var _namePlate:TextField;
 		public var _charName:String;
+		public var _pName:String;
 		
 		
 		protected var _nSpeed:uint = 5;
@@ -49,7 +50,7 @@ package edu.ewu.components.player
 			this._bAlive = true;
 			
 			this._charName = $charName;
-			
+			this._pName = $pName;
 
 			var loader:XMLLoader = new XMLLoader("resources/xml/" + _charName + ".xml", { name:this._charName, onComplete:init  } );
 			loader.load();
