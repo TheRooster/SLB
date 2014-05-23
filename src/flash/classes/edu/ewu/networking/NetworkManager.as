@@ -243,15 +243,16 @@ package edu.ewu.networking
 
 		 *
 
-		 * @param	$sKey 		Server to be connected to.
+		 * @param	$sKey 			Server to be connected to.
+		 * @param	$sSessionName	Session to connect to.
 
 		 */
 
-		public function initConnection($sKey):void 
+		public function initConnection($sKey:String, $sSessionName:String = "SimpleDemoGroup"):void 
 
 		{
 
-			_connection = new MultiUserSession($sKey, "SimpleDemoGroup");
+			_connection = new MultiUserSession($sKey, $sSessionName);
 
 			if (_connection.userCount > 4)
 
