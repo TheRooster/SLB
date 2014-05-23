@@ -168,13 +168,13 @@ package edu.ewu.components.attacks
 			if (this.sCreator != $oPlayer.PlayerName)
 
 			{
-				$oPlayer.nHealth++; 
+				$oPlayer.nHealth += this.damage; 
 				$oPlayer.sLastHitBy = this.sCreator;
 				SoundManager.instance.playSound(this.sHitSound);
 
 				TweenMax.killTweensOf($oPlayer);
 
-				TweenMax.to($oPlayer, 0.5, { x:$oPlayer.x + this.force * Math.cos(this.angle), y:$oPlayer.y + this.force * Math.sin(this.angle) , ease: Linear.easeNone } );
+				TweenMax.to($oPlayer, 0.5, { x:$oPlayer.x + ((this.force / $oPlayer.weight) * ($oPlayer.nHealth + 1 / 10)) * Math.cos(this.angle), y:$oPlayer.y + ((this.force / $oPlayer.weight) * ($oPlayer.nHealth + 1 / 10)) * Math.sin(this.angle) , ease: Linear.easeOut } );
 
 				this.destroy();
 

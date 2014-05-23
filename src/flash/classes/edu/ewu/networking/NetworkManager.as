@@ -53,13 +53,17 @@ package edu.ewu.networking
 
 		public static const		OPCODE_HEARTBEAT	:String = "OPCODE_HEARTBEAT";
 
-		/** String for animation OPCODE. */
+		/** String for sound OPCODE. */
 
 		public static const		OPCODE_SOUND		:String = "OPCODE_SOUND";
 
-		/** String for sound OPCODE. */
+		/** String for animation OPCODE. */
 
 		public static const		OPCODE_ANIM			:String = "OPCODE_ANIM";
+		
+		/** String for death OPCODE. */
+
+		public static const		OPCODE_DEATH		:String = "OPCODE_DEATH";
 
 		
 
@@ -188,7 +192,7 @@ package edu.ewu.networking
 		 * @param	$sName 		The name the Player was added under to be removed.
 
 		 * @return				The Player which was removed.
-
+-
 		 */
 
 		public function remove($sName:String):Player
@@ -402,6 +406,22 @@ package edu.ewu.networking
 				}
 
 			}
+			
+			else if (dataObj.OPCODE == NetworkManager.OPCODE_DEATH)
+			
+			{
+				
+				var player:Player = _dPlayers[dataObj.name];
+				
+				if (player)
+
+				{
+
+					player.kills++;
+
+				}
+				
+			}
 
 		}
 
@@ -476,6 +496,11 @@ package edu.ewu.networking
 						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_ANIM, name:$oObject.name, animName:$oObject.animName } );
 
 					}
+					
+					else if ($sOPCODE == NetworkManager.OPCODE_DEATH)
+					{
+						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_DEATH, name:$oObject.sLastHitBy } );
+					}
 
 				}
 
@@ -518,6 +543,30 @@ package edu.ewu.networking
 		{
 
 			_connection.connect($sName,  {charName:$oPlayer._charName, x:$oPlayer.x, y:$oPlayer.y } );
+
+		}
+		
+		/* ---------------------------------------------------------------------------------------- */
+
+		
+
+		/**
+
+		 * Disconnects the user to the server
+
+		 *
+
+		 * @param	$sName		Name to connect with
+
+		 * @param	$oPlayer	Player that is connecting
+
+		 */
+
+		public function disconnect():void
+
+		{
+
+			_connection.close();
 
 		}
 

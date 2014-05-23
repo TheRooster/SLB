@@ -43,12 +43,17 @@ package edu.ewu.components.player
 		
 		public var nLives:uint;
 		public var nHealth:uint;
+		public var weight:uint;
+		
+		public var kills:uint;
+		
 		
 		public function Player($pName:String, $charName:String)
 		{
 			super();
 			this._bAlive = true;
 			
+			this.weight = 1;
 			this._charName = $charName;
 			this._pName = $pName;
 
@@ -82,7 +87,7 @@ package edu.ewu.components.player
 			
 			this.nLives = 3;
 			this.nHealth = 0;
-		
+			this.kills = 0;
 		}
 		
 		

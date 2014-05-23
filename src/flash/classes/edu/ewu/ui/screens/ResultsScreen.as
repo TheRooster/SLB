@@ -49,6 +49,7 @@ package edu.ewu.ui.screens
 			_btLobby.clickedSignal.addOnce(toLobby);
 			_btCredits.clickedSignal.addOnce(toCredits);
 			_btQuit.clickedSignal.addOnce(toPreloader);
+			NetworkManager.instance.disconnect();
 			super.begin();
 		}
 		

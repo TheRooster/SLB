@@ -188,6 +188,12 @@ package edu.ewu.components.player
 			KeyboardManager.instance.addKeyDownListener(KeyCode.E, eDownHandler);
 
 			StageRef.stage.addEventListener(MouseEvent.CLICK, mouseClickHandler);
+			
+			this.sLastHitBy = "";
+			
+			this._nLastX = this.stage.stageWidth / 2;
+			
+			this._nLastY = this.stage.stageHeight / 2;
 
 		}
 
@@ -711,6 +717,8 @@ package edu.ewu.components.player
 
 			this.nLives--;
 			
+			NetworkManager.instance.sendData(NetworkManager.OPCODE_DEATH, this);
+			
 			//keep track of who killed you.
 			if (sLastHitBy == NetworkManager.instance.players[0])
 				nP1Score++;
@@ -789,6 +797,10 @@ package edu.ewu.components.player
 			this._bAlive = true;
 			
 			this.visible = true;
+			
+			this.nHealth = 0;
+			
+			this.sLastHitBy = "";
 
 		}
 		
