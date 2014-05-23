@@ -338,7 +338,7 @@ package edu.ewu.components.player
 
 
 
-			this._sSprite.gotoAndPlay("Ranged_Attack");
+			this._sSprite.gotoAndPlaySprite("Ranged_Attack");
 
 
 
