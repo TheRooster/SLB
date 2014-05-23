@@ -1,4 +1,4 @@
-package edu.ewu.components.player 
+﻿package edu.ewu.components.player 
 {
 
 	import com.greensock.easing.Linear;
@@ -338,7 +338,7 @@ package edu.ewu.components.player
 
 
 
-			this._sSprite.gotoAndPlaySprite("Ranged_Attack");
+			this.gotoAndPlaySprite("Ranged_Attack");
 
 
 

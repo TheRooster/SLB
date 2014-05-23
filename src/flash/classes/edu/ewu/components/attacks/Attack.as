@@ -174,7 +174,7 @@ package edu.ewu.components.attacks
 
 				TweenMax.killTweensOf($oPlayer);
 
-				TweenMax.to($oPlayer, 0.5, { x:$oPlayer.x + ((this.force / $oPlayer.weight) * ($oPlayer.nHealth + 1 / 10)) * Math.cos(this.angle), y:$oPlayer.y + ((this.force / $oPlayer.weight) * ($oPlayer.nHealth + 1 / 10)) * Math.sin(this.angle) , ease: Linear.easeOut } );
+				TweenMax.to($oPlayer, 0.5, { x:$oPlayer.x + (((this.force / $oPlayer.weight) + ($oPlayer.nHealth + 1 / 100)) * Math.cos(this.angle)), y:$oPlayer.y + (((this.force / $oPlayer.weight) + ($oPlayer.nHealth + 1 / 100))) * Math.sin(this.angle) , ease: Linear.easeOut } );
 
 				this.destroy();
 
