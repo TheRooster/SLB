@@ -55,7 +55,7 @@ package edu.ewu.components.attacks
 
 		public var		angle		:Number;
 
-		protected var 	_timer  	:Timer;
+		public var 		_timer  	:Timer;
 
 		
 
@@ -68,6 +68,8 @@ package edu.ewu.components.attacks
 		public function Attack($sCreator:String, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint, $nDamage:uint, $nTime:uint, $sAttackName:String, $sHitSound:String, $bNetwork:Boolean = false) 
 
 		{
+			
+			
 
 			//Changed so everything is passed to super.
 
@@ -78,11 +80,24 @@ package edu.ewu.components.attacks
 			this.x = $nX;
 
 			this.y = $nY;
-
+			
+			
+			
 			this.angle = $nAngle;
-
-			this.rotation = $nAngle;
-
+			/*
+			if ($bNetwork)
+			{
+				this.angle += 90;
+			}
+			*/
+			
+			if (this.angle > 360)
+			{
+				this.angle -= 360;
+			}
+		
+			this.rotation = this.angle;
+			
 			this._bNetwork = $bNetwork;
 
 			
@@ -94,8 +109,6 @@ package edu.ewu.components.attacks
 			this.sHitSound = $sHitSound;
 
 			this.sAttackName = $sAttackName;
-
-			
 
 			this.sCollisionType = CollisionManager.TYPE_ATTACK;
 
@@ -173,7 +186,11 @@ package edu.ewu.components.attacks
 				SoundManager.instance.playSound(this.sHitSound);
 
 				TweenMax.killTweensOf($oPlayer);
-
+				
+				
+				//Convert this bitch to radians yo
+				this.angle = (this.angle / 180) * Math.PI;
+				
 				TweenMax.to($oPlayer, 0.5, { x:$oPlayer.x + (((this.force / $oPlayer.weight) + ($oPlayer.nHealth + 1 / 100)) * Math.cos(this.angle)), y:$oPlayer.y + (((this.force / $oPlayer.weight) + ($oPlayer.nHealth + 1 / 100))) * Math.sin(this.angle) , ease: Linear.easeOut } );
 
 				this.destroy();

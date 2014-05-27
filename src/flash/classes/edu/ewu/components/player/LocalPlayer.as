@@ -554,7 +554,7 @@
 
 				
 
-				this.SpriteRotation = angleInDegrees; //TODO: consider rotating sprite here instead of whole player, solves the nameplate dissapearing issue
+				this.SpriteRotation = angleInDegrees; 
 
 				
 
@@ -587,7 +587,6 @@
 			if (this._bAlive)
 
 			{
-
 				this.gotoAndPlaySprite("Light_Attack");
 
 				var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "BasicAttack") as Class;
