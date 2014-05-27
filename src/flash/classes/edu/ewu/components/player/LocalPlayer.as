@@ -358,7 +358,8 @@
 
 		{
 
-			
+			var AngCos = Math.cos((this.SpriteRotation / 180) * Math.PI);
+			var AngSin = Math.sin((this.SpriteRotation / 180) * Math.PI);
 
 
 			if (this._bAlive && this.nLives>0)
@@ -376,85 +377,45 @@
 
 				
 
-				if (_left && (this.x - this._nSpeed) > 0)
-
+				if (_left)
 				{
 
-					this.x -= this._nSpeed;
-
-				}
-
-				else if(_left)
-
-				{
-
-					this.x = 0;
+					this.x += this._nSpeed * AngSin;
+					this.y += this._nSpeed * -AngCos;
 
 				}
 
 
 
-				if (_right && (this.x + (this.width/2) + this._nSpeed) < StageRef.stage.stageWidth)
-
+				if (_right)
 				{
 
-					this.x += this._nSpeed;
+					this.x += this._nSpeed * -AngSin;
+					this.y += this._nSpeed * AngCos;
 
 				}
-
-				else if (_right)
-
-				{
-
-					this.x = StageRef.stage.stageWidth - this.width / 4;
-
-				}
-
 					
 
-				if (_up && (this.y - this._nSpeed) > 0)
-
+				if (_up )
 				{
 
-					//Move toward mouse rather than global up 
 
-					//TODO: this is buggy, but works well for a movement scheme, will need to fix bugs before alpha -Jon
+					this.x += this._nSpeed * AngCos;
+					this.y += this._nSpeed * AngSin;
 
-					//this.x += this._nSpeed * Math.cos(rotation);
-
-					//this.y += this._nSpeed * Math.sin(rotation);
-
-					
-
-					this.y -= this._nSpeed;
 
 				}
 
-				else if(_up)
+				if (_down)
 
 				{
 
-					this.y = 0;
+					this.x += this._nSpeed * -AngCos;
+
+					this.y += this._nSpeed * -AngSin;
 
 				}
 
-				
-
-				if (_down && (this.y + (this.height/2) + this._nSpeed) < StageRef.stage.stageHeight)
-
-				{
-
-					this.y += this._nSpeed;
-
-				}
-
-				else if (_down)
-
-				{
-
-					this.y = StageRef.stage.stageHeight - this.height / 4;
-
-				}
 
 				
 
