@@ -344,7 +344,7 @@
 
 			var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "RangedAttack") as Class;
 
-			new customAttack(this.PlayerName, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation);
+			new customAttack(this.PlayerName, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation, this.nBaseForce, this.nBaseDamage);
 
 		}
 
@@ -380,8 +380,8 @@
 				if (_left)
 				{
 
-					this.x += this._nSpeed * AngSin;
-					this.y += this._nSpeed * -AngCos;
+					this.x += this.nSpeed * AngSin;
+					this.y += this.nSpeed * -AngCos;
 
 				}
 
@@ -390,8 +390,8 @@
 				if (_right)
 				{
 
-					this.x += this._nSpeed * -AngSin;
-					this.y += this._nSpeed * AngCos;
+					this.x += this.nSpeed * -AngSin;
+					this.y += this.nSpeed * AngCos;
 
 				}
 					
@@ -400,8 +400,8 @@
 				{
 
 
-					this.x += this._nSpeed * AngCos;
-					this.y += this._nSpeed * AngSin;
+					this.x += this.nSpeed * AngCos;
+					this.y += this.nSpeed * AngSin;
 
 
 				}
@@ -410,9 +410,9 @@
 
 				{
 
-					this.x += this._nSpeed * -AngCos;
+					this.x += this.nSpeed * -AngCos;
 
-					this.y += this._nSpeed * -AngSin;
+					this.y += this.nSpeed * -AngSin;
 
 				}
 
@@ -474,11 +474,6 @@
 		protected function mouseMoveHandler($e:MouseEvent = null):void
 
 		{
-
-			
-
-			//TODO: we may need to use the mouse movements to update a dummy object here, as it is the mouse movement is kinda wonky.  I'll look into refactoring it -Jon
-
 			
 
 			if (this._bAlive)

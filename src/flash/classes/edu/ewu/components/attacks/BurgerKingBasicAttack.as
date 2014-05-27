@@ -6,9 +6,9 @@ package edu.ewu.components.attacks
 	 */
 	public class BurgerKingBasicAttack extends RonaldMcDonaldBasicAttack
 	{
-		public function BurgerKingBasicAttack($sCreator:String, $nX:uint, $nY:uint, $nAngle:uint, $bNetwork:Boolean = false) 
+		public function BurgerKingBasicAttack($sCreator:String, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=0, $nDamage:uint=0, $bNetwork:Boolean = false) 
 		{
-			super($sCreator, $nX, $nY, $nAngle, $bNetwork);
+			super($sCreator, $nX, $nY, $nAngle, 250+$nForce, 5+$nDamage, $bNetwork);
 		}
 	}
 

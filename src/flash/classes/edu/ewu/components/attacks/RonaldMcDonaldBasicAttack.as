@@ -15,9 +15,9 @@ package edu.ewu.components.attacks
 	 */
 	public class RonaldMcDonaldBasicAttack extends Attack
 	{
-		public function RonaldMcDonaldBasicAttack($sCreator:String, $nX:uint, $nY:uint, $nAngle:uint, $bNetwork:Boolean = false) 
+		public function RonaldMcDonaldBasicAttack($sCreator:String, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=0, $nDamage:uint=0, $bNetwork:Boolean = false) 
 		{
-			super($sCreator, $nX, $nY, $nAngle, 200, 10, 500, "edu.ewu.components.attacks.RonaldMcDonaldBasicAttack", "Thump", $bNetwork);
+			super($sCreator, $nX, $nY, $nAngle, 200 + $nForce, 10 + $nDamage, 500, "edu.ewu.components.attacks.RonaldMcDonaldBasicAttack", "Thump", $bNetwork);
 		}		
 	}
 

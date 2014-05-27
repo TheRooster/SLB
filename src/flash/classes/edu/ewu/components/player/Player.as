@@ -31,9 +31,12 @@ package edu.ewu.components.player
 		public var _pName:String;
 		
 		
-		protected var _nSpeed:uint = 5;
+		public var nSpeed:uint = 5;
 		
-		protected var _nWeight:uint;
+		public var nWeight:uint;
+		
+		public var nBaseDamage:uint;
+		public var nBaseForce:uint;
 		
 		protected var _bAlive:Boolean;
 		
@@ -158,5 +161,6 @@ package edu.ewu.components.player
 		{
 			return this._bAlive;
 		}
+		
 	}
 }
