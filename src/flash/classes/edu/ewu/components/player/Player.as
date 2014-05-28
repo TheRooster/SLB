@@ -112,6 +112,7 @@ package edu.ewu.components.player
 			return this._namePlate.text;
 		}
 		
+
 		
 		/* ---------------------------------------------------------------------------------------- */
 		

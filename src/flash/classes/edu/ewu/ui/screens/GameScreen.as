@@ -168,6 +168,7 @@
 			if (this.bPlaying)
 			{
 				txtLocalHealth.text = p1.getHealth() + "%";
+				updateLives();
 				if(p2!=null)
 					txtP2Health.text = p2.nHealth + "%";
 				if(p3!=null)
@@ -175,6 +176,17 @@
 				if(p4!=null)
 					txtP4Health.text = p4.nHealth + "%";
 			}
+		}
+		
+		public function updateLives():void
+		{
+			txtLocalLives.text = p1.getLives();
+			if(p2!=null)
+				txtp2Lives.text = p2.nLives;
+			if(p3!=null)
+				txtp3Lives.text = p3.nLives;
+			if(p4!=null)
+				txtp4Lives.text = p4.nLives;
 		}
 	}
 }

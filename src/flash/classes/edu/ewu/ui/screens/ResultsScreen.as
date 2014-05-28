@@ -63,7 +63,10 @@ package edu.ewu.ui.screens
 			txtKOs.text = "You got " + kills + " KOs!";
 			//change this later to a variable... not 3
 			deaths = 3 - nLives;
-			txtKOd.text = "You got KO'd " + deaths + " times!";
+			if (deaths == 0)
+				txtKOd.text = "You got KO'd " + 0 + " times!";
+			else
+				txtKOd.text = "You got KO'd " + deaths + " times!";
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */

@@ -148,7 +148,6 @@ package edu.ewu.components.attacks
 
 			_timer.removeEventListener(TimerEvent.TIMER_COMPLETE, destroy);
 
-			
 
 			this.stage.removeChild(this);
 

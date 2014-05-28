@@ -764,6 +764,13 @@
 		{
 			return this.nHealth;
 		}
+		
+		/* ---------------------------------------------------------------------------------------- */
+		
+		public function getLives():int
+		{
+			return this.nLives;
+		}
 
 	}
 }
