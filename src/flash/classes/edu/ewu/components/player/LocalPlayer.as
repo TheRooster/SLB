@@ -380,9 +380,9 @@
 				if (_left)
 				{
 
-					this.x += this.nSpeed * AngSin;
-					this.y += this.nSpeed * -AngCos;
-
+					//this.x += this.nSpeed * AngSin;
+					//this.y += this.nSpeed * -AngCos;
+					this.x -= this.nSpeed;
 				}
 
 
@@ -390,9 +390,9 @@
 				if (_right)
 				{
 
-					this.x += this.nSpeed * -AngSin;
-					this.y += this.nSpeed * AngCos;
-
+					//this.x += this.nSpeed * -AngSin;
+					//this.y += this.nSpeed * AngCos;
+					this.x += this.nSpeed;
 				}
 					
 
@@ -400,9 +400,9 @@
 				{
 
 
-					this.x += this.nSpeed * AngCos;
-					this.y += this.nSpeed * AngSin;
-
+					//this.x += this.nSpeed * AngCos;
+					//this.y += this.nSpeed * AngSin;
+					this.y -= this.nSpeed;
 
 				}
 
@@ -410,10 +410,9 @@
 
 				{
 
-					this.x += this.nSpeed * -AngCos;
-
-					this.y += this.nSpeed * -AngSin;
-
+					//this.x += this.nSpeed * -AngCos;
+					//this.y += this.nSpeed * -AngSin;
+					this.y += this.nSpeed;
 				}
 
 
