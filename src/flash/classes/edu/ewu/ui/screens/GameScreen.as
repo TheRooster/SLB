@@ -180,13 +180,26 @@
 		
 		public function updateLives():void
 		{
-			txtLocalLives.text = p1.getLives();
+			txtLocalLives.text = makePeriods(p1.getLives());
+			
+			
 			if(p2!=null)
-				txtp2Lives.text = p2.nLives;
+				txtp2Lives.text = makePeriods(p2.nLives);
 			if(p3!=null)
-				txtp3Lives.text = p3.nLives;
+				txtp3Lives.text = makePeriods(p3.nLives);
 			if(p4!=null)
-				txtp4Lives.text = p4.nLives;
+				txtp4Lives.text = makePeriods(p4.nLives);
+		}
+		
+		public function makePeriods(n:int):String
+		{
+			var s:String = "";
+			while (n > 0)
+			{
+				s += ".";
+				n--;
+			}
+			return s;
 		}
 	}
 }
