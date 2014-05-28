@@ -13,6 +13,11 @@ package edu.ewu.components
 	{
 		private var _sType:String;
 		
+		public function get type():String
+		{
+			return _sType;
+		}
+		
 		private var _sAttribute:String;
 		
 		private var _nAmount:Number;
@@ -25,8 +30,11 @@ package edu.ewu.components
 		
 		private var _oTweenMaxVars:Object;
 		
+		/** Whether the collectable was created locally or not */
+		protected var	_bNetwork	:Boolean;
 		
-		public function Collectable($sType:String) 
+		
+		public function Collectable($sType:String, $bNetwork = false) 
 		{
 			super();
 			this._sType = $sType;
@@ -37,6 +45,13 @@ package edu.ewu.components
 			var loader:XMLLoader = new XMLLoader("resources/xml/" + $sType + ".xml", { name:$sType, onComplete:init  } );
 			var imgLoader:ImageLoader = new ImageLoader("resources/images/" + $sType + ".png", { name:$sType + "_sprite", onComplete:initSprite } );
 			loader.load();
+			
+			this._bNetwork = $bNetwork;
+			
+			if (this._bNetwork == false)
+			{
+				NetworkManager.instance.sendData(NetworkManager.OPCODE_COLLECTABLE, this);
+			}
 		}
 		
 		public function init()

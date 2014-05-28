@@ -4,6 +4,7 @@ package edu.ewu.networking
 	import com.reyco1.multiuser.data.UserObject;
 	import edu.ewu.components.attacks.BurgerKingBasicAttack;
 	import edu.ewu.components.attacks.BurgerKingRangedAttack;
+	import edu.ewu.components.Collectable;
 
 	import com.reyco1.multiuser.MultiUserSession;
 
@@ -64,6 +65,10 @@ package edu.ewu.networking
 		/** String for death OPCODE. */
 
 		public static const		OPCODE_DEATH		:String = "OPCODE_DEATH";
+		
+		/** String for collectable OPCODE. */
+
+		public static const		OPCODE_COLLECTABLE	:String = "OPCODE_COLLECTABLE";
 
 		
 
@@ -423,7 +428,13 @@ package edu.ewu.networking
 				}
 				
 			}
-
+			
+			else if (dataObj.OPCODE == NetworkManager.OPCODE_COLLECTABLE)
+			{
+				var collectable:Collectable = new Collectable(dataObj.type, true);
+				collectable.x = dataObj.x;
+				collectable.y = dataObj.y;
+			}
 		}
 
 		
@@ -501,6 +512,10 @@ package edu.ewu.networking
 					else if ($sOPCODE == NetworkManager.OPCODE_DEATH)
 					{
 						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_DEATH, name:$oObject.sLastHitBy } );
+					}
+					else if ($sOPCODE == NetworkManager.OPCODE_COLLECTABLE)
+					{
+						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_COLLECTABLE, type:$oObject.type, x:$oObject.x, y:$oObject.y } );
 					}
 
 				}
