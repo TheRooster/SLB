@@ -61,11 +61,7 @@ package edu.ewu.ui.screens
 		override public function setKOs(kills:int, nLives:int):void
 		{
 			txtKOs.text = "You got " + kills + " KOs!";
-			//change this later to a variable... not 3
 			deaths = 3 - nLives;
-			if (deaths == 0)
-				txtKOd.text = "You got KO'd " + 0 + " times!";
-			else
 				txtKOd.text = "You got KO'd " + deaths + " times!";
 		}
 		

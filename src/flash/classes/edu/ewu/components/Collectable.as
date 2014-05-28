@@ -2,9 +2,12 @@ package edu.ewu.components
 {
 	import com.greensock.loading.ImageLoader;
 	import com.greensock.loading.LoaderMax;
+	import com.greensock.loading.XMLLoader;
 	import com.greensock.TweenMax;
 	import edu.ewu.components.player.Player;
+	import edu.ewu.networking.NetworkManager;
 	import flash.display.Sprite;
+	import edu.ewu.networking.NetworkManager;
 	/**
 	 * ...
 	 * @author Jon Roster
