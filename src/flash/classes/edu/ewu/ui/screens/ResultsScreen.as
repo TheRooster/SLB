@@ -20,14 +20,17 @@ package edu.ewu.ui.screens
 	{	
 		/** Signal that is dispatched after the button is clicked. */
 		public var			clickedSignal			:Signal = new Signal();
-		/** Reference to the input text field */
-		public var			_txtPlayerName			:TextField;
+		/** References to the text fields */
+		public var			txtKOs					:TextField;
+		public var			txtKOd					:TextField;
 		/** Reference to the Submit button */
 		public var			_btLobby				:BackButton;
 		/** Reference to the Credits button */
 		public var			_btCredits				:CreditsButton;	
 		/** Reference to the Credits button */
-		public var			_btQuit					:QuitButton;	
+		public var			_btQuit					:QuitButton;
+		
+		var deaths:int = 0;
 		/* ---------------------------------------------------------------------------------------- */
 		
 		/**
@@ -49,8 +52,18 @@ package edu.ewu.ui.screens
 			_btLobby.clickedSignal.addOnce(toLobby);
 			_btCredits.clickedSignal.addOnce(toCredits);
 			_btQuit.clickedSignal.addOnce(toPreloader);
+			//txtKOs.text = NetworkManager.instance.players
+			
 			NetworkManager.instance.disconnect();
 			super.begin();
+		}
+		
+		override public function setKOs(kills:int, nLives:int):void
+		{
+			txtKOs.text = "You got " + kills + " KOs!";
+			//change this later to a variable... not 3
+			deaths = 3 - nLives;
+			txtKOd.text = "You got KO'd " + deaths + " times!";
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */

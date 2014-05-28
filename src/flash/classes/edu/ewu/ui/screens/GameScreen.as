@@ -150,6 +150,9 @@
 			this.removeEventListener(Event.ENTER_FRAME, this.enterFrameHandler);
 			this.bPlaying = false;
 			CollisionManager.instance.end();
+			ScreenManager.instance.crossSwitchScreen("Results");
+			ScreenManager.instance.mcActiveScreen.begin();
+			ScreenManager.instance.mcActiveScreen.setKOs(p1.kills, p1.nLives);
 			super.end();
 		}
 		

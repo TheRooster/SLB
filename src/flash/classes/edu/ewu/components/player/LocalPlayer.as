@@ -719,8 +719,10 @@
 				{
 
 					trace("All Dead");
-					ScreenManager.instance.crossSwitchScreen("Results");
-					ScreenManager.instance.mcActiveScreen.begin();
+					ScreenManager.instance.mcActiveScreen.end();
+					//following lines moved to game screen
+					//ScreenManager.instance.crossSwitchScreen("Results");
+					//ScreenManager.instance.mcActiveScreen.begin();
 					//ScreenManager.instance.switchScreen("Results");
 
 				}
