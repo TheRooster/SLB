@@ -381,7 +381,7 @@ package edu.ewu.networking
 
 				var customAttack:Class = getDefinitionByName(dataObj.name) as Class;
 
-				var attack:* = new customAttack(dataObj.creator, dataObj.x, dataObj.y, dataObj.angle, true);
+				var attack:* = new customAttack(dataObj.creator, dataObj.x, dataObj.y, dataObj.angle, dataObj.force, dataObj.damage, true);
 
 			}
 			else if (dataObj.OPCODE == NetworkManager.OPCODE_SOUND)
@@ -479,7 +479,7 @@ package edu.ewu.networking
 
 					{
 
-						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_ATTACK, name:$oObject.sAttackName, creator:$oObject.sCreator, x:$oObject.x, y:$oObject.y, angle:$oObject.angle } );
+						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_ATTACK, name:$oObject.sAttackName, creator:$oObject.sCreator, x:$oObject.x, y:$oObject.y, angle:$oObject.angle, force:$oObject.force, damage:$oObject.damage } );
 
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_SOUND)
