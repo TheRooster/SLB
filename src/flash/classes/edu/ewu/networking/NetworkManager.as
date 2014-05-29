@@ -3,7 +3,12 @@ package edu.ewu.networking
 
 	import com.reyco1.multiuser.data.UserObject;
 	import edu.ewu.components.attacks.BurgerKingBasicAttack;
+	import edu.ewu.components.attacks.BurgerKingChargedAttack;
 	import edu.ewu.components.attacks.BurgerKingRangedAttack;
+	import edu.ewu.components.attacks.RonaldMcDonaldChargedAttack;
+	import edu.ewu.components.attacks.WendyBasicAttack;
+	import edu.ewu.components.attacks.WendyChargedAttack;
+	import edu.ewu.components.attacks.WendyRangedAttack;
 	import edu.ewu.components.Collectable;
 
 	import com.reyco1.multiuser.MultiUserSession;
@@ -80,9 +85,19 @@ package edu.ewu.networking
 
 		private var 			_rmdRangedAttack	:RonaldMcDonaldRangedAttack;
 		
+		private var 			_rmdChargedAttack	:RonaldMcDonaldChargedAttack;
+		
 		private var 			_bkBasicAttack		:BurgerKingBasicAttack;
 
 		private var 			_bkRangedAttack		:BurgerKingRangedAttack;
+		
+		private var 			_bkChargedAttack	:BurgerKingChargedAttack;
+		
+		private var 			_wBasicAttack		:WendyBasicAttack;
+
+		private var 			_wRangedAttack		:WendyRangedAttack;
+		
+		private var 			_wChargedAttack		:WendyChargedAttack;
 
 		
 
