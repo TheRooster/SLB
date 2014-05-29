@@ -1,5 +1,7 @@
 package edu.ewu.components 
 {
+	import com.greensock.data.TweenMaxVars;
+	import com.greensock.events.LoaderEvent;
 	import com.greensock.loading.ImageLoader;
 	import com.greensock.loading.LoaderMax;
 	import com.greensock.loading.XMLLoader;
@@ -31,7 +33,7 @@ package edu.ewu.components
 		
 		private var _sSprite:Sprite;
 		
-		private var _oTweenMaxVars:Object;
+		private var _oTweenMaxVars:TweenMaxVars;
 		
 		/** Whether the collectable was created locally or not */
 		protected var	_bNetwork	:Boolean;
@@ -45,8 +47,8 @@ package edu.ewu.components
 			this.addCollidesWithType(CollisionManager.TYPE_PLAYER);
 			
 			//load xml here
-			var loader:XMLLoader = new XMLLoader("resources/xml/" + $sType + ".xml", { name:$sType, onComplete:init  } );
-			var imgLoader:ImageLoader = new ImageLoader("resources/images/" + $sType + ".png", { name:$sType + "_sprite", onComplete:initSprite } );
+			var loader:XMLLoader = new XMLLoader("resources/xml/" + _sType + ".xml", { name:_sType, onComplete:init  } );
+			var imgLoader:ImageLoader = new ImageLoader("resources/images/" + _sType + ".png", { name:_sType + "_sprite", onComplete:initSprite } );
 			loader.load();
 			imgLoader.load();
 			
@@ -58,23 +60,59 @@ package edu.ewu.components
 			}
 		}
 		
-		public function init()
+		public function init(e:LoaderEvent)
 		{
-			var stats:XML = LoaderMax.getContent(this._sType);
+			var stats:XML = XMLLoader(e.target).content;
 			
 			this._sAttribute = stats.affected;
 			this._nAmount = Number(stats.amount);
 			this._iDuration = Number(stats.duration);
-			this._oTweenMaxVars = stats.vars;
+			this._oTweenMaxVars = new TweenMaxVars(objectFromXML(XML(stats.vars)));
 			
 			
 		}
 		
 		
-		public function initSprite()
+		function objectFromXML(xml:XML):Object
 		{
-			this._sSprite = LoaderMax.getContent(this._sType + "_sprite");
+			var obj:Object = {  };
+
+           // Check if xml has no child nodes:
+			if (xml.hasSimpleContent()) 
+			{
+				return String(xml);     // Return its value
+			}
+
+			// Parse out attributes:
+			for each (var attr:XML in xml.@ * )
+			{
+				obj[String(attr.name())] = attr;
+			}
+
+			// Parse out nodes:
+			for each (var node:XML in xml.*) 
+			{
+				obj[String(node.localName())] = objectFromXML(node);
+			}
+
+			return obj;
+		}
+		
+		
+		
+		
+		
+		public function initSprite(e:LoaderEvent)
+		{
+			this._sSprite = ImageLoader(e.target).content;
+			this._sSprite.scaleX = .15;
+			this._sSprite.scaleY = .15;
 			
+			do
+			{
+				this._sSprite.x = stage.stageWidth / 2;// Math.random() * stage.stageWidth;
+				this._sSprite.y = stage.stageHeight / 2; // Math.random() * stage.stageHeight;
+			}while (false);//while(!CollisionManager.instance.TestLocation());
 			
 			this.addChild(_sSprite);
 			CollisionManager.instance.add(this);
@@ -87,9 +125,12 @@ package edu.ewu.components
 		{
 			if ($oObjectCollidedWith is Player)
 			{
+				CollisionManager.instance.remove(this);
+				stage.removeChild(this);
+				
 				this._nOriginalValue = Player($oObjectCollidedWith)[_sAttribute];
 				Player($oObjectCollidedWith)[_sAttribute] *= _nAmount;
-				TweenMax.to($oObjectCollidedWith, .01, _oTweenMaxVars);
+				TweenMax.to($oObjectCollidedWith, .01, this._oTweenMaxVars);
 				TweenMax.delayedCall(this._iDuration, onComplete, [$oObjectCollidedWith]);
 			}
 		}

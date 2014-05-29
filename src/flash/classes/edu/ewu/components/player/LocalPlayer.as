@@ -142,7 +142,7 @@
 
 
 			KeyboardManager.instance.addKeyDownListener(KeyCode.T, function() {
-				StageRef.stage.addChild(new Collectable("Jalepeno", true));
+				StageRef.stage.addChild(new Collectable("Jalepeno", false));
 			});
 
 			
