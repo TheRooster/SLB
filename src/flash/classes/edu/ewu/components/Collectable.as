@@ -1,4 +1,4 @@
-﻿package edu.ewu.components 
+package edu.ewu.components 
 {
 	import com.greensock.data.TweenMaxVars;
 	import com.greensock.events.LoaderEvent;
@@ -6,6 +6,7 @@
 	import com.greensock.loading.LoaderMax;
 	import com.greensock.loading.XMLLoader;
 	import com.greensock.TweenMax;
+	import com.natejc.utils.StageRef;
 	import edu.ewu.components.player.LocalPlayer;
 	import edu.ewu.components.player.NetworkPlayer;
 	import edu.ewu.components.player.Player;
@@ -47,6 +48,8 @@
 			this._sType = $sType;
 			this.sCollisionType = CollisionManager.TYPE_COLLECTABLE;
 			this.addCollidesWithType(CollisionManager.TYPE_PLAYER);
+			this.addCollidesWithType(CollisionManager.TYPE_WALL);
+			this.addCollidesWithType(CollisionManager.TYPE_PIT);
 			
 			//load xml here
 			var loader:XMLLoader = new XMLLoader("resources/xml/" + _sType + ".xml", { name:_sType, onComplete:init  } );
@@ -107,28 +110,22 @@
 		public function initSprite(e:LoaderEvent)
 		{
 			this._sSprite = ImageLoader(e.target).content;
-			this._sSprite.scaleX = .15;
-			this._sSprite.scaleY = .15;
+			this._sSprite.visible = false;
+			this._sSprite.scaleX = .25;
+			this._sSprite.scaleY = .25;
 			
-			var randX:Number = Math.random() * stage.stageWidth;
-			var randY:Number = Math.random() * stage.stageHeight;
-			var hitTest:Collideable = new PlayerHitTest();
-			hitTest.addCollidesWithType(CollisionManager.TYPE_COLLECTABLE);
-			hitTest.addCollidesWithType(CollisionManager.TYPE_PIT);
-			hitTest.addCollidesWithType(CollisionManager.TYPE_PLAYER);
-			hitTest.x = randX;
-			hitTest.y = randY;
 			
-			while (CollisionManager.instance.doesObjectCollide(hitTest))
+			this.addCollidesWithType(CollisionManager.TYPE_COLLECTABLE);
+			this.addCollidesWithType(CollisionManager.TYPE_PIT);
+			this.addCollidesWithType(CollisionManager.TYPE_PLAYER);
+			
+			do
 			{
-				randX = Math.random() * stage.stageWidth;
-				randY = Math.random() * stage.stageHeight;
-				hitTest.x = randX;
-				hitTest.y = randY;
-			}
+				this._sSprite.x = Math.random() * StageRef.stage.stageWidth;
+				this._sSprite.y = Math.random() * StageRef.stage.stageHeight;
+			}while(CollisionManager.instance.doesObjectCollide(this));
 			
-			this._sSprite.x = randX;
-			this._sSprite.y = randY;
+			this._sSprite.visible = true;
 			this.addChild(_sSprite);
 			CollisionManager.instance.add(this);
 			
@@ -158,6 +155,11 @@
 		public function onComplete($oObjectCollidedWith:Player)
 		{
 			$oObjectCollidedWith[_sAttribute] = _nOriginalValue;
+		}
+		
+		override public function  get collisionTestObject():Sprite
+		{
+			return this._sSprite;
 		}
 		
 	}
