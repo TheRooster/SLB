@@ -386,7 +386,7 @@ package edu.ewu.networking
 
 				var customAttack:Class = getDefinitionByName(dataObj.name) as Class;
 
-				var attack:* = new customAttack(dataObj.creator, dataObj.x, dataObj.y, dataObj.angle, dataObj.force, dataObj.damage, true);
+				var attack:* = new customAttack(_dPlayers[dataObj.creator], dataObj.x, dataObj.y, dataObj.angle, dataObj.force, dataObj.damage, true);
 
 			}
 			else if (dataObj.OPCODE == NetworkManager.OPCODE_SOUND)
