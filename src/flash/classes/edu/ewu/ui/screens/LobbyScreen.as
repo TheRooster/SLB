@@ -7,6 +7,7 @@ package edu.ewu.ui.screens
 	import edu.ewu.sounds.MusicManager;
 	import edu.ewu.ui.buttons.BKButton;
 	import edu.ewu.ui.buttons.ColonelButton;
+	import edu.ewu.ui.buttons.HostButton;
 	import edu.ewu.ui.buttons.IslandMap;
 	import edu.ewu.ui.buttons.JackButton;
 	import edu.ewu.ui.buttons.PapaButton;
@@ -29,10 +30,14 @@ package edu.ewu.ui.screens
 	{	
 		/** Signal that is dispatched after the button is clicked. */
 		public var			clickedSignal			:Signal = new Signal();
-		/** Reference to the input text field */
+		/** References to the input text fields */
 		public var			_txtPlayerName			:TextField;
+		public var			_txtServer				:TextField;
+		
 		/** Reference to the Submit button */
 		public var			_btSubmit				:SubmitButton;
+		/** Reference to the Host button */
+		public var			_btHost					:HostButton;
 		
 		/** Reference to the Ron button */
 		public var			_btRon					:RonButton;	
@@ -141,6 +146,29 @@ package edu.ewu.ui.screens
 		private function onSubmit():void 
 		{
 			var name:String = _txtPlayerName.text;
+			var sessionName:String = _txtServer.text;
+			if (name == "Anon" || name == "")
+			{
+				name = "Anon" + uint(Math.random() * 10000).toString();
+			}
+			if (sessionName == "Server1" || sessionName == "")
+			{
+				sessionName = "SimpleDemoGroup";
+			}
+			
+			ScreenManager.instance.crossSwitchScreen("Game");
+			ScreenManager.instance.mcActiveScreen.gotoAndPlay(map);
+			//ScreenManager.instance.mcActiveScreen.begin();
+			//ScreenManager.instance.mcActiveScreen.begin();
+			ScreenManager.instance.mcActiveScreen.setGame(name, character, sessionName);
+		}
+		
+		/* ---------------------------------------------------------------------------------------- */
+		
+		private function onHost():void 
+		{
+			var name:String = _txtPlayerName.text;
+			var sessionName:String = _txtServer.text;
 			if (name == "Anon" || name == "")
 			{
 				name = "Anon" + uint(Math.random() * 10000).toString();
@@ -149,10 +177,8 @@ package edu.ewu.ui.screens
 			ScreenManager.instance.crossSwitchScreen("Game");
 			ScreenManager.instance.mcActiveScreen.gotoAndPlay(map);
 			ScreenManager.instance.mcActiveScreen.begin();
-			ScreenManager.instance.mcActiveScreen.setPlayer(name, character);
-			
+			ScreenManager.instance.mcActiveScreen.setGame(name, character, sessionName);
 		}
-		
 		
 		private function toCredits():void 
 		{	

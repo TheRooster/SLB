@@ -10,6 +10,9 @@
 	import edu.ewu.sounds.MusicManager;
 	import edu.ewu.components.CollisionManager;
 	import flash.text.TextFormat;
+	import com.greensock.events.LoaderEvent;
+	import com.greensock.loading.LoaderMax;
+	import com.greensock.loading.XMLLoader;
 	
 	/**
 	 * Drives the GameScreen class.
@@ -50,6 +53,15 @@
 		public var p2;
 		public var p3;
 		public var p4;
+		
+		private const SERVER:String = "rtmfp://p2p.rtmfp.net/";
+		
+		private var sessionName:String = "SimpleDemoGroup";
+		private var   DEVKEY:String = "";
+		private var SERV_KEY:String = "";
+		
+		var me:LocalPlayer;
+		var playerName:String;
 /* ---------------------------------------------------------------------------------------- */
 		
 		/**
@@ -83,20 +95,34 @@
 		/**
 		 * Creates the Local Player.
 		 */
-		override public function setPlayer(name:String, character:String):void
+		override public function setGame(name:String, character:String, $sSessionName:String):void
 		{
+			this.playerName = name;
+			this.sessionName = $sSessionName;
+			var loader:XMLLoader =  new XMLLoader("resources/xml/serverKey.xml", { name:"key", onComplete:initNetwork} );
+			loader.load();
 			//player will now be created in GameScreen.
 			//var me:LocalPlayer = new LocalPlayer(name, "BurgerKing");
-			var me:LocalPlayer = new LocalPlayer(name, character);
+			me = new LocalPlayer(playerName, character);
+			
+			
+		}
+		
+		
+		private function initNetwork(event:LoaderEvent):void 
+		{
+			DEVKEY = (LoaderMax.getContent("key")).Key; 
+			SERV_KEY = SERVER + DEVKEY; 
+			NetworkManager.instance.initConnection(SERV_KEY, sessionName);
+			NetworkManager.instance.add(playerName, me);
+			NetworkManager.instance.connect(playerName, me);
+			ScreenManager.instance.mcActiveScreen.addChild(me);
+			
 			p1 = me;
 			me.x = stage.stageWidth * 0.5;
 			me.y = stage.stageHeight * 0.5;
-			
-			NetworkManager.instance.add(name, me);
-			NetworkManager.instance.connect(name, me);
-			ScreenManager.instance.mcActiveScreen.addChild(me);
-			
-			txtLocal.text = name;
+			txtLocal.text = playerName;
+			this.begin();
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
