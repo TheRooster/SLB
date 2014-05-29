@@ -1,4 +1,4 @@
-package edu.ewu.components 
+﻿package edu.ewu.components 
 {
 	import com.greensock.data.TweenMaxVars;
 	import com.greensock.events.LoaderEvent;
@@ -6,6 +6,8 @@ package edu.ewu.components
 	import com.greensock.loading.LoaderMax;
 	import com.greensock.loading.XMLLoader;
 	import com.greensock.TweenMax;
+	import edu.ewu.components.player.LocalPlayer;
+	import edu.ewu.components.player.NetworkPlayer;
 	import edu.ewu.components.player.Player;
 	import edu.ewu.networking.NetworkManager;
 	import flash.display.Sprite;
@@ -108,12 +110,25 @@ package edu.ewu.components
 			this._sSprite.scaleX = .15;
 			this._sSprite.scaleY = .15;
 			
-			do
-			{
-				this._sSprite.x = stage.stageWidth / 2;// Math.random() * stage.stageWidth;
-				this._sSprite.y = stage.stageHeight / 2; // Math.random() * stage.stageHeight;
-			}while (false);//while(!CollisionManager.instance.TestLocation());
+			var randX:Number = Math.random() * stage.stageWidth;
+			var randY:Number = Math.random() * stage.stageHeight;
+			var hitTest:Collideable = new PlayerHitTest();
+			hitTest.addCollidesWithType(CollisionManager.TYPE_COLLECTABLE);
+			hitTest.addCollidesWithType(CollisionManager.TYPE_PIT);
+			hitTest.addCollidesWithType(CollisionManager.TYPE_PLAYER);
+			hitTest.x = randX;
+			hitTest.y = randY;
 			
+			while (CollisionManager.instance.doesObjectCollide(hitTest))
+			{
+				randX = Math.random() * stage.stageWidth;
+				randY = Math.random() * stage.stageHeight;
+				hitTest.x = randX;
+				hitTest.y = randY;
+			}
+			
+			this._sSprite.x = randX;
+			this._sSprite.y = randY;
 			this.addChild(_sSprite);
 			CollisionManager.instance.add(this);
 			
@@ -123,7 +138,7 @@ package edu.ewu.components
 		
 		override public function collidedWith($oObjectCollidedWith:Collideable):void
 		{
-			if ($oObjectCollidedWith is Player)
+			if ($oObjectCollidedWith is LocalPlayer)
 			{
 				CollisionManager.instance.remove(this);
 				stage.removeChild(this);
@@ -132,6 +147,11 @@ package edu.ewu.components
 				Player($oObjectCollidedWith)[_sAttribute] *= _nAmount;
 				TweenMax.to($oObjectCollidedWith, .01, this._oTweenMaxVars);
 				TweenMax.delayedCall(this._iDuration, onComplete, [$oObjectCollidedWith]);
+			}
+			else if ($oObjectCollidedWith is NetworkPlayer)
+			{
+				CollisionManager.instance.remove(this);
+				stage.removeChild(this);
 			}
 		}
 		

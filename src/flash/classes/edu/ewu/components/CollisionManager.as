@@ -1,6 +1,7 @@
-package edu.ewu.components
+﻿package edu.ewu.components
 {
 	import com.natejc.utils.StageRef;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	
 	/**
@@ -167,6 +168,34 @@ package edu.ewu.components
 					}
 				}
 			}
+		}
+		
+		/* ---------------------------------------------------------------------------------------- */
+		
+		/**
+		 * Test a single objects collisions with its collides with types.
+		 */
+		public function doesObjectCollide($oObjectToTest:Collideable):Boolean
+		{
+			var aCollidableTypes:Array = $oObjectToTest.collidesWithTypes;
+			var aObjectsOfCurrentType:Array;
+			var oCurrentObject:Collideable;
+			for (var i:uint = 0; i < aCollidableTypes.length; i++)
+			{
+				aObjectsOfCurrentType = this._aObjectsBeingTracked[aCollidableTypes[i]];
+				if (aObjectsOfCurrentType)
+				{
+					for (var j:uint = 0; j < aObjectsOfCurrentType.length; j++)
+					{
+						oCurrentObject = aObjectsOfCurrentType[j];
+						if ($oObjectToTest.collisionTestObject.hitTestObject(oCurrentObject.collisionTestObject))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
 		}
 	}
 }

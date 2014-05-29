@@ -160,7 +160,7 @@
 
 
 			KeyboardManager.instance.addKeyDownListener(KeyCode.T, function() {
-				StageRef.stage.addChild(new Collectable("Jalepeno", false));
+				StageRef.stage.addChild(new Collectable("Jalapeno", false));
 			});
 			
 			KeyboardManager.instance.addKeyDownListener(KeyCode.SPACEBAR, spaceDownHandler);
