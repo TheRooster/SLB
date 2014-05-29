@@ -9,6 +9,11 @@ package edu.ewu.components.player
 	import flash.display.DisplayObject;
 	import edu.ewu.components.Collideable;
 	import flash.display.Loader;
+	import flash.filters.BlurFilter;
+	import flash.filters.ColorMatrixFilter;
+	import flash.geom.Rectangle;
+	import org.flintparticles.twoD.emitters.Emitter2D;
+	import org.flintparticles.twoD.renderers.BitmapRenderer;
 
 	import flash.display.MovieClip;
 	import flash.text.TextField;
@@ -35,6 +40,9 @@ package edu.ewu.components.player
 		
 		public var nWeight:uint;
 		
+		protected var _nChargeDelay;
+		
+		
 		public var nBaseDamage:uint;
 		public var nBaseForce:uint;
 		
@@ -50,13 +58,24 @@ package edu.ewu.components.player
 		
 		public var kills:uint;
 		
+		private var emitter:Emitter2D;
+		
 		
 		public function Player($pName:String, $charName:String)
 		{
+			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 400, 400 ) );
+			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
+			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );
+			this.addChild( renderer );
+      
+			emitter = new Sparkler( renderer );
+			renderer.addEmitter( emitter );
+			
 			super();
 			this._bAlive = true;
 			
 			this.weight = 1;
+			this._nChargeDelay = 2;
 			this._charName = $charName;
 			this._pName = $pName;
 
@@ -163,5 +182,16 @@ package edu.ewu.components.player
 			return this._bAlive;
 		}
 		
+		
+		protected function chargeAnim()
+		{
+
+			emitter.start( );
+		}
+		
+		protected function stopChargeAnim()
+		{
+			emitter.stop();
+		}
 	}
 }

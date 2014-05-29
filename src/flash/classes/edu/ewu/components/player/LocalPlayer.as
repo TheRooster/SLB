@@ -1,8 +1,14 @@
 ﻿package edu.ewu.components.player 
 {
 
+	import adobe.utils.CustomActions;
 	import com.greensock.easing.Linear;
+	import edu.ewu.components.attacks.BurgerKingChargedAttack;
 	import edu.ewu.components.attacks.BurgerKingRangedAttack;
+	import edu.ewu.components.attacks.RonaldMcDonaldChargedAttack;
+	import edu.ewu.components.attacks.WendyBasicAttack;
+	import edu.ewu.components.attacks.WendyChargedAttack;
+	import edu.ewu.components.attacks.WendyRangedAttack;
 	import edu.ewu.components.Collectable;
 
 	import com.greensock.events.LoaderEvent;
@@ -92,10 +98,19 @@
 
 		private var _rmdRangedAttack:RonaldMcDonaldRangedAttack;
 		
+		private var _rmdChargedAttack:RonaldMcDonaldChargedAttack;
+		
 		private var _bkBasicAttack:BurgerKingBasicAttack;
 
 		private var _bkRangedAttack:BurgerKingRangedAttack;
+		
+		private var _bkChargedAttack:BurgerKingChargedAttack;
+		
+		private var _wBasicAttack:WendyBasicAttack;
 
+		private var _wRangedAttack:WendyRangedAttack;
+
+		private var _wChargedAttack:WendyChargedAttack;
 		
 		/** To help keep track of score */
 
@@ -106,6 +121,9 @@
 		public var nP3Score:int = 0;
 		public var nP4Score:int = 0;
 		
+		
+		
+
 
 	
 		/* ---------------------------------------------------------------------------------------- */
@@ -144,6 +162,10 @@
 			KeyboardManager.instance.addKeyDownListener(KeyCode.T, function() {
 				StageRef.stage.addChild(new Collectable("Jalepeno", false));
 			});
+			
+			KeyboardManager.instance.addKeyDownListener(KeyCode.SPACEBAR, spaceDownHandler);
+			KeyboardManager.instance.addKeyUpListener(KeyCode.SPACEBAR, spaceUpHandler);
+			
 
 			
 
@@ -349,6 +371,33 @@
 
 			new customAttack(this.PlayerName, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation, this.nBaseForce, this.nBaseDamage);
 
+		}
+		
+		
+		
+		private function spaceDownHandler():void
+		{
+			gotoAndPlaySprite("Charged_Attack");
+			this.chargeAnim();
+			TweenMax.delayedCall(this._nChargeDelay, chargedAttackExecute)
+		}
+		
+		
+		private function spaceUpHandler():void
+		{
+			gotoAndPlaySprite("Idle");
+			TweenMax.killTweensOf(chargedAttackExecute);//stop the delayed call
+			this.stopChargeAnim();
+		}
+		
+		
+		private function chargedAttackExecute()
+		{
+			gotoAndPlaySprite("Charged_Execute");
+			this.stopChargeAnim();
+			var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "ChargedAttack") as Class;
+			new customAttack(this.PlayerName, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation, this.nBaseForce, this.nBaseDamage);
+			
 		}
 
 		
@@ -616,6 +665,10 @@
 			{
 
 				var attack:Attack = $oObjectCollidedWith as Attack;
+				
+				//stop the charging
+				this.stopChargeAnim();
+				TweenMax.killTweensOf(this);
 
 				attack.apply(this);
 

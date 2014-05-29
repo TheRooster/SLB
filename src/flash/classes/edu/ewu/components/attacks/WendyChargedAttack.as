@@ -1,4 +1,4 @@
-package edu.ewu.components.attacks 
+﻿package edu.ewu.components.attacks 
 {
 	/**
 	 * ...
@@ -9,7 +9,7 @@ package edu.ewu.components.attacks
 		 
 		public function WendyChargedAttack($sCreator:String, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=0, $nDamage:uint=0, $bNetwork:Boolean = false) 
 		{
-			TweenMax.delayedCall(5, super($sCreator, $nX, $nY, $nAngle, $bNetwork));
+			super($sCreator, $nX, $nY, $nAngle, $nForce, $nDamage, 500, "edu.ewu.components.attacks.WendyChargedAttack", "whip",  $bNetwork);
 		}
 	}
 

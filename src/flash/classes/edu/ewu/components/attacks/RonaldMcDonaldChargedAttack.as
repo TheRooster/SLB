@@ -1,4 +1,4 @@
-package edu.ewu.components.attacks 
+﻿package edu.ewu.components.attacks 
 {
 	import com.greensock.TweenMax;
 	/**
@@ -10,7 +10,7 @@ package edu.ewu.components.attacks
 		
 		public function RonaldMcDonaldChargedAttack($sCreator:String, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=0, $nDamage:uint=0, $bNetwork:Boolean = false) 
 		{
-			TweenMax.delayedCall(5, super($sCreator, $nX, $nY, $nAngle, $bNetwork));
+			super($sCreator, $nX, $nY, $nAngle, $nForce, $nDamage, 1000, "edu.ewu.components.attacks.RonaldMcDonaldChargedAttack", "Explosion",  $bNetwork);
 		}
 		
 	}
