@@ -132,7 +132,7 @@ package edu.ewu.ui.screens
 		/**
 		 * Creates the Local Player.
 		 */
-		public function setPlayer(name:String, character:String):void { }
+		public function setGame(name:String, character:String, sessionName:String):void { }
 		
 		/* ---------------------------------------------------------------------------------------- */
 		

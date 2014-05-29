@@ -22,7 +22,7 @@
 	/**
 	 * Drives the project.
 	 * 
-	 * @author	Nate Chatellier
+	 * @author	
 	 */
 	public class Main extends MovieClip
 	{
@@ -45,8 +45,8 @@
 			
 			
 			//Load the key from an xml file named serverKey, <serverKey><Key>yourkeyHere</Key></serverKey>
-			var loader:XMLLoader =  new XMLLoader("resources/xml/serverKey.xml", { name:"key", onComplete:initNetwork} );
-			loader.load();
+			//var loader:XMLLoader =  new XMLLoader("resources/xml/serverKey.xml", { name:"key", onComplete:initNetwork} );
+			//loader.load();
 			
 			
 			MusicManager.instance.add("Lobby", new Music(new LobbyLoop(), 0.15, true)); 
@@ -82,7 +82,7 @@
 			ScreenManager.instance.mcActiveScreen.begin();
 		}
 		
-		/* ---------------------------------------------------------------------------------------- */
+		/* ---------------------------------------------------------------------------------------- 
 		
 		private function initNetwork(event:LoaderEvent):void 
 		{
