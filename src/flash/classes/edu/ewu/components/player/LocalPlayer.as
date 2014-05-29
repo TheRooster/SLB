@@ -369,7 +369,7 @@
 
 			var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "RangedAttack") as Class;
 
-			new customAttack(this.PlayerName, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation, this.nBaseForce, this.nBaseDamage);
+			new customAttack(this, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation, this.nBaseForce, this.nBaseDamage);
 
 		}
 		
@@ -396,7 +396,7 @@
 			gotoAndPlaySprite("Charged_Execute");
 			this.stopChargeAnim();
 			var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "ChargedAttack") as Class;
-			new customAttack(this.PlayerName, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation, this.nBaseForce, this.nBaseDamage);
+			new customAttack(this, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation, this.nBaseForce, this.nBaseDamage);
 			
 		}
 
@@ -598,7 +598,7 @@
 
 				var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "BasicAttack") as Class;
 
-				new customAttack(this.PlayerName, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation);
+				new customAttack(this, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation);
 
 			}
 
@@ -668,7 +668,7 @@
 				
 				//stop the charging
 				this.stopChargeAnim();
-				TweenMax.killTweensOf(this);
+				TweenMax.killTweensOf(chargedAttackExecute);
 
 				attack.apply(this);
 

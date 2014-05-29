@@ -1,5 +1,6 @@
 ﻿package edu.ewu.components.attacks 
 {
+	import edu.ewu.components.player.Player;
 	/**
 	 * ...
 	 * @author Lindsey
@@ -7,9 +8,9 @@
 	public class WendyRangedAttack extends RonaldMcDonaldRangedAttack
 	{
 		
-		public function WendyRangedAttack($sCreator:String, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=0, $nDamage:uint=0, $bNetwork:Boolean = false) 
+		public function WendyRangedAttack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=0, $nDamage:uint=0, $bNetwork:Boolean = false) 
 		{
-			super($sCreator, $nX, $nY, $nAngle, $nForce, $nDamage, $bNetwork);
+			super($oCreator, $nX, $nY, $nAngle, $nForce, $nDamage, $bNetwork);
 		}
 		
 	}

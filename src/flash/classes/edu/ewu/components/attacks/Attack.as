@@ -2,6 +2,7 @@ package edu.ewu.components.attacks
 {
 
 	import com.greensock.easing.Linear;
+	import edu.ewu.components.player.Player;
 
 	import com.greensock.TweenMax;
 
@@ -65,7 +66,7 @@ package edu.ewu.components.attacks
 
 		//$nTime is the time the attack will last in milliseconds.
 
-		public function Attack($sCreator:String, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint, $nDamage:uint, $nTime:uint, $sAttackName:String, $sHitSound:String, $bNetwork:Boolean = false) 
+		public function Attack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint, $nDamage:uint, $nTime:uint, $sAttackName:String, $sHitSound:String, $bNetwork:Boolean = false) 
 
 		{
 			
@@ -75,7 +76,7 @@ package edu.ewu.components.attacks
 
 			//On each attack creation they pass their values up instead of setting them all in their own attack.
 
-			this.sCreator = $sCreator; 
+			this.sCreator = $oCreator.PlayerName; 
 
 			this.x = $nX;
 
