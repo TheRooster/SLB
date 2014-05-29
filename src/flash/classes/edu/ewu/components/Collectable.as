@@ -48,6 +48,7 @@ package edu.ewu.components
 			var loader:XMLLoader = new XMLLoader("resources/xml/" + $sType + ".xml", { name:$sType, onComplete:init  } );
 			var imgLoader:ImageLoader = new ImageLoader("resources/images/" + $sType + ".png", { name:$sType + "_sprite", onComplete:initSprite } );
 			loader.load();
+			imgLoader.load();
 			
 			this._bNetwork = $bNetwork;
 			

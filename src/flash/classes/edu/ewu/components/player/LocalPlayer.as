@@ -3,6 +3,7 @@
 
 	import com.greensock.easing.Linear;
 	import edu.ewu.components.attacks.BurgerKingRangedAttack;
+	import edu.ewu.components.Collectable;
 
 	import com.greensock.events.LoaderEvent;
 
@@ -140,7 +141,9 @@
 			
 
 
-			KeyboardManager.instance.addKeyDownListener(KeyCode.T, this.defeated);
+			KeyboardManager.instance.addKeyDownListener(KeyCode.T, function() {
+				StageRef.stage.addChild(new Collectable("Jalepeno", true));
+			});
 
 			
 
@@ -665,7 +668,7 @@
 
 			SoundManager.instance.playSound("Death");
 			
-			this.visible = false;
+			
 
 			this._bAlive = false;
 
@@ -683,9 +686,16 @@
 			else if (sLastHitBy == NetworkManager.instance.players[3])
 				nP4Score++;
 
-			//TODO: Play death animation;
-
-			//this.gotoAndPlaySprite("Death");
+			//remove the key handlers so that the animation doesn't get interrupted
+			KeyboardManager.instance.removeAllKeyListeners(KeyCode.W);
+			KeyboardManager.instance.removeAllKeyListeners(KeyCode.A);
+			KeyboardManager.instance.removeAllKeyListeners(KeyCode.S);
+			KeyboardManager.instance.removeAllKeyListeners(KeyCode.D);
+			KeyboardManager.instance.removeAllKeyListeners(KeyCode.E);
+			KeyboardManager.instance.removeAllKeyListeners(KeyCode.T);
+			
+			this.gotoAndPlaySprite("Death");
+			TweenMax.to(this, 2, { scaleX:0, scaleY:0 } );
 
 			if (this.nLives == 0)
 
@@ -743,6 +753,19 @@
 		public function respawn():void
 
 		{
+			//reinit the controls
+			KeyboardManager.instance.addKeyDownListener(KeyCode.W, wDownHandler);
+			KeyboardManager.instance.addKeyDownListener(KeyCode.A, aDownHandler);
+			KeyboardManager.instance.addKeyDownListener(KeyCode.S, sDownHandler);
+			KeyboardManager.instance.addKeyDownListener(KeyCode.D, dDownHandler);
+
+			KeyboardManager.instance.addKeyUpListener(KeyCode.W, wUpHandler);
+			KeyboardManager.instance.addKeyUpListener(KeyCode.A, aUpHandler);
+			KeyboardManager.instance.addKeyUpListener(KeyCode.S, sUpHandler);
+			KeyboardManager.instance.addKeyUpListener(KeyCode.D, dUpHandler);
+			
+			KeyboardManager.instance.addKeyDownListener(KeyCode.E, eDownHandler);
+
 
 			//TODO: Add invulnerability timer
 
@@ -752,11 +775,13 @@
 
 			this._bAlive = true;
 			
-			this.visible = true;
+			this.scaleX = 1;
+			this.scaleY = 1;
 			
 			this.nHealth = 0;
 			
 			this.sLastHitBy = "";
+			this.gotoAndPlaySprite("Idle");
 
 		}
 		
