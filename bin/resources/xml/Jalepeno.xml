@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+	<affected>nBaseDamage</affected>
+	<amount>1.1</amount>
+	<duration>10</duration>
+	<vars>{glowFilter:{color:0xffff00, alpha:0.7, blurX:30, blurY:30}, repeat:-1}</vars>
+</data>
