@@ -598,7 +598,7 @@
 
 				var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "BasicAttack") as Class;
 
-				new customAttack(this, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation);
+				new customAttack(this, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation, this.nBaseForce, this.nBaseDamage);
 
 			}
 
@@ -739,13 +739,7 @@
 			else if (sLastHitBy == NetworkManager.instance.players[3])
 				nP4Score++;
 
-			//remove the key handlers so that the animation doesn't get interrupted
-			KeyboardManager.instance.removeAllKeyListeners(KeyCode.W);
-			KeyboardManager.instance.removeAllKeyListeners(KeyCode.A);
-			KeyboardManager.instance.removeAllKeyListeners(KeyCode.S);
-			KeyboardManager.instance.removeAllKeyListeners(KeyCode.D);
-			KeyboardManager.instance.removeAllKeyListeners(KeyCode.E);
-			KeyboardManager.instance.removeAllKeyListeners(KeyCode.T);
+
 			
 			this.gotoAndPlaySprite("Death");
 			TweenMax.to(this, 2, { scaleX:0, scaleY:0 } );
@@ -806,18 +800,7 @@
 		public function respawn():void
 
 		{
-			//reinit the controls
-			KeyboardManager.instance.addKeyDownListener(KeyCode.W, wDownHandler);
-			KeyboardManager.instance.addKeyDownListener(KeyCode.A, aDownHandler);
-			KeyboardManager.instance.addKeyDownListener(KeyCode.S, sDownHandler);
-			KeyboardManager.instance.addKeyDownListener(KeyCode.D, dDownHandler);
 
-			KeyboardManager.instance.addKeyUpListener(KeyCode.W, wUpHandler);
-			KeyboardManager.instance.addKeyUpListener(KeyCode.A, aUpHandler);
-			KeyboardManager.instance.addKeyUpListener(KeyCode.S, sUpHandler);
-			KeyboardManager.instance.addKeyUpListener(KeyCode.D, dUpHandler);
-			
-			KeyboardManager.instance.addKeyDownListener(KeyCode.E, eDownHandler);
 
 
 			//TODO: Add invulnerability timer

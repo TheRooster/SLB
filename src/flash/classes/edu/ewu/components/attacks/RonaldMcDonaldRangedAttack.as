@@ -8,9 +8,9 @@ package edu.ewu.components.attacks
 	public class RonaldMcDonaldRangedAttack extends Attack
 	{
 		
-		public function RonaldMcDonaldRangedAttack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=0, $nDamage:uint=0, $bNetwork:Boolean = false) 
+		public function RonaldMcDonaldRangedAttack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=1, $nDamage:uint=1, $bNetwork:Boolean = false) 
 		{
-			super($oCreator, $nX, $nY, $nAngle, 100 + $nForce, 5 + $nDamage, 500, "edu.ewu.components.attacks.RonaldMcDonaldRangedAttack", "Thump", $bNetwork);
+			super($oCreator, $nX, $nY, $nAngle, 1 * $nForce, 5 * $nDamage, 500, "edu.ewu.components.attacks.RonaldMcDonaldRangedAttack", "Thump", $bNetwork);
 		}
 	}
 }

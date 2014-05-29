@@ -8,7 +8,7 @@
 	public class WendyRangedAttack extends RonaldMcDonaldRangedAttack
 	{
 		
-		public function WendyRangedAttack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=0, $nDamage:uint=0, $bNetwork:Boolean = false) 
+		public function WendyRangedAttack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=1, $nDamage:uint=1, $bNetwork:Boolean = false) 
 		{
 			super($oCreator, $nX, $nY, $nAngle, $nForce, $nDamage, $bNetwork);
 		}

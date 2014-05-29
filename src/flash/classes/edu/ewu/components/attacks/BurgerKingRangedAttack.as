@@ -5,11 +5,11 @@
 	 * ...
 	 * @author Lindsey
 	 */
-	public class BurgerKingRangedAttack extends RonaldMcDonaldRangedAttack
+	public class BurgerKingRangedAttack extends Attack
 	{
-		public function BurgerKingRangedAttack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=0, $nDamage:uint=0, $bNetwork:Boolean = false) 
+		public function BurgerKingRangedAttack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=1, $nDamage:uint=1, $bNetwork:Boolean = false) 
 		{
-			super($oCreator, $nX, $nY, $nAngle, 50+$nForce, 20 + $nDamage, $bNetwork);
+			super($oCreator, $nX, $nY, $nAngle, 5*$nForce, 20 * $nDamage,500, "edu.ewu.components.attacks.BurgerKingRangedAttack", "Thump", $bNetwork);
 		}
 	}
 

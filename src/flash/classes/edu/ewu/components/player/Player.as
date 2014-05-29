@@ -43,8 +43,8 @@ package edu.ewu.components.player
 		protected var _nChargeDelay;
 		
 		
-		public var nBaseDamage:uint;
-		public var nBaseForce:uint;
+		public var nBaseDamage:Number;
+		public var nBaseForce:Number;
 		
 		protected var _bAlive:Boolean;
 		
@@ -63,6 +63,7 @@ package edu.ewu.components.player
 		
 		public function Player($pName:String, $charName:String)
 		{
+			
 			var renderer:BitmapRenderer = new BitmapRenderer( new Rectangle( 0, 0, 400, 400 ) );
 			renderer.addFilter( new BlurFilter( 2, 2, 1 ) );
 			renderer.addFilter( new ColorMatrixFilter( [ 1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0.95,0 ] ) );
@@ -110,6 +111,8 @@ package edu.ewu.components.player
 			this.nLives = 3;
 			this.nHealth = 0;
 			this.kills = 0;
+			this.nBaseDamage = 1;
+			this.nBaseForce = 1;
 		}
 		
 		
