@@ -6,8 +6,10 @@ package edu.ewu.ui.screens
 	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.sounds.MusicManager;
 	import edu.ewu.ui.buttons.BKButton;
+	import edu.ewu.ui.buttons.IslandMap;
 	import edu.ewu.ui.buttons.RonButton;
 	import edu.ewu.ui.buttons.SoundButton;
+	import edu.ewu.ui.buttons.TrayMap;
 	import flash.text.TextField;
 	import org.osflash.signals.Signal;
 	
@@ -25,12 +27,17 @@ package edu.ewu.ui.screens
 		/** Reference to the Submit button */
 		public var			_btSubmit				:SubmitButton;
 		/** Reference to the Ron button */
-		public var			_btRon				:RonButton;	
+		public var			_btRon					:RonButton;	
 		/** Reference to the BK button */
-		public var			_btBK				:BKButton;	
+		public var			_btBK					:BKButton;	
+		/** Reference to the TrayMap button */
+		public var			_btTrayMap				:TrayMap;
+		/** Reference to the IslandMap button */
+		public var			_btIslandMap			:IslandMap;
 		/** Reference to the Credits button */
 		public var			_btCredits				:CreditsButton;	
 		public var			character				:String = "RonaldMcDonald";
+		public var			map						:int = 2;
 		/* ---------------------------------------------------------------------------------------- */
 		
 		/**
@@ -53,6 +60,8 @@ package edu.ewu.ui.screens
 			_btCredits.clickedSignal.addOnce(toCredits);
 			_btRon.clickedSignal.addOnce(changeCharacterToRon);
 			_btBK.clickedSignal.addOnce(changeCharacterToBK);
+			_btTrayMap.clickedSignal.addOnce(changeMapToTray);
+			_btIslandMap.clickedSignal.addOnce(changeMapToIsland);
 			super.begin();
 		}
 		
@@ -66,6 +75,17 @@ package edu.ewu.ui.screens
 		{
 			this.character = "BurgerKing";
 		}
+		
+		public function changeMapToTray():void
+		{
+			this.map = 2;
+		}
+		
+		public function changeMapToIsland():void
+		{
+			this.map = 3;
+		}
+		
 		/* ---------------------------------------------------------------------------------------- */
 		
 		private function onSubmit():void 
@@ -77,8 +97,10 @@ package edu.ewu.ui.screens
 			}
 			
 			ScreenManager.instance.crossSwitchScreen("Game");
+			ScreenManager.instance.mcActiveScreen.gotoAndPlay(map);
 			ScreenManager.instance.mcActiveScreen.begin();
 			ScreenManager.instance.mcActiveScreen.setPlayer(name, character);
+			
 		}
 		
 		
