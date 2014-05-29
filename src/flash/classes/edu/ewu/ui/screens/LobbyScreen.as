@@ -6,12 +6,19 @@ package edu.ewu.ui.screens
 	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.sounds.MusicManager;
 	import edu.ewu.ui.buttons.BKButton;
+	import edu.ewu.ui.buttons.ColonelButton;
 	import edu.ewu.ui.buttons.IslandMap;
+	import edu.ewu.ui.buttons.JackButton;
+	import edu.ewu.ui.buttons.PapaButton;
 	import edu.ewu.ui.buttons.RonButton;
 	import edu.ewu.ui.buttons.SoundButton;
 	import edu.ewu.ui.buttons.TrayMap;
+	import edu.ewu.ui.buttons.UFCMap;
+	import edu.ewu.ui.buttons.WendyButton;
+	import flash.display.MovieClip;
 	import flash.text.TextField;
 	import org.osflash.signals.Signal;
+	import com.greensock.*;
 	
 	/**
 	 * Drives the LobbyScreen class.
@@ -26,14 +33,27 @@ package edu.ewu.ui.screens
 		public var			_txtPlayerName			:TextField;
 		/** Reference to the Submit button */
 		public var			_btSubmit				:SubmitButton;
+		
 		/** Reference to the Ron button */
 		public var			_btRon					:RonButton;	
 		/** Reference to the BK button */
-		public var			_btBK					:BKButton;	
+		public var			_btBK					:BKButton;
+		/** Reference to the Wendy button */
+		public var			_btWendy				:WendyButton;
+		/** Reference to the Jack button */
+		public var			_btJack					:JackButton;
+		/** Reference to the Colonel button */
+		public var			_btColonel				:ColonelButton;
+		/** Reference to the Papa button */
+		public var			_btPapa					:PapaButton;
+		
 		/** Reference to the TrayMap button */
 		public var			_btTrayMap				:TrayMap;
 		/** Reference to the IslandMap button */
 		public var			_btIslandMap			:IslandMap;
+		/** Reference to the UFCMap button */
+		public var			_btUFCMap				:UFCMap;
+		
 		/** Reference to the Credits button */
 		public var			_btCredits				:CreditsButton;	
 		public var			character				:String = "RonaldMcDonald";
@@ -56,34 +76,64 @@ package edu.ewu.ui.screens
 		override public function begin():void
 		{
 			MusicManager.instance.crossSwitchMusic("Lobby");
-			_btSubmit.clickedSignal.addOnce(onSubmit);
-			_btCredits.clickedSignal.addOnce(toCredits);
-			_btRon.clickedSignal.addOnce(changeCharacterToRon);
-			_btBK.clickedSignal.addOnce(changeCharacterToBK);
-			_btTrayMap.clickedSignal.addOnce(changeMapToTray);
-			_btIslandMap.clickedSignal.addOnce(changeMapToIsland);
+			_btSubmit.clickedSignal.add(onSubmit);
+			_btCredits.clickedSignal.add(toCredits);
+			_btRon.clickedSignal.add(changeCharacterToRon);
+			_btBK.clickedSignal.add(changeCharacterToBK);
+			_btTrayMap.clickedSignal.add(changeMapToTray);
+			_btIslandMap.clickedSignal.add(changeMapToIsland);
+			
 			super.begin();
+			fadeCharacters();
+			fadeMaps();
+			_btRon.alpha = 1;
+			_btTrayMap.alpha = 1;
 		}
 		
 		
 		public function changeCharacterToRon():void
 		{
 			this.character = "RonaldMcDonald";
+			fadeCharacters();
+			this._btRon.alpha = 1;
 		}
 		
 		public function changeCharacterToBK():void
 		{
 			this.character = "BurgerKing";
+			fadeCharacters();
+			this._btBK.alpha = 1;
+		}
+		
+		public function fadeCharacters():void
+		{
+			_btRon.alpha = .5;
+			_btBK.alpha = .5;
+			_btWendy.alpha = .5;
+			_btJack.alpha = .5;
+			_btColonel.alpha = .5;
+			_btPapa.alpha = .5;
+		}
+		
+		public function fadeMaps():void
+		{
+			_btTrayMap.alpha = .5;
+			_btIslandMap.alpha = .5;
+			_btUFCMap.alpha = .5;
 		}
 		
 		public function changeMapToTray():void
 		{
 			this.map = 2;
+			fadeMaps();
+			_btTrayMap.alpha = 1;
 		}
 		
 		public function changeMapToIsland():void
 		{
 			this.map = 3;
+			fadeMaps();
+			_btIslandMap.alpha = 1;
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
