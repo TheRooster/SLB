@@ -22,6 +22,8 @@ package edu.ewu.components.player
 	import edu.ewu.components.CollisionManager;
 	import edu.ewu.networking.NetworkManager;
 	
+	import com.greensock.TweenMax;
+	
 	/**
 	 * ...
 	 * @author Jon Roster
@@ -151,6 +153,11 @@ package edu.ewu.components.player
 			if (this._sSprite != null)
 			{
 				this._sSprite.gotoAndPlay($sAnimationName);
+				
+				if ($sAnimationName == "Death")
+				{
+					TweenMax.to(this, 2, { scaleX:0, scaleY:0 } );
+				}
 				
 				if ($bNetworked == false)
 				{

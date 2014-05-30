@@ -214,11 +214,9 @@
 
 			StageRef.stage.addEventListener(MouseEvent.CLICK, mouseClickHandler);
 			
-			this.sLastHitBy = "";
+			this.respawn();
 			
-			this._nLastX = this.stage.stageWidth / 2;
-			
-			this._nLastY = this.stage.stageHeight / 2;
+			_bAlive = false;
 
 		}
 
@@ -361,25 +359,29 @@
 		{
 
 
+			if (_bAlive)
+			{
+
+				this.gotoAndPlaySprite("Ranged_Attack");
 
 
-			this.gotoAndPlaySprite("Ranged_Attack");
 
+				var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "RangedAttack") as Class;
 
-
-			var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "RangedAttack") as Class;
-
-			new customAttack(this, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation, this.nBaseForce, this.nBaseDamage);
-
+				new customAttack(this, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation, this.nBaseForce, this.nBaseDamage);
+			}
 		}
 		
 		
 		
 		private function spaceDownHandler():void
 		{
-			gotoAndPlaySprite("Charged_Attack");
-			this.chargeAnim();
-			TweenMax.delayedCall(this._nChargeDelay, chargedAttackExecute)
+			if (_bAlive)
+			{
+				gotoAndPlaySprite("Charged_Attack");
+				this.chargeAnim();
+				TweenMax.delayedCall(this._nChargeDelay, chargedAttackExecute);
+			}
 		}
 		
 		
@@ -742,7 +744,7 @@
 
 			
 			this.gotoAndPlaySprite("Death");
-			TweenMax.to(this, 2, { scaleX:0, scaleY:0 } );
+			
 
 			if (this.nLives == 0)
 
@@ -751,7 +753,7 @@
 				//TODO: Handle switching to results.
 
 				var aliveCount:int = 0;
-
+				var hasLivesCount:int = 0;
 				for (var p:String in NetworkManager.instance.players)
 
 				{
@@ -763,12 +765,25 @@
 						trace(p + ": is alive");
 
 						aliveCount++;
+						
+						
+
+					}
+					if (Player(NetworkManager.instance.players[p]).nLives != 0)
+
+					{
+
+						trace(p + ": has lives");
+
+						hasLivesCount++;
+						
+						
 
 					}
 
 				}
 
-				if (aliveCount == 1 && NetworkManager.instance.userCount() > 1)
+				if (aliveCount == 1 && NetworkManager.instance.userCount() > 1 && hasLivesCount == 1)
 
 				{
 
@@ -803,9 +818,27 @@
 
 			//TODO: Add invulnerability timer
 
-			this.x = stage.stageWidth * 0.5;
-
-			this.y = stage.stageHeight * 0.5;
+			var hitTest:Collideable = new PlayerHitTest();
+			hitTest.addCollidesWithType(CollisionManager.TYPE_PIT);
+			hitTest.addCollidesWithType(CollisionManager.TYPE_PLAYER);
+			
+			var randX:Number = Math.floor(Math.random() * StageRef.stage.stageWidth);
+			var randY:Number = Math.floor(Math.random() * StageRef.stage.stageHeight);
+			hitTest.x = randX;
+			hitTest.y = randY;
+			
+			while(CollisionManager.instance.doesObjectCollide(hitTest))
+			{
+				randX = Math.floor(Math.random() * StageRef.stage.stageWidth);
+				randY = Math.floor(Math.random() * StageRef.stage.stageHeight);
+				hitTest.x = randX;
+				hitTest.y = randY;
+			}
+			
+			hitTest = null;
+			
+			this.x = randX;
+			this.y = randY;
 
 			this._bAlive = true;
 			

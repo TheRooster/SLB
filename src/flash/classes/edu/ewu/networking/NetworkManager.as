@@ -125,10 +125,10 @@ package edu.ewu.networking
 
 		protected var		_connection				:MultiUserSession;
 
-
-
 		
-
+		
+		
+		
 		/* ---------------------------------------------------------------------------------------- */
 
 		

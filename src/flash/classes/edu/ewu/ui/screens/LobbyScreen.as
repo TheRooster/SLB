@@ -164,6 +164,8 @@ package edu.ewu.ui.screens
 				sessionName = "SimpleDemoGroup";
 			}
 			
+			sessionName += this.map.toString();
+			
 			ScreenManager.instance.crossSwitchScreen("Game");
 			ScreenManager.instance.mcActiveScreen.gotoAndPlay(map);
 			//ScreenManager.instance.mcActiveScreen.begin();

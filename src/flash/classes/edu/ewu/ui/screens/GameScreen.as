@@ -86,6 +86,7 @@
 			NetworkManager.instance.playerRemovedSignal.add(playerRemoved);
 			NetworkManager.instance.collectableAddedSignal.add(collectableAdded);
 			MusicManager.instance.crossSwitchMusic("Game");
+			
 			this.bPlaying = true;
 			CollisionManager.instance.begin();
 			super.begin();
@@ -152,6 +153,7 @@
 			{
 				p4 = $oPlayer;
 				txtp4.text = p4._pName;
+				this.start();
 			}
 		}
 		
@@ -236,6 +238,11 @@
 		protected function collectableAdded($oCollectable:Collectable):void
 		{
 			this.addChild($oCollectable);
+		}
+		
+		public function start():void
+		{
+			me.alive = true;
 		}
 	}
 }
