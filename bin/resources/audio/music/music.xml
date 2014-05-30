@@ -1,0 +1,9 @@
+<?xml version="1.0"?> 
+<data>
+	<LoaderMax name="musicLoaderMax" load="true" prependURLs="resources/audio/music/">
+		<MP3Loader name="Game" volume="0.15" loops="true" loopStart="1914" url="Invincible (Intro Loop 1).mp3" autoPlay="false" />
+		<MP3Loader name="Lobby" volume="0.15" loops="true" loopStart="0" url="Invincible (Loop 1).mp3" autoPlay="false" />
+		<MP3Loader name="Victory" volume="0.15" loops="true" loopStart="27549" url="To Glory (Intro Loop 1).mp3" autoPlay="false" />
+		<MP3Loader name="Defeat" volume="0.15" loops="true" loopStart="0" url="What's Happening To Me (Loop 1).mp3" autoPlay="false" />
+	</LoaderMax>
+</data>

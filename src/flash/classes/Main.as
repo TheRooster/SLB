@@ -17,6 +17,8 @@
 	import edu.ewu.ui.screens.ResultsScreen;
 	import edu.ewu.ui.screens.ScreenManager;
 	import flash.display.MovieClip;
+	import com.greensock.loading.LoaderMax;
+	import com.greensock.loading.MP3Loader;
 	
 	
 	/**
@@ -48,17 +50,15 @@
 			//var loader:XMLLoader =  new XMLLoader("resources/xml/serverKey.xml", { name:"key", onComplete:initNetwork} );
 			//loader.load();
 			
-			
-			MusicManager.instance.add("Lobby", new Music(new LobbyLoop(), 0.15, true)); 
-			MusicManager.instance.add("Game", new Music(new GameLoop(), 0.15, true, 1914)); 
-			MusicManager.instance.add("Victory", new Music(new VictoryLoop(), 0.15, true, 27549)); 
-			MusicManager.instance.add("Defeat", new Music(new DefeatLoop(), 0.15, true)); 
-			
-			SoundManager.instance.add("ButtonClick", new ClickSound());
-			SoundManager.instance.add("Thump", new ThumpSound());
-			SoundManager.instance.add("Death", new DeathSound());
-			
-			
+			LoaderMax.activate([MP3Loader]);
+			var mainQueue:LoaderMax = new LoaderMax( { name:"mainQueue", onComplete:completeHandler } );
+			this.loadMusic(mainQueue);
+			this.loadSounds(mainQueue);
+			mainQueue.load();	
+		}
+		
+		private function completeHandler(event:LoaderEvent)
+		{
 			var loadingScreen:LoadingScreen = new LoadingScreen();
 			ScreenManager.instance.add("Loading", loadingScreen);
 			var lobbyScreen:LobbyScreen = new LobbyScreen();
@@ -76,8 +76,6 @@
 			this.addChild(creditsScreen);
 			this.addChild(resultsScreen);
 			
-			
-			
 			ScreenManager.instance.switchScreen("Loading");
 			ScreenManager.instance.mcActiveScreen.begin();
 		}
@@ -92,6 +90,57 @@
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
+		
+		//{ region Loading
+		
+		//{ region Music
+		
+		private function loadMusic(queue:LoaderMax)
+		{
+			var musicLoader:XMLLoader = new XMLLoader("resources/audio/music/music.xml", { name:"musicLoader", onComplete:musicOnComplete } );
+			queue.append(musicLoader);
+		}
+		
+		private function musicOnComplete(event:LoaderEvent)
+		{
+			var loaders:Array = (event.target as XMLLoader).getChildren(true, true);
+			loaders.forEach(addMusic);
+		}
+		
+		private function addMusic(loader:MP3Loader, index:int, array:Array)
+		{ 
+			var name:String = loader.vars.name;
+			var loopStart:Number = loader.vars.loopStart;
+			var loops:Boolean = loader.vars.loops;
+			var volume:Number = loader.vars.volume;
+			MusicManager.instance.add(name, new Music(LoaderMax.getContent(name), volume, loops, loopStart));
+		}
+		
+		//} endregion
+		
+		//{ region Sounds
+		
+		private function loadSounds(queue:LoaderMax)
+		{
+			var soundsLoader:XMLLoader = new XMLLoader("resources/audio/sounds/sounds.xml", { name:"soundsLoader", onComplete:soundsOnComplete } );
+			queue.append(soundsLoader);
+		}
+		
+		private function soundsOnComplete(event:LoaderEvent)
+		{
+			var loaders:Array = (event.target as XMLLoader).getChildren(true, true);
+			loaders.forEach(addSound);
+		}
+		
+		private function addSound(loader:MP3Loader, index:int, array:Array)
+		{
+			var name:String = loader.vars.name;
+			SoundManager.instance.add(name, LoaderMax.getContent(name));
+		}
+		
+		//} endregion
+		
+		//} endregion
 
 	}
 }
