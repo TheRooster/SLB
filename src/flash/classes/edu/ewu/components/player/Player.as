@@ -185,6 +185,14 @@ package edu.ewu.components.player
 			return this._bAlive;
 		}
 		
+		public function set alive($bAlive:Boolean)
+		{
+			if (_bAlive != $bAlive)
+			{
+				_bAlive = $bAlive;
+			}
+		}
+		
 		
 		protected function chargeAnim()
 		{

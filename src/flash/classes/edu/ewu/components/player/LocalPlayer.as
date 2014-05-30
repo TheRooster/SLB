@@ -750,7 +750,7 @@
 
 				//TODO: Handle switching to results.
 
-				var allDead:Boolean = true;
+				var aliveCount:int = 0;
 
 				for (var p:String in NetworkManager.instance.players)
 
@@ -762,15 +762,13 @@
 
 						trace(p + ": is alive");
 
-						allDead = false;
-
-						break;
+						aliveCount++;
 
 					}
 
 				}
 
-				if (allDead)
+				if (aliveCount == 1 && NetworkManager.instance.userCount() > 1)
 
 				{
 

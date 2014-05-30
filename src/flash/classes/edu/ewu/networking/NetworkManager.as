@@ -1,4 +1,4 @@
-﻿package edu.ewu.networking
+package edu.ewu.networking
 {
 
 	import com.reyco1.multiuser.data.UserObject;
@@ -374,7 +374,7 @@
 
 					player.nHealth = dataObj.health;
 
-
+					player.alive = dataObj.alive;
 				}
 
 			}
@@ -492,7 +492,7 @@
 					if ($sOPCODE == NetworkManager.OPCODE_HEARTBEAT)
 
 					{
-						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_HEARTBEAT, name:$oObject.PlayerName, x:$oObject.x, y:$oObject.y, rotation:$oObject.SpriteRotation , health:$oObject.nHealth, lives:$oObject.nLives } );
+						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_HEARTBEAT, name:$oObject.PlayerName, x:$oObject.x, y:$oObject.y, rotation:$oObject.SpriteRotation , health:$oObject.nHealth, lives:$oObject.nLives, alive:$oObject.alive } );
 
 					}
 
@@ -604,6 +604,16 @@
 
 		}
 
+		public function userCount():int
+		{
+			var result:int = 1;
+			if (_connection)
+			{
+				result = _connection.userCount;
+			}
+			return result;
+		}
+		
 	}
 
 }
