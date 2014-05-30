@@ -158,6 +158,11 @@ package edu.ewu.components.player
 				{
 					TweenMax.to(this, 2, { scaleX:0, scaleY:0 } );
 				}
+				else
+				{
+					this.scaleX = 1;
+					this.scaleY = 1;
+				}
 				
 				if ($bNetworked == false)
 				{
