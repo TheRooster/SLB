@@ -749,55 +749,57 @@
 			if (this.nLives == 0)
 
 			{
-
+				//temp
 				//TODO: Handle switching to results.
 
-				var aliveCount:int = 0;
-				var hasLivesCount:int = 0;
-				for (var p:String in NetworkManager.instance.players)
-
-				{
-
-					if (NetworkManager.instance.players[p])
-					{
-						if (Player(NetworkManager.instance.players[p]).alive)
-
-						{
-
-							trace(p + ": is alive");
-
-							aliveCount++;
-							
-							
-
-						}
-						if (Player(NetworkManager.instance.players[p]).nLives != 0)
-
-						{
-
-							trace(p + ": has lives");
-
-							hasLivesCount++;
-							
-							
-
-						}
-					}
-
-				}
-
-				if (aliveCount == 1 && NetworkManager.instance.userCount() > 1 && hasLivesCount == 1)
-
-				{
+				//var aliveCount:int = 0;
+				//var hasLivesCount:int = 0;
+				//for (var p:String in NetworkManager.instance.players)
+//
+				//{
+//
+					//if (NetworkManager.instance.players[p])
+					//{
+						//if (Player(NetworkManager.instance.players[p]).alive)
+//
+						//{
+//
+							//trace(p + ": is alive");
+//
+							//aliveCount++;
+							//
+							//
+//
+						//}
+						//if (Player(NetworkManager.instance.players[p]).nLives != 0)
+//
+						//{
+//
+							//trace(p + ": has lives");
+//
+							//hasLivesCount++;
+							//
+							//
+//
+						//}
+					//}
+//
+				//}
+//
+				//if (aliveCount == 1 && NetworkManager.instance.userCount() > 1 && hasLivesCount == 1)
+//
+				//{
 
 					trace("All Dead");
-					ScreenManager.instance.mcActiveScreen.end();
+					
+					NetworkManager.instance.disconnect();
+					TweenMax.delayedCall(2, ScreenManager.instance.mcActiveScreen.end);
 					//following lines moved to game screen
 					//ScreenManager.instance.crossSwitchScreen("Results");
 					//ScreenManager.instance.mcActiveScreen.begin();
 					//ScreenManager.instance.switchScreen("Results");
 
-				}
+				//}
 
 			}
 
