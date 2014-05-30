@@ -601,6 +601,11 @@ package edu.ewu.networking
 		{
 
 			_connection.close();
+			
+			for each (var player:Player in _dPlayers)
+			{
+				this.remove(player.PlayerName);
+			}
 
 		}
 

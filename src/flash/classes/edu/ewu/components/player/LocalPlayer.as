@@ -758,27 +758,30 @@
 
 				{
 
-					if (Player(NetworkManager.instance.players[p]).alive)
-
+					if (NetworkManager.instance.players[p])
 					{
+						if (Player(NetworkManager.instance.players[p]).alive)
 
-						trace(p + ": is alive");
+						{
 
-						aliveCount++;
-						
-						
+							trace(p + ": is alive");
 
-					}
-					if (Player(NetworkManager.instance.players[p]).nLives != 0)
+							aliveCount++;
+							
+							
 
-					{
+						}
+						if (Player(NetworkManager.instance.players[p]).nLives != 0)
 
-						trace(p + ": has lives");
+						{
 
-						hasLivesCount++;
-						
-						
+							trace(p + ": has lives");
 
+							hasLivesCount++;
+							
+							
+
+						}
 					}
 
 				}
