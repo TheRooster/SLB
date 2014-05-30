@@ -1,6 +1,7 @@
 ﻿package edu.ewu.ui.screens
 {
 	import com.greensock.TweenMax;
+	import edu.ewu.components.Collectable;
 	import edu.ewu.components.player.Player;
 	import edu.ewu.components.player.LocalPlayer;
 	import flash.display.MovieClip;
@@ -83,6 +84,7 @@
 			this.addEventListener(Event.ENTER_FRAME, this.enterFrameHandler);
 			NetworkManager.instance.playerJoinedSignal.add(playerAdded);
 			NetworkManager.instance.playerRemovedSignal.add(playerRemoved);
+			NetworkManager.instance.collectableAddedSignal.add(collectableAdded);
 			MusicManager.instance.crossSwitchMusic("Game");
 			this.bPlaying = true;
 			CollisionManager.instance.begin();
@@ -179,6 +181,9 @@
 			ScreenManager.instance.crossSwitchScreen("Results");
 			ScreenManager.instance.mcActiveScreen.begin();
 			ScreenManager.instance.mcActiveScreen.setKOs(p1.kills, p1.nLives);
+			NetworkManager.instance.playerJoinedSignal.removeAll();
+			NetworkManager.instance.playerRemovedSignal.removeAll();
+			NetworkManager.instance.collectableAddedSignal.removeAll();
 			super.end();
 		}
 		
@@ -226,6 +231,11 @@
 				n--;
 			}
 			return s;
+		}
+		
+		protected function collectableAdded($oCollectable:Collectable):void
+		{
+			this.addChild($oCollectable);
 		}
 	}
 }

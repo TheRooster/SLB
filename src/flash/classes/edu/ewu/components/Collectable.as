@@ -13,6 +13,7 @@ package edu.ewu.components
 	import edu.ewu.networking.NetworkManager;
 	import flash.display.Sprite;
 	import edu.ewu.networking.NetworkManager;
+	import edu.ewu.ui.screens.ScreenManager;
 	/**
 	 * ...
 	 * @author Jon Roster
@@ -59,11 +60,17 @@ package edu.ewu.components
 			
 			this._bNetwork = $bNetwork;
 			
+			
+		}
+		
+		public function begin():void
+		{
 			if (this._bNetwork == false)
 			{
 				NetworkManager.instance.sendData(NetworkManager.OPCODE_COLLECTABLE, this);
 			}
 		}
+		
 		
 		public function init(e:LoaderEvent)
 		{
@@ -129,6 +136,7 @@ package edu.ewu.components
 			this._sSprite.visible = true;
 			this.addChild(_sSprite);
 			CollisionManager.instance.add(this);
+			this.begin();
 			
 		}
 		
@@ -139,7 +147,7 @@ package edu.ewu.components
 			if ($oObjectCollidedWith is LocalPlayer )
 			{
 				CollisionManager.instance.remove(this);
-				stage.removeChild(this);
+				ScreenManager.instance.mcActiveScreen.removeChild(this);
 				
 				this._nOriginalValue = Player($oObjectCollidedWith)[_sAttribute];
 				Player($oObjectCollidedWith)[_sAttribute] *= _nAmount;
@@ -149,7 +157,7 @@ package edu.ewu.components
 			else if ($oObjectCollidedWith is NetworkPlayer )
 			{
 				CollisionManager.instance.remove(this);
-				stage.removeChild(this);
+				ScreenManager.instance.mcActiveScreen.removeChild(this);
 			}
 		}
 		

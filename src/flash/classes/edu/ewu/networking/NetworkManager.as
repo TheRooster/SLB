@@ -1,4 +1,4 @@
-package edu.ewu.networking
+﻿package edu.ewu.networking
 {
 
 	import com.reyco1.multiuser.data.UserObject;
@@ -118,6 +118,8 @@ package edu.ewu.networking
 		/** Signal that is dispatched when a player is removed. */
 
 		public var			playerRemovedSignal		:Signal = new Signal(Player);
+		
+		public var			collectableAddedSignal	:Signal = new Signal(Collectable);
 
 		/** Connection for AS3mul */
 
@@ -449,6 +451,7 @@ package edu.ewu.networking
 				var collectable:Collectable = new Collectable(dataObj.type, true);
 				collectable.x = dataObj.x;
 				collectable.y = dataObj.y;
+				NetworkManager.instance.collectableAddedSignal.dispatch(collectable);
 			}
 		}
 
