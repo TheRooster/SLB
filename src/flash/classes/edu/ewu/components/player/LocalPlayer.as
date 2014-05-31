@@ -408,79 +408,48 @@
 			else if (sLastHitBy == NetworkManager.instance.players[3])
 				nP4Score++;
 
-
-			
 			this.gotoAndPlaySprite("Death");
 			
-
 			if (this.nLives == 0)
-
 			{
 				//var aliveCount:int = 0;
 				//var hasLivesCount:int = 0;
 				//for (var p:String in NetworkManager.instance.players)
-//
 				//{
-//
 					//if (NetworkManager.instance.players[p])
 					//{
 						//if (Player(NetworkManager.instance.players[p]).alive)
-//
 						//{
-//
 							//trace(p + ": is alive");
-//
 							//aliveCount++;
 							//
 							//
-//
 						//}
 						//if (Player(NetworkManager.instance.players[p]).nLives != 0)
-//
 						//{
-//
 							//trace(p + ": has lives");
-//
 							//hasLivesCount++;
 							//
 							//
-//
 						//}
 					//}
-//
 				//}
-//
 				//if (aliveCount == 1 && NetworkManager.instance.userCount() > 1 && hasLivesCount == 1)
-//
 				//{
-
 					trace("All Dead");
-					
+					ScreenManager.instance.getScreen("Results").setKOs(this.kills, this.nLives);
 					NetworkManager.instance.disconnect();
-					TweenMax.delayedCall(2, ScreenManager.instance.mcActiveScreen.end);
-
+					TweenMax.delayedCall(4, ScreenManager.instance.mcActiveScreen.end);
 				//}
-
 			}
-
 			else
-
 			{
-
 				TweenMax.delayedCall(5, respawn);
-
 			}
-
 		}
-
 		
-
 		public function respawn():void
-
 		{
-
-
-
 			//TODO: Add invulnerability timer
 
 			var hitTest:Collideable = new PlayerHitTest();
@@ -514,7 +483,6 @@
 			
 			this.sLastHitBy = "";
 			this.gotoAndPlaySprite("Idle");
-
 		}
 		
 		public function getHealth():int

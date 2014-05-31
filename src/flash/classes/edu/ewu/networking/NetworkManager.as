@@ -1,4 +1,4 @@
-package edu.ewu.networking
+﻿package edu.ewu.networking
 {
 
 	import com.reyco1.multiuser.data.UserObject;
@@ -602,7 +602,8 @@ package edu.ewu.networking
 			
 			for each (var player:Player in _dPlayers)
 			{
-				this.remove(player.PlayerName);
+				if(player)
+					this.remove(player.PlayerName);
 			}
 
 		}

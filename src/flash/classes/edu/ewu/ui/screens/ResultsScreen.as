@@ -48,13 +48,21 @@ package edu.ewu.ui.screens
 		 */
 		override public function begin():void
 		{
+			//This code should end world hunger.
+			//ScreenManager.instance.remove("Game");
+			//ScreenManager.instance.remove("Lobby");
+			//var lobbyScreen:LobbyScreen = new LobbyScreen();
+			//ScreenManager.instance.getScreen("Lobby") = new LobbyScreen();
+			//var gameScreen:GameScreen = new GameScreen();
+			//ScreenManager.instance.getScreen("Game") = AbstractScreen(gameScreen);
+			
 			MusicManager.instance.crossSwitchMusic("Defeat");
 			_btLobby.clickedSignal.addOnce(toLobby);
 			_btCredits.clickedSignal.addOnce(toCredits);
 			_btQuit.clickedSignal.addOnce(toPreloader);
 			//txtKOs.text = NetworkManager.instance.players
 			
-			NetworkManager.instance.disconnect();
+			//NetworkManager.instance.disconnect();
 			super.begin();
 		}
 		

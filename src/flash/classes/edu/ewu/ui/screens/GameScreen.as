@@ -182,7 +182,7 @@
 			CollisionManager.instance.end();
 			ScreenManager.instance.crossSwitchScreen("Results");
 			ScreenManager.instance.mcActiveScreen.begin();
-			ScreenManager.instance.mcActiveScreen.setKOs(p1.kills, p1.nLives);
+			//ScreenManager.instance.mcActiveScreen.setKOs(p1.kills, p1.nLives);
 			NetworkManager.instance.playerJoinedSignal.removeAll();
 			NetworkManager.instance.playerRemovedSignal.removeAll();
 			NetworkManager.instance.collectableAddedSignal.removeAll();

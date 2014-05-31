@@ -29,6 +29,12 @@
 		private var   DEVKEY:String = "";
 		private var SERV_KEY:String = "";
 		
+		var loadingScreen:LoadingScreen = new LoadingScreen();
+		var lobbyScreen:LobbyScreen = new LobbyScreen();
+		var gameScreen:GameScreen = new GameScreen();
+		var creditsScreen:CreditsScreen = new CreditsScreen();
+		var resultsScreen:ResultsScreen = new ResultsScreen();
+		
 		/* ---------------------------------------------------------------------------------------- */
 		
 		/**
@@ -52,16 +58,18 @@
 		
 		private function completeHandler(event:LoaderEvent)
 		{
-			var loadingScreen:LoadingScreen = new LoadingScreen();
+			//loadingScreen = new LoadingScreen();
 			ScreenManager.instance.add("Loading", loadingScreen);
-			var lobbyScreen:LobbyScreen = new LobbyScreen();
+			//lobbyScreen = new LobbyScreen();
 			ScreenManager.instance.add("Lobby", lobbyScreen);
-			var gameScreen:GameScreen = new GameScreen();
+			//gameScreen = new GameScreen();
 			ScreenManager.instance.add("Game", gameScreen);
-			var creditsScreen:CreditsScreen = new CreditsScreen();
+			//creditsScreen = new CreditsScreen();
 			ScreenManager.instance.add("Credits", creditsScreen);
-			var resultsScreen:ResultsScreen = new ResultsScreen();
+			//resultsScreen = new ResultsScreen();
 			ScreenManager.instance.add("Results", resultsScreen);
+			
+			resultsScreen.beginCompletedSignal.add(reset);
 			
 			this.addChild(loadingScreen);
 			this.addChild(lobbyScreen);
@@ -71,6 +79,20 @@
 			
 			ScreenManager.instance.switchScreen("Loading");
 			ScreenManager.instance.mcActiveScreen.begin();
+		}
+		
+		private function reset()
+		{
+			this.removeChild(lobbyScreen);
+			this.removeChild(gameScreen);
+			ScreenManager.instance.remove("Lobby");
+			ScreenManager.instance.remove("Game");
+			lobbyScreen = new LobbyScreen();
+			ScreenManager.instance.add("Lobby", lobbyScreen);
+			gameScreen = new GameScreen();
+			ScreenManager.instance.add("Game", gameScreen);
+			this.addChild(lobbyScreen);
+			this.addChild(gameScreen);
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
