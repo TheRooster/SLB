@@ -7,12 +7,9 @@
 	 */
 	public class WendyBasicAttack extends RonaldMcDonaldBasicAttack
 	{
-	
 		public function WendyBasicAttack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=1, $nDamage:uint=1, $bNetwork:Boolean = false) 
 		{
 			super($oCreator, $nX, $nY, $nAngle, $nForce, $nDamage,  $bNetwork);
 		}
-		
 	}
-
 }

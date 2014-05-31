@@ -12,5 +12,4 @@ package edu.ewu.components.attacks
 			super($oCreator, $nX, $nY, $nAngle, 3*$nForce, 50*$nDamage, 500, "edu.ewu.components.attacks.BurgerKingBasicAttack", "Thump", $bNetwork);
 		}
 	}
-
 }

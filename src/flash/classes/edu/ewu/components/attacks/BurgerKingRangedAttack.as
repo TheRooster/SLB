@@ -12,5 +12,4 @@
 			super($oCreator, $nX, $nY, $nAngle, 5*$nForce, 20 * $nDamage,500, "edu.ewu.components.attacks.BurgerKingRangedAttack", "Thump", $bNetwork);
 		}
 	}
-
 }

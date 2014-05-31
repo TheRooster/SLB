@@ -2,23 +2,20 @@
 {
 	import com.greensock.events.LoaderEvent;
 	import com.greensock.loading.LoaderMax;
+	import com.greensock.loading.MP3Loader;
 	import com.greensock.loading.XMLLoader;
 	import com.natejc.input.KeyboardManager;
 	import com.natejc.utils.StageRef;
-	import edu.ewu.components.CreditsButton;
-	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.sounds.Music;
 	import edu.ewu.sounds.MusicManager;
 	import edu.ewu.sounds.SoundManager;
 	import edu.ewu.ui.screens.CreditsScreen;
 	import edu.ewu.ui.screens.GameScreen;
-	import edu.ewu.ui.screens.LobbyScreen;
 	import edu.ewu.ui.screens.LoadingScreen;
+	import edu.ewu.ui.screens.LobbyScreen;
 	import edu.ewu.ui.screens.ResultsScreen;
 	import edu.ewu.ui.screens.ScreenManager;
 	import flash.display.MovieClip;
-	import com.greensock.loading.LoaderMax;
-	import com.greensock.loading.MP3Loader;
 	
 	
 	/**
@@ -28,9 +25,6 @@
 	 */
 	public class Main extends MovieClip
 	{
-		
-		
-		
 		private const SERVER:String = "rtmfp://p2p.rtmfp.net/";
 		private var   DEVKEY:String = "";
 		private var SERV_KEY:String = "";
@@ -44,7 +38,6 @@
 		{
 			KeyboardManager.init(this.stage);
 			StageRef.stage = this.stage;
-			
 			
 			//Load the key from an xml file named serverKey, <serverKey><Key>yourkeyHere</Key></serverKey>
 			//var loader:XMLLoader =  new XMLLoader("resources/xml/serverKey.xml", { name:"key", onComplete:initNetwork} );
@@ -78,15 +71,6 @@
 			
 			ScreenManager.instance.switchScreen("Loading");
 			ScreenManager.instance.mcActiveScreen.begin();
-		}
-		
-		/* ---------------------------------------------------------------------------------------- 
-		
-		private function initNetwork(event:LoaderEvent):void 
-		{
-			DEVKEY = (LoaderMax.getContent("key")).Key; 
-			SERV_KEY = SERVER + DEVKEY; 
-			NetworkManager.instance.initConnection(SERV_KEY);
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -141,7 +125,5 @@
 		//} endregion
 		
 		//} endregion
-
 	}
 }
-
