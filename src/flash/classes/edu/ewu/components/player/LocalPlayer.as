@@ -206,6 +206,7 @@
 			if (_bAlive)
 			{
 				gotoAndPlaySprite("Charged_Attack");
+				SoundManager.instance.playSound("Charge", true);
 				this.chargeAnim();
 				TweenMax.delayedCall(this._nChargeDelay, chargedAttackExecute);
 			}

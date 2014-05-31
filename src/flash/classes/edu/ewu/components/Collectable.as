@@ -11,6 +11,7 @@ package edu.ewu.components
 	import edu.ewu.components.player.NetworkPlayer;
 	import edu.ewu.components.player.Player;
 	import edu.ewu.networking.NetworkManager;
+	import edu.ewu.sounds.SoundManager;
 	import flash.display.Sprite;
 	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.ui.screens.ScreenManager;
@@ -152,6 +153,14 @@ package edu.ewu.components
 				this._nOriginalValue = Player($oObjectCollidedWith)[_sAttribute];
 				Player($oObjectCollidedWith)[_sAttribute] *= _nAmount;
 				//TweenMax.to($oObjectCollidedWith, .01, this._oTweenMaxVars);
+				if (this._sType == "Burger" || this._sType == "Jalepeno")
+				{
+					SoundManager.instance.playSound("Chomp", true);
+				}
+				else if (this._sType == "Soda")
+				{
+					SoundManager.instance.playSound("Slurp", true);
+				}
 				TweenMax.delayedCall(this._iDuration, onComplete, [$oObjectCollidedWith]);
 			}
 			else if ($oObjectCollidedWith is NetworkPlayer )

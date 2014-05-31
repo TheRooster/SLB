@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+	<affected>nSpeed</affected>
+	<amount>1.1</amount>
+	<duration>10</duration>
+	<vars>
+		<repeat repeat="-1"/>
+		<glowFilter>
+			<color color="0xff0000"/>			
+			<alpha alpha="0.7"/>
+			<blurX blurX="30"/>
+			<blurY blurY="30"/>
+		</glowFilter>
+	</vars>
+</data>
