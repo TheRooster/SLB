@@ -49,15 +49,6 @@
 			//var loader:XMLLoader =  new XMLLoader("resources/xml/serverKey.xml", { name:"key", onComplete:initNetwork} );
 			//loader.load();
 			
-			LoaderMax.activate([MP3Loader]);
-			var mainQueue:LoaderMax = new LoaderMax( { name:"mainQueue", onComplete:completeHandler } );
-			this.loadMusic(mainQueue);
-			this.loadSounds(mainQueue);
-			mainQueue.load();	
-		}
-		
-		private function completeHandler(event:LoaderEvent)
-		{
 			//loadingScreen = new LoadingScreen();
 			ScreenManager.instance.add("Loading", loadingScreen);
 			//lobbyScreen = new LobbyScreen();
@@ -69,8 +60,6 @@
 			//resultsScreen = new ResultsScreen();
 			ScreenManager.instance.add("Results", resultsScreen);
 			
-			resultsScreen.beginCompletedSignal.add(reset);
-			
 			this.addChild(loadingScreen);
 			this.addChild(lobbyScreen);
 			this.addChild(gameScreen);
@@ -79,6 +68,23 @@
 			
 			ScreenManager.instance.switchScreen("Loading");
 			ScreenManager.instance.mcActiveScreen.begin();
+			
+			LoaderMax.activate([MP3Loader]);
+			var mainQueue:LoaderMax = new LoaderMax( { name:"mainQueue", onComplete:completeHandler, onProgress:progressHandler } );
+			this.loadMusic(mainQueue);
+			this.loadSounds(mainQueue);
+			mainQueue.load();	
+		}
+		
+		private function progressHandler(event:LoaderEvent)
+		{
+			loadingScreen.mcLoadingBar.scaleX = (LoaderMax.getLoader("mainQueue") as LoaderMax).progress;
+		}
+		
+		private function completeHandler(event:LoaderEvent)
+		{
+			loadingScreen.loadComplete();
+			resultsScreen.beginCompletedSignal.add(reset);
 		}
 		
 		private function reset()

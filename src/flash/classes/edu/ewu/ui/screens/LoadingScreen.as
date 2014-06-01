@@ -6,6 +6,7 @@ package edu.ewu.ui.screens
 	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.sounds.MusicManager;
 	import edu.ewu.ui.buttons.SoundButton;
+	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
 	import flash.text.TextField;
 	import org.osflash.signals.Signal;
@@ -19,8 +20,10 @@ package edu.ewu.ui.screens
 	{	
 		/** Signal that is dispatched after the button is clicked. */
 		public var			clickedSignal			:Signal = new Signal();
-		/** Reference to the back button */
+		
 		public var			_btLobby				:SoundButton;
+		
+		public var			mcLoadingBar			:MovieClip;
 		
 		public var txtLoading:TextField = new TextField();
 		
@@ -41,14 +44,19 @@ package edu.ewu.ui.screens
 		 */
 		override public function begin():void
 		{
-			MusicManager.instance.crossSwitchMusic("Victory");
-			_btLobby.clickedSignal.addOnce(toLobby);
 			super.begin();
+			_btLobby.visible = false;
+			_btLobby.clickedSignal.addOnce(toLobby);
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
 		
-
+		public function loadComplete():void
+		{
+			txtLoading.text = "Loading Complete";
+			_btLobby.visible = true;
+		}
+		
 		private function toLobby():void 
 		{	
 			ScreenManager.instance.crossSwitchScreen("Lobby");
