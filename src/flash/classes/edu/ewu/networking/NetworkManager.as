@@ -381,15 +381,15 @@
 
 			{
 
-				var player:Player = _dPlayers[dataObj.name];
+				var player1:Player = _dPlayers[dataObj.name];
 
-				if (player)
+				if (player1)
 
 				{
 
-					player.x = dataObj.x;
+					player1.x = dataObj.x;
 
-					player.y = dataObj.y;
+					player1.y = dataObj.y;
 
 				}
 
@@ -416,13 +416,13 @@
 
 			{
 
-				var player:Player = _dPlayers[dataObj.name];
+				var player2:Player = _dPlayers[dataObj.name];
 
-				if (player)
+				if (player2)
 
 				{
 
-					player.gotoAndPlaySprite(dataObj.animName, true);
+					player2.gotoAndPlaySprite(dataObj.animName, true);
 
 				}
 
@@ -432,13 +432,13 @@
 			
 			{
 				
-				var player:Player = _dPlayers[dataObj.name];
+				var player3:Player = _dPlayers[dataObj.name];
 				
-				if (player)
+				if (player3)
 
 				{
 
-					player.kills++;
+					player3.kills++;
 
 				}
 				
