@@ -5,6 +5,7 @@ package com.reyco1.multiuser
 	import com.reyco1.multiuser.data.UserObject;
 	import com.reyco1.multiuser.debug.Logger;
 	import com.reyco1.multiuser.events.ChatMessageEvent;
+	import com.reyco1.multiuser.events.FileShareEvent;
 	import com.reyco1.multiuser.events.P2PDispatcher;
 	import com.reyco1.multiuser.events.UserStatusEvent;
 	
@@ -56,6 +57,9 @@ package com.reyco1.multiuser
 		 */		
 		public  var running			:Boolean;
 		
+		public var onFileReceived	:Function;
+		public var onFileReady		:Function;
+		
 		private var serverAddress	:String;
 		private var groupName		:String;
 		
@@ -81,14 +85,16 @@ package com.reyco1.multiuser
 		 */
 		public function connect(userName:String, userDetails:Object = null):void
 		{
-			P2PDispatcher.addEventListener(ChatMessageEvent.RECIEVE		, handleChatMessage);
-			P2PDispatcher.addEventListener(UserStatusEvent.CONNECTED	, handleConnect);
-			P2PDispatcher.addEventListener(UserStatusEvent.DISCONNECTED	, handleClose);
-			P2PDispatcher.addEventListener(UserStatusEvent.USER_ADDED	, handleUserAdded);
-			P2PDispatcher.addEventListener(UserStatusEvent.USER_REMOVED	, handleUserRemoved);
-			P2PDispatcher.addEventListener(UserStatusEvent.USER_EXPIRED	, handleUserExpired);
-			P2PDispatcher.addEventListener(UserStatusEvent.USER_IDLE	, handleUserIdle);
-			Logger.log("global listeners added", this);
+			P2PDispatcher.addEventListener(ChatMessageEvent.RECIEVE				, handleChatMessage);
+			P2PDispatcher.addEventListener(UserStatusEvent.CONNECTED			, handleConnect);
+			P2PDispatcher.addEventListener(UserStatusEvent.DISCONNECTED			, handleClose);
+			P2PDispatcher.addEventListener(UserStatusEvent.USER_ADDED			, handleUserAdded);
+			P2PDispatcher.addEventListener(UserStatusEvent.USER_REMOVED			, handleUserRemoved);
+			P2PDispatcher.addEventListener(UserStatusEvent.USER_EXPIRED			, handleUserExpired);
+			P2PDispatcher.addEventListener(UserStatusEvent.USER_IDLE			, handleUserIdle);
+			P2PDispatcher.addEventListener(FileShareEvent.RECIEVE				, handleFileReceived);
+			P2PDispatcher.addEventListener(FileShareEvent.FILE_TO_SHARE_READY	, handleFileReadyToShare);
+			Logger.log("global listeners added", this);	
 			
 			session = new Session(serverAddress, groupName);
 			session.connect(userName, userDetails);
@@ -102,6 +108,11 @@ package com.reyco1.multiuser
 		public function sendObject(object:*):void
 		{
 			channelManager.sendStream.send("receiveObject", myUser.id, object);
+		}
+		
+		public function browseForFileToShare( autoShare:Boolean = true ):void
+		{
+			session.fileSharer.browseForFile( autoShare );
 		}
 		
 		/**
@@ -140,6 +151,16 @@ package com.reyco1.multiuser
 		 */		
 		public function close():void
 		{
+			//Mine
+			P2PDispatcher.removeEventListener(ChatMessageEvent.RECIEVE		, handleChatMessage);
+			P2PDispatcher.removeEventListener(UserStatusEvent.CONNECTED		, handleConnect);
+			P2PDispatcher.removeEventListener(UserStatusEvent.DISCONNECTED	, handleClose);
+			P2PDispatcher.removeEventListener(UserStatusEvent.USER_ADDED	, handleUserAdded);
+			P2PDispatcher.removeEventListener(UserStatusEvent.USER_REMOVED	, handleUserRemoved);
+			P2PDispatcher.removeEventListener(UserStatusEvent.USER_EXPIRED	, handleUserExpired);
+			P2PDispatcher.removeEventListener(UserStatusEvent.USER_IDLE		, handleUserIdle);
+			Logger.log("global listeners removed", this);
+			
 			session.close();
 		}
 		
@@ -196,6 +217,20 @@ package com.reyco1.multiuser
 				onUserIdle(event.user);
 		}
 		
+		private function handleFileReceived(event:FileShareEvent):void
+		{
+			Logger.log("File received.", this);
+			if(onFileReceived != null)
+				onFileReceived( event.fileObject );
+		}
+		
+		private function handleFileReadyToShare(event:FileShareEvent):void
+		{
+			Logger.log("File received.", this);
+			if(onFileReady != null)
+				onFileReady( event.file );
+		}
+		
 		/**
 		 * Returns our instance of the UserObject 
 		 * @return 
@@ -217,7 +252,7 @@ package com.reyco1.multiuser
 		}
 		
 		/**
-		 * Returns and array of all UserObjects of all the connected users 
+		 * Returns an array of all UserObjects of all the connected users 
 		 * @return 
 		 * 
 		 */		
@@ -227,7 +262,7 @@ package com.reyco1.multiuser
 		}
 		
 		/**
-		 * Returns and array with all UserObjects of all the connected users 
+		 * Returns an array with all UserObjects of all the connected users 
 		 * @return 
 		 * 
 		 */		
