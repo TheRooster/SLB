@@ -61,6 +61,10 @@
 					NetworkManager.instance.sendData(NetworkManager.OPCODE_SOUND, { name:$soundName } );
 				}
 			}
+			else
+			{
+				trace("Couldn't find sound: " + $soundName);
+			}
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */

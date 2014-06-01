@@ -2,6 +2,7 @@
 <data>
 	<LoaderMax name="soundLoaderMax" load="true" prependURLs="resources/audio/sounds/">
 		<MP3Loader name="Thump" url="Thump.mp3" autoPlay="false" />
+		<MP3Loader name="Chomp" url="Chomp.mp3" autoPlay="false" />
 		<MP3Loader name="Charge" url="Charge.mp3" autoPlay="false" />
 		<MP3Loader name="ButtonClick" url="Click.mp3" autoPlay="false" />
 		<MP3Loader name="Cut" url="Cut.mp3" autoPlay="false" />
