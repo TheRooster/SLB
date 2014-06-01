@@ -1,4 +1,4 @@
-package edu.ewu.components 
+﻿package edu.ewu.components 
 {
 	import com.greensock.data.TweenMaxVars;
 	import com.greensock.events.LoaderEvent;
@@ -52,6 +52,7 @@ package edu.ewu.components
 			this.addCollidesWithType(CollisionManager.TYPE_PLAYER);
 			this.addCollidesWithType(CollisionManager.TYPE_WALL);
 			this.addCollidesWithType(CollisionManager.TYPE_PIT);
+			this.addCollidesWithType(CollisionManager.TYPE_COLLECTABLE);
 			
 			//load xml here
 			var loader:XMLLoader = new XMLLoader("resources/xml/" + _sType + ".xml", { name:_sType, onComplete:init  } );
@@ -66,7 +67,7 @@ package edu.ewu.components
 		
 		public function begin():void
 		{
-			if (this._bNetwork == false)
+			if (_bNetwork == false)
 			{
 				NetworkManager.instance.sendData(NetworkManager.OPCODE_COLLECTABLE, this);
 			}
@@ -119,23 +120,23 @@ package edu.ewu.components
 		public function initSprite(e:LoaderEvent)
 		{
 			this._sSprite = ImageLoader(e.target).content;
-			this._sSprite.visible = false;
 			this._sSprite.scaleX = .25;
 			this._sSprite.scaleY = .25;
-			
-			
-			this.addCollidesWithType(CollisionManager.TYPE_COLLECTABLE);
-			this.addCollidesWithType(CollisionManager.TYPE_PIT);
-			this.addCollidesWithType(CollisionManager.TYPE_PLAYER);
-			
-			do
-			{
-				this._sSprite.x = Math.random() * StageRef.stage.stageWidth;
-				this._sSprite.y = Math.random() * StageRef.stage.stageHeight;
-			}while(CollisionManager.instance.doesObjectCollide(this));
-			
-			this._sSprite.visible = true;
+			this.visible = false;
 			this.addChild(_sSprite);
+			
+			if (_bNetwork == false)
+			{
+				do
+				{
+					this.x = Math.random() * StageRef.stage.stageWidth;
+					this.y = Math.random() * StageRef.stage.stageHeight;
+				}while(CollisionManager.instance.doesObjectCollide(this));
+				
+				trace("X: " + this.x.toString());
+				trace("Y: " + this.y.toString());
+			}
+			this.visible = true;
 			CollisionManager.instance.add(this);
 			this.begin();
 			
@@ -145,10 +146,10 @@ package edu.ewu.components
 		
 		override public function collidedWith($oObjectCollidedWith:Collideable):void
 		{
-			if ($oObjectCollidedWith is LocalPlayer )
+			if ($oObjectCollidedWith is LocalPlayer)
 			{
 				CollisionManager.instance.remove(this);
-				ScreenManager.instance.mcActiveScreen.removeChild(this);
+				this.parent.removeChild(this);
 				
 				this._nOriginalValue = Player($oObjectCollidedWith)[_sAttribute];
 				Player($oObjectCollidedWith)[_sAttribute] *= _nAmount;

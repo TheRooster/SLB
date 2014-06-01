@@ -161,7 +161,7 @@
 					for (var j:uint = 0; j < aObjectsOfCurrentType.length; j++)
 					{
 						oCurrentObject = aObjectsOfCurrentType[j];
-						if ($oObjectToTest.collisionTestObject.hitTestObject(oCurrentObject.collisionTestObject))
+						if (oCurrentObject != $oObjectToTest && $oObjectToTest.collisionTestObject.hitTestObject(oCurrentObject.collisionTestObject))
 						{
 							$oObjectToTest.collidedWith(oCurrentObject);
 						}
@@ -188,7 +188,7 @@
 					for (var j:uint = 0; j < aObjectsOfCurrentType.length; j++)
 					{
 						oCurrentObject = aObjectsOfCurrentType[j];
-						if ($oObjectToTest.collisionTestObject.hitTestObject(oCurrentObject.collisionTestObject))
+						if (oCurrentObject != $oObjectToTest && $oObjectToTest.collisionTestObject.hitTestObject(oCurrentObject.collisionTestObject))
 						{
 							return true;
 						}
