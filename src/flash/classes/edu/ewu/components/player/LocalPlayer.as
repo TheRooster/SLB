@@ -15,7 +15,8 @@
 	import edu.ewu.components.attacks.WendyBasicAttack;
 	import edu.ewu.components.attacks.WendyChargedAttack;
 	import edu.ewu.components.attacks.WendyRangedAttack;
-	import edu.ewu.components.Collectable;
+	import edu.ewu.components.collectables.Collectable;
+	import edu.ewu.components.collectables.Jalepeno;
 	import edu.ewu.components.Collideable;
 	import edu.ewu.components.CollisionManager;
 	import edu.ewu.networking.NetworkManager;
@@ -91,7 +92,7 @@
 			
 			//spawn a jalepeno to the screen
 			KeyboardManager.instance.addKeyDownListener(KeyCode.T, function() {
-				StageRef.stage.addChild(new Collectable("Jalepeno", false));
+				ScreenManager.instance.mcActiveScreen.addChild(new Jalepeno(false));
 			});
 			
 			//commit suicide

@@ -1,6 +1,7 @@
 ﻿package edu.ewu.networking
 {
 
+	import com.natejc.utils.StageRef;
 	import com.reyco1.multiuser.data.UserObject;
 	import edu.ewu.components.attacks.BurgerKingBasicAttack;
 	import edu.ewu.components.attacks.BurgerKingChargedAttack;
@@ -9,7 +10,8 @@
 	import edu.ewu.components.attacks.WendyBasicAttack;
 	import edu.ewu.components.attacks.WendyChargedAttack;
 	import edu.ewu.components.attacks.WendyRangedAttack;
-	import edu.ewu.components.Collectable;
+	import edu.ewu.components.collectables.Collectable;
+	import edu.ewu.components.collectables.Jalepeno;
 	import edu.ewu.ui.screens.ResultsScreen;
 	import edu.ewu.ui.screens.ScreenManager;
 
@@ -104,6 +106,8 @@
 		private var 			_wRangedAttack		:WendyRangedAttack;
 		
 		private var 			_wChargedAttack		:WendyChargedAttack;
+		
+		private var				_cJalepeno			:Jalepeno;
 
 		
 
@@ -454,9 +458,13 @@
 			
 			else if (dataObj.OPCODE == NetworkManager.OPCODE_COLLECTABLE)
 			{
-				var collectable:Collectable = new Collectable(dataObj.type, true);
+				var customCollectable:Class = getDefinitionByName(dataObj.type) as Class;
+				var collectable:* = new customCollectable(true);
+				
+				collectable.visible = true;
 				collectable.x = dataObj.x;
 				collectable.y = dataObj.y;
+				
 				NetworkManager.instance.collectableAddedSignal.dispatch(collectable);
 			}
 			else if (dataObj.OPCODE == NetworkManager.OPCODE_DISCONNECT)

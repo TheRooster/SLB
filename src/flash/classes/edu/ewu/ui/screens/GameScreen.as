@@ -2,7 +2,7 @@
 {
 	import com.greensock.TweenMax;
 	import edu.ewu.components.attacks.Attack;
-	import edu.ewu.components.Collectable;
+	import edu.ewu.components.collectables.Collectable;
 	import edu.ewu.components.player.Player;
 	import edu.ewu.components.player.LocalPlayer;
 	import flash.display.MovieClip;
