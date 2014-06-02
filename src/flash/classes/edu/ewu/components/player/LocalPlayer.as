@@ -79,6 +79,7 @@
 		public function LocalPlayer($pName:String, $charName:String) 
 		{
 			super($pName, $charName);
+			_bAlive = false;
 			KeyboardManager.instance.addKeyDownListener(KeyCode.W, wDownHandler);
 			KeyboardManager.instance.addKeyDownListener(KeyCode.A, aDownHandler);
 			KeyboardManager.instance.addKeyDownListener(KeyCode.S, sDownHandler);
@@ -129,64 +130,88 @@
 
 		private function wDownHandler():void 
 		{
-			this._up = true;
-			this.gotoAndPlaySprite("Walk_Enter");
+			if (_bAlive)
+			{
+				this._up = true;
+				this.gotoAndPlaySprite("Walk_Enter");
+			}
 		}
 
 		/* ---------------------------------------------------------------------------------------- */
 		
 		private function aDownHandler():void 
 		{
-			this._left = true;
-			this.gotoAndPlaySprite("Walk_Enter");
+			if (_bAlive)
+			{
+				this._left = true;
+				this.gotoAndPlaySprite("Walk_Enter");
+			}
 		}	
 
 		/* ---------------------------------------------------------------------------------------- */
 		
 		private function sDownHandler():void 
 		{
-			this._down = true;
-			this.gotoAndPlaySprite("Walk_Enter");
+			if (_bAlive)
+			{
+				this._down = true;
+				this.gotoAndPlaySprite("Walk_Enter");
+			}
 		}
 				
 		/* ---------------------------------------------------------------------------------------- */
 
 		private function dDownHandler():void 
 		{
-			this._right = true;
-			this.gotoAndPlaySprite("Walk_Enter");
+			if (_bAlive)
+			{
+				this._right = true;
+				this.gotoAndPlaySprite("Walk_Enter");
+			}
 		}
 				
 		/* ---------------------------------------------------------------------------------------- */
 		
 		private function wUpHandler():void 
 		{
-			this._up = false;
-			this.gotoAndPlaySprite("Walk_Exit");
+			if (_bAlive)
+			{
+				this._up = false;
+				this.gotoAndPlaySprite("Walk_Exit");
+			}
 		}
 
 		/* ---------------------------------------------------------------------------------------- */
 		
 		private function aUpHandler():void 
 		{
-			this._left = false;
-			this.gotoAndPlaySprite("Walk_Exit");
+			if (_bAlive)
+			{
+				this._left = false;
+				this.gotoAndPlaySprite("Walk_Exit");
+			}
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
 		
 		private function sUpHandler():void 
 		{
-			this._down = false;
-			this.gotoAndPlaySprite("Walk_Exit");
+			if (_bAlive)
+			{
+				this._down = false;
+				this.gotoAndPlaySprite("Walk_Exit");
+			}
 		}
 
 		/* ---------------------------------------------------------------------------------------- */
 		
 		private function dUpHandler():void 
 		{
-			this._right = false;
-			this.gotoAndPlaySprite("Walk_Exit");
+			if (_bAlive)
+			{
+				this._right = false;
+				this.gotoAndPlaySprite("Walk_Exit");
+			}
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -214,17 +239,23 @@
 		
 		private function spaceUpHandler():void
 		{
-			gotoAndPlaySprite("Idle");
-			TweenMax.killTweensOf(chargedAttackExecute);//stop the delayed call
-			this.stopChargeAnim();
+			if (_bAlive)
+			{
+				gotoAndPlaySprite("Idle");
+				TweenMax.killTweensOf(chargedAttackExecute);//stop the delayed call
+				this.stopChargeAnim();
+			}
 		}
 		
 		private function chargedAttackExecute()
 		{
-			gotoAndPlaySprite("Charged_Execute");
-			this.stopChargeAnim();
-			var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "ChargedAttack") as Class;
-			new customAttack(this, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation, this.nBaseForce, this.nBaseDamage);
+			if (_bAlive)
+			{
+				gotoAndPlaySprite("Charged_Execute");
+				this.stopChargeAnim();
+				var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "ChargedAttack") as Class;
+				new customAttack(this, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation, this.nBaseForce, this.nBaseDamage);
+			}
 		}
 
 		/* ---------------------------------------------------------------------------------------- */
@@ -270,20 +301,17 @@
 					this.y += this.nSpeed;
 				}
 				
-				if (this._bAlive)
+				var distanceX : Number = StageRef.stage.mouseX - this.x;
+				var distanceY : Number = StageRef.stage.mouseY - this.y;
+
+				var angleInRadians : Number = Math.atan2(distanceY, distanceX);
+				var angleInDegrees : Number = angleInRadians * (180 / Math.PI);
+
+				if (angleInDegrees < 0)
 				{
-					var distanceX : Number = StageRef.stage.mouseX - this.x;
-					var distanceY : Number = StageRef.stage.mouseY - this.y;
-
-					var angleInRadians : Number = Math.atan2(distanceY, distanceX);
-					var angleInDegrees : Number = angleInRadians * (180 / Math.PI);
-
-					if (angleInDegrees < 0)
-					{
-						angleInDegrees += 360;
-					}
-					this.SpriteRotation = angleInDegrees; 
+					angleInDegrees += 360;
 				}
+				this.SpriteRotation = angleInDegrees;
 				
 				if (_down || _left || _right || _up)
 				{
@@ -398,7 +426,10 @@
 			this._bAlive = false;
 			this.nLives--;
 			NetworkManager.instance.sendData(NetworkManager.OPCODE_DEATH, this);
-			
+			_left = false;
+			_right = false;
+			_up = false;
+			_down = false;
 			//keep track of who killed you.
 			if (sLastHitBy == NetworkManager.instance.players[0])
 				nP1Score++;
