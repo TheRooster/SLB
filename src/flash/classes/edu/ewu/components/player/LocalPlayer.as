@@ -499,17 +499,17 @@
 			hitTest.addCollidesWithType(CollisionManager.TYPE_PIT);
 			hitTest.addCollidesWithType(CollisionManager.TYPE_PLAYER);
 			
-			var randX:Number = Math.floor(Math.random() * StageRef.stage.stageWidth);
-			var randY:Number = Math.floor(Math.random() * StageRef.stage.stageHeight);
-			hitTest.x = randX;
-			hitTest.y = randY;
+			var randX:Number = Math.floor(Math.random() * (StageRef.stage.stageWidth + (this.mcHitTest.width * 0.5)));
+			var randY:Number = Math.floor(Math.random() * (StageRef.stage.stageHeight + + (this.mcHitTest.height * 0.5)));
+			hitTest.x = randX - 25;
+			hitTest.y = randY - 25;
 			
 			while(CollisionManager.instance.doesObjectCollide(hitTest))
 			{
-				randX = Math.floor(Math.random() * StageRef.stage.stageWidth);
-				randY = Math.floor(Math.random() * StageRef.stage.stageHeight);
-				hitTest.x = randX;
-				hitTest.y = randY;
+				randX = Math.floor(Math.random() * (StageRef.stage.stageWidth + (this.mcHitTest.width * 0.5)));
+				randY = Math.floor(Math.random() * (StageRef.stage.stageHeight + (this.mcHitTest.height * 0.5)));
+				hitTest.x = randX - 25;
+				hitTest.y = randY - 25;
 			}
 			
 			hitTest = null;
