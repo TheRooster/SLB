@@ -86,6 +86,7 @@ package edu.ewu.ui.screens
 			_btRon.clickedSignal.add(changeCharacterToRon);
 			_btBK.clickedSignal.add(changeCharacterToBK);
 			_btWendy.clickedSignal.add(changeCharacterToWendy);
+			_btJack.clickedSignal.add(changeCharacterToJack);
 			_btTrayMap.clickedSignal.add(changeMapToTray);
 			_btIslandMap.clickedSignal.add(changeMapToIsland);
 			
@@ -116,6 +117,13 @@ package edu.ewu.ui.screens
 			this.character = "Wendy";
 			fadeCharacters();
 			this._btWendy.alpha = 1;
+		}
+		
+		public function changeCharacterToJack():void
+		{
+			this.character = "Jack";
+			fadeCharacters();
+			this._btJack.alpha = 1;
 		}
 		
 		public function fadeCharacters():void
