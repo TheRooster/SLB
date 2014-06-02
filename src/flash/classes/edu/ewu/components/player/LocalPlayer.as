@@ -67,7 +67,7 @@
 		public var nP3Score:int = 0;
 		public var nP4Score:int = 0;
 		
-		
+		public var invulnerable:Boolean;
 		
 
 
@@ -123,6 +123,7 @@
 			StageRef.stage.addEventListener(MouseEvent.CLICK, mouseClickHandler);
 			this.respawn();
 			_bAlive = false;
+			this.invulnerable = false;
 		}
 
 		/* ---------------------------------------------------------------------------------------- */
@@ -364,18 +365,29 @@
 
 			else if ($oObjectCollidedWith.sCollisionType == CollisionManager.TYPE_ATTACK)
 			{
-				var attack:Attack = $oObjectCollidedWith as Attack;
-				//stop the charging
-				this.stopChargeAnim();
-				TweenMax.killTweensOf(chargedAttackExecute);
-				attack.apply(this);
+				if (this.invulnerable == false)
+				{
+					var attack:Attack = $oObjectCollidedWith as Attack;
+					//stop the charging
+					this.stopChargeAnim();
+					TweenMax.killTweensOf(chargedAttackExecute);
+					attack.apply(this);
+				}
 			}
 
 			else if ($oObjectCollidedWith.sCollisionType == CollisionManager.TYPE_PIT)
 			{
 				if (this._bAlive)
 				{
-					this.defeated();
+					if (this.invulnerable == false)
+					{
+						this.defeated();
+					}
+					else
+					{
+						this.x = this._nLastX;
+						this.y = this._nLastY;
+					}
 				}
 			}
 		}
@@ -451,8 +463,14 @@
 		
 		public function respawn():void
 		{
-			//TODO: Add invulnerability timer
-
+			this.invulnerable = true;
+			var onComplete:Function = function(player:LocalPlayer):void 
+			{ 
+				TweenMax.to(player, 0, { tint:null } ); 
+				player.invulnerable = false; 
+			}
+			TweenMax.to(this, 0.1, { tint:0xFFFFFF, repeat: 10, yoyo:true, repeatDelay:0, onComplete:onComplete, onCompleteParams:[this] } );
+			
 			var hitTest:Collideable = new PlayerHitTest();
 			hitTest.addCollidesWithType(CollisionManager.TYPE_PIT);
 			hitTest.addCollidesWithType(CollisionManager.TYPE_PLAYER);
@@ -474,9 +492,9 @@
 			
 			this.x = randX;
 			this.y = randY;
+			this._nLastX = this.x;
+			this._nLastY = this.y;
 
-			this._bAlive = true;
-			
 			this.scaleX = 1;
 			this.scaleY = 1;
 			
@@ -484,6 +502,8 @@
 			
 			this.sLastHitBy = "";
 			this.gotoAndPlaySprite("Idle");
+			
+			this._bAlive = true;
 		}
 		
 		public function getHealth():int

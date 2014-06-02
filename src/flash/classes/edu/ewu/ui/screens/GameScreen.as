@@ -1,6 +1,7 @@
 ﻿package edu.ewu.ui.screens
 {
 	import com.greensock.TweenMax;
+	import edu.ewu.components.attacks.Attack;
 	import edu.ewu.components.Collectable;
 	import edu.ewu.components.player.Player;
 	import edu.ewu.components.player.LocalPlayer;
@@ -234,6 +235,16 @@
 			this.p3 = null;
 			this.p4 = null;
 			this.me = null;
+			
+			for (var i:int = 0; i < this.numChildren; i++)
+			{
+				var child:* = this.getChildAt(i);
+				if (child is Player || child is Collectable || child is Attack)
+				{
+					this.removeChild(child);
+				}
+			}
+			
 			super.end();
 		}
 		
