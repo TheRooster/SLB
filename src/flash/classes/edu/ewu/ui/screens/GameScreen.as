@@ -223,6 +223,11 @@
 			NetworkManager.instance.playerJoinedSignal.removeAll();
 			NetworkManager.instance.playerRemovedSignal.removeAll();
 			NetworkManager.instance.collectableAddedSignal.removeAll();
+			this.p1 = null;
+			this.p2 = null;
+			this.p3 = null;
+			this.p4 = null;
+			this.me = null;
 			super.end();
 		}
 		
