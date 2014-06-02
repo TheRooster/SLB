@@ -70,6 +70,20 @@
 		/* ---------------------------------------------------------------------------------------- */
 		
 		/**
+		 * Tests whether a sound already exists in the sound manager
+		 *
+		 * @param	$sSound		The Sound to be checked.
+		 * @return  boolean		whether or not the sound exists
+		 * 
+		 */
+		public function exists($sName:String):boolean
+		{
+			return _dSound[$sName] != null;
+		}
+		
+		/* ---------------------------------------------------------------------------------------- */
+		
+		/**
 		 * Add Sound to SoundManager overwriting Sound if one with the same $name is found.
 		 *
 		 * @param	$oNewSound	The Sound to be added.
