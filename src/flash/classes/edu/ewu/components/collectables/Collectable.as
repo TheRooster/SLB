@@ -17,9 +17,6 @@
 	import flash.display.Sprite;
 	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.ui.screens.ScreenManager;
-	import flash.events.Event;
-	import flash.media.Sound;
-	import flash.net.URLRequest;
 	/**
 	 * ...
 	 * @author Jon Roster
@@ -87,23 +84,7 @@
 			this._nAmount = Number(stats.amount);
 			this._iDuration = Number(stats.duration);
 			this._sSound = stats.sound;
-			
-			if (!SoundManager.instance.exists(this._sSound))
-			{
-			
-				var s:Sound = new Sound(); 
-				s.addEventListener(Event.COMPLETE, onSoundLoaded); 
-				var req:URLRequest = new URLRequest("bigSound.mp3"); 
-				s.load(req);
-			}
 		}
-		
-		public function onSoundLoaded(e:Event)
-		{
-			SoundManager.instance.add(this._sSound, e.target as Sound); 
-		}
-		
-		
 		
 		public function initSprite(e:LoaderEvent)
 		{
