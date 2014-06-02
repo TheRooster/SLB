@@ -491,6 +491,7 @@
 			TweenMax.to(this, 0.1, { tint:0xFFFFFF, repeat: 10, yoyo:true, repeatDelay:0, onComplete:onComplete, onCompleteParams:[this] } );
 			
 			var hitTest:Collideable = new PlayerHitTest();
+			hitTest.addCollidesWithType(CollisionManager.TYPE_WALL);
 			hitTest.addCollidesWithType(CollisionManager.TYPE_PIT);
 			hitTest.addCollidesWithType(CollisionManager.TYPE_PLAYER);
 			
