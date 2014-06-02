@@ -121,9 +121,13 @@
 			//trigger the animations
 			KeyboardManager.instance.addKeyDownListener(KeyCode.E, eDownHandler);
 			StageRef.stage.addEventListener(MouseEvent.CLICK, mouseClickHandler);
-			this.respawn();
+			
 			_bAlive = false;
 			this.invulnerable = false;
+			
+			//Try moving off top left of screen until initial spawn, doesn't always work.
+			this.x = -50;
+			this.y = -50;
 		}
 
 		/* ---------------------------------------------------------------------------------------- */

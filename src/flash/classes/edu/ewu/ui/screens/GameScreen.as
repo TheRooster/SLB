@@ -129,8 +129,6 @@
 			ScreenManager.instance.mcActiveScreen.addChild(me);
 			
 			p1 = me;
-			me.x = stage.stageWidth * 0.5;
-			me.y = stage.stageHeight * 0.5;
 			txtLocal.text = playerName;
 			this.begin();
 		}
@@ -325,7 +323,7 @@
 		public function start():void
 		{
 			this.bPlaying = true;
-			me.alive = true;
+			me.respawn();
 		}
 	}
 }
