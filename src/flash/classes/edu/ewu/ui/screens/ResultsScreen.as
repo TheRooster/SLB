@@ -78,6 +78,12 @@ package edu.ewu.ui.screens
 			}
 		}
 		
+		public function setFullServerMessage():void
+		{
+			txtKOs.text = "Server was full";
+			txtKOd.text = "";
+		}
+		
 		/* ---------------------------------------------------------------------------------------- */
 		
 		private function toLobby():void 

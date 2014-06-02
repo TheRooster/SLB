@@ -10,6 +10,8 @@
 	import edu.ewu.components.attacks.WendyChargedAttack;
 	import edu.ewu.components.attacks.WendyRangedAttack;
 	import edu.ewu.components.Collectable;
+	import edu.ewu.ui.screens.ResultsScreen;
+	import edu.ewu.ui.screens.ScreenManager;
 
 	import com.reyco1.multiuser.MultiUserSession;
 
@@ -74,6 +76,10 @@
 		/** String for collectable OPCODE. */
 
 		public static const		OPCODE_COLLECTABLE	:String = "OPCODE_COLLECTABLE";
+		
+		/** String for disconnect OPCODE. */
+
+		public static const		OPCODE_DISCONNECT	:String = "OPCODE_DISCONNECT";
 
 		
 
@@ -453,6 +459,14 @@
 				collectable.y = dataObj.y;
 				NetworkManager.instance.collectableAddedSignal.dispatch(collectable);
 			}
+			else if (dataObj.OPCODE == NetworkManager.OPCODE_DISCONNECT)
+			{
+				if (dataObj.name == (_connection.myUser as UserObject).name)
+				{
+					ScreenManager.instance.mcActiveScreen.end();
+					(ScreenManager.instance.getScreen("Results") as ResultsScreen).setFullServerMessage();
+				}
+			}
 		}
 
 		
@@ -534,6 +548,10 @@
 					else if ($sOPCODE == NetworkManager.OPCODE_COLLECTABLE)
 					{
 						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_COLLECTABLE, type:$oObject.type, x:$oObject.x, y:$oObject.y } );
+					}
+					else if ($sOPCODE == NetworkManager.OPCODE_DISCONNECT)
+					{
+						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_DISCONNECT, name:$oObject.PlayerName } );
 					}
 
 				}

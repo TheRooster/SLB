@@ -144,6 +144,11 @@
 		 */
 		protected function playerAdded($oPlayer:Player):void
 		{
+			if (this.bPlaying)
+			{
+				NetworkManager.instance.sendData(NetworkManager.OPCODE_DISCONNECT, $oPlayer);
+			}
+			
 			this.currentPlayerCount++;
 			
 			if (this.currentPlayerCount > this.maxPlayerCount)
@@ -223,6 +228,7 @@
 			NetworkManager.instance.playerJoinedSignal.removeAll();
 			NetworkManager.instance.playerRemovedSignal.removeAll();
 			NetworkManager.instance.collectableAddedSignal.removeAll();
+			NetworkManager.instance.disconnect();
 			this.p1 = null;
 			this.p2 = null;
 			this.p3 = null;
@@ -251,7 +257,7 @@
 				if(p4!=null)
 					txtP4Health.text = p4.nHealth + "%";
 					
-				if (this.maxPlayerCount == 4)
+				if (this.maxPlayerCount >= 4)
 				{
 					var stillHasLivesCount:uint = 0;
 					var stillAliveCount:uint = 0;
@@ -271,7 +277,6 @@
 					if (stillAliveCount <= 1 && stillHasLivesCount <= 1)
 					{
 						ScreenManager.instance.getScreen("Results").setKOs(this.me.kills, this.me.nLives);
-						NetworkManager.instance.disconnect();
 						this.end();
 					}
 				}
