@@ -118,7 +118,6 @@
 			super.init(e);
 			//need to have these here so that we're sure the sprite is loaded before we try to 
 			//trigger the animations
-			StageRef.stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
 			KeyboardManager.instance.addKeyDownListener(KeyCode.E, eDownHandler);
 			StageRef.stage.addEventListener(MouseEvent.CLICK, mouseClickHandler);
 			this.respawn();
@@ -271,6 +270,21 @@
 					this.y += this.nSpeed;
 				}
 				
+				if (this._bAlive)
+				{
+					var distanceX : Number = StageRef.stage.mouseX - this.x;
+					var distanceY : Number = StageRef.stage.mouseY - this.y;
+
+					var angleInRadians : Number = Math.atan2(distanceY, distanceX);
+					var angleInDegrees : Number = angleInRadians * (180 / Math.PI);
+
+					if (angleInDegrees < 0)
+					{
+						angleInDegrees += 360;
+					}
+					this.SpriteRotation = angleInDegrees; 
+				}
+				
 				if (_down || _left || _right || _up)
 				{
 					NetworkManager.instance.sendData(NetworkManager.OPCODE_MOVED, this);
@@ -288,32 +302,6 @@
 		protected function heartbeat($e:TimerEvent = null):void
 		{
 			NetworkManager.instance.sendData(NetworkManager.OPCODE_HEARTBEAT, this);
-		}
-
-		/* ---------------------------------------------------------------------------------------- */
-		
-		/**
-		 * @private
-		 * Rotate player to face mouse.
-		 * 
-		 * @param	$e		The dispatched MouseEvent.
-		 */
-		protected function mouseMoveHandler($e:MouseEvent = null):void
-		{
-			if (this._bAlive)
-			{
-				var distanceX : Number = $e.stageX - this.x;
-				var distanceY : Number = $e.stageY - this.y;
-
-				var angleInRadians : Number = Math.atan2(distanceY, distanceX);
-				var angleInDegrees : Number = angleInRadians * (180 / Math.PI);
-
-				if (angleInDegrees < 0)
-				{
-					angleInDegrees += 360;
-				}
-				this.SpriteRotation = angleInDegrees; 
-			}
 		}
 
 		/* ---------------------------------------------------------------------------------------- */
