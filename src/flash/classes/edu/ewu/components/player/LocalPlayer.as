@@ -437,10 +437,10 @@
 				//}
 				//if (aliveCount == 1 && NetworkManager.instance.userCount() > 1 && hasLivesCount == 1)
 				//{
-					trace("All Dead");
-					ScreenManager.instance.getScreen("Results").setKOs(this.kills, this.nLives);
-					NetworkManager.instance.disconnect();
-					TweenMax.delayedCall(4, ScreenManager.instance.mcActiveScreen.end);
+					//trace("All Dead");
+					//ScreenManager.instance.getScreen("Results").setKOs(this.kills, this.nLives);
+					//NetworkManager.instance.disconnect();
+					//TweenMax.delayedCall(4, ScreenManager.instance.mcActiveScreen.end);
 				//}
 			}
 			else

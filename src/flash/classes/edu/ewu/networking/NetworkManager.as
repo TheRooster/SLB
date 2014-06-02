@@ -221,8 +221,10 @@
 
 			var oRemovedPlayer:Player = this._dPlayers[$sName];
 
-			this._dPlayers[$sName] = null;
+			_dPlayers[$sName] = null;
 
+			delete _dPlayers[$sName];
+			
 			return oRemovedPlayer;
 
 		}

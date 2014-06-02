@@ -76,6 +76,7 @@ package edu.ewu.components.player
 			
 			super();
 			this._bAlive = true;
+			this.nLives = 3;
 			
 			this.weight = 1;
 			this._nChargeDelay = 2;

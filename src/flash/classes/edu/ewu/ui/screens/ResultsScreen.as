@@ -54,7 +54,6 @@ package edu.ewu.ui.screens
 			//var gameScreen:GameScreen = new GameScreen();
 			//ScreenManager.instance.getScreen("Game") = AbstractScreen(gameScreen);
 			
-			MusicManager.instance.crossSwitchMusic("Defeat");
 			_btLobby.clickedSignal.addOnce(toLobby);
 			_btCredits.clickedSignal.addOnce(toCredits);
 			//txtKOs.text = NetworkManager.instance.players
@@ -65,9 +64,18 @@ package edu.ewu.ui.screens
 		
 		override public function setKOs(kills:int, nLives:int):void
 		{
-			txtKOs.text = "You got " + kills + " KOs!";
-			deaths = 3 - nLives;
-				txtKOd.text = "You got KO'd " + deaths + " times!";
+			txtKOs.text = "You got " + kills.toString() + " KOs!";
+			var deaths:int = 3 - nLives;
+			txtKOd.text = "You got KO'd " + deaths.toString() + " times!";
+			
+			if (kills > deaths)
+			{
+				MusicManager.instance.crossSwitchMusic("Victory");
+			}
+			else
+			{
+				MusicManager.instance.crossSwitchMusic("Defeat");
+			}
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */

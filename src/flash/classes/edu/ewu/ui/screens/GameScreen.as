@@ -55,6 +55,9 @@
 		public var p3;
 		public var p4;
 		
+		public var maxPlayerCount:uint;
+		public var currentPlayerCount:uint;
+		
 		private const SERVER:String = "rtmfp://p2p.rtmfp.net/";
 		
 		private var sessionName:String = "SimpleDemoGroup";
@@ -81,13 +84,16 @@
 		 */
 		override public function begin():void
 		{
+			this.maxPlayerCount = 1;
+			this.currentPlayerCount = 1;
+			
 			this.addEventListener(Event.ENTER_FRAME, this.enterFrameHandler);
 			NetworkManager.instance.playerJoinedSignal.add(playerAdded);
 			NetworkManager.instance.playerRemovedSignal.add(playerRemoved);
 			NetworkManager.instance.collectableAddedSignal.add(collectableAdded);
 			MusicManager.instance.crossSwitchMusic("Game");
 			
-			this.bPlaying = true;
+			this.bPlaying = false;
 			CollisionManager.instance.begin();
 			super.begin();
 		}
@@ -138,6 +144,13 @@
 		 */
 		protected function playerAdded($oPlayer:Player):void
 		{
+			this.currentPlayerCount++;
+			
+			if (this.currentPlayerCount > this.maxPlayerCount)
+			{
+				this.maxPlayerCount = this.currentPlayerCount;
+			}
+			
 			this.addChild($oPlayer);
 			if (p2 == null)
 			{
@@ -167,7 +180,31 @@
 		 */
 		protected function playerRemoved($oPlayer:Player):void
 		{
+			this.currentPlayerCount--;
+			
 			this.removeChild($oPlayer);
+			
+			if (this.p2 == $oPlayer)
+			{
+				this.txtp2.text = "";
+				this.txtP2Health.text = "";
+				this.txtp2Lives.text = "";
+				this.p2 = null;
+			}
+			else if (this.p3 == $oPlayer)
+			{
+				this.txtp3.text = "";
+				this.txtP3Health.text = "";
+				this.txtp3Lives.text = "";
+				this.p3 = null;
+			}
+			else if (this.p4 == $oPlayer)
+			{
+				this.txtp4.text = "";
+				this.txtP4Health.text = "";
+				this.txtp4Lives.text = "";
+				this.p3 = null;
+			}
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
@@ -182,7 +219,7 @@
 			CollisionManager.instance.end();
 			ScreenManager.instance.crossSwitchScreen("Results");
 			ScreenManager.instance.mcActiveScreen.begin();
-			//ScreenManager.instance.mcActiveScreen.setKOs(p1.kills, p1.nLives);
+			//ScreenManager.instance.mcActiveScreen.setKOs(this.me.kills, this.me.nLives);
 			NetworkManager.instance.playerJoinedSignal.removeAll();
 			NetworkManager.instance.playerRemovedSignal.removeAll();
 			NetworkManager.instance.collectableAddedSignal.removeAll();
@@ -208,13 +245,37 @@
 					txtP3Health.text = p3.nHealth + "%";
 				if(p4!=null)
 					txtP4Health.text = p4.nHealth + "%";
+					
+				if (this.maxPlayerCount == 4)
+				{
+					var stillHasLivesCount:uint = 0;
+					var stillAliveCount:uint = 0;
+					
+					for each (var player:Player in NetworkManager.instance.players)
+					{
+						if (player.alive)
+						{
+							stillAliveCount++;
+						}
+						if (player.nLives > 0)
+						{
+							stillHasLivesCount++;
+						}
+					}
+					
+					if (stillAliveCount <= 1 && stillHasLivesCount <= 1)
+					{
+						ScreenManager.instance.getScreen("Results").setKOs(this.me.kills, this.me.nLives);
+						NetworkManager.instance.disconnect();
+						this.end();
+					}
+				}
 			}
 		}
 		
 		public function updateLives():void
 		{
 			txtLocalLives.text = makePeriods(p1.getLives());
-			
 			
 			if(p2!=null)
 				txtp2Lives.text = makePeriods(p2.nLives);
@@ -242,6 +303,7 @@
 		
 		public function start():void
 		{
+			this.bPlaying = true;
 			me.alive = true;
 		}
 	}
