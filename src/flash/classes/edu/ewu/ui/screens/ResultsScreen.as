@@ -27,8 +27,6 @@ package edu.ewu.ui.screens
 		public var			_btLobby				:BackButton;
 		/** Reference to the Credits button */
 		public var			_btCredits				:CreditsButton;	
-		/** Reference to the Credits button */
-		public var			_btQuit					:QuitButton;
 		
 		var deaths:int = 0;
 		/* ---------------------------------------------------------------------------------------- */
@@ -59,7 +57,6 @@ package edu.ewu.ui.screens
 			MusicManager.instance.crossSwitchMusic("Defeat");
 			_btLobby.clickedSignal.addOnce(toLobby);
 			_btCredits.clickedSignal.addOnce(toCredits);
-			_btQuit.clickedSignal.addOnce(toPreloader);
 			//txtKOs.text = NetworkManager.instance.players
 			
 			//NetworkManager.instance.disconnect();
@@ -85,12 +82,6 @@ package edu.ewu.ui.screens
 		private function toCredits():void 
 		{	
 			ScreenManager.instance.crossSwitchScreen("Credits");
-			ScreenManager.instance.mcActiveScreen.begin();
-		}
-		
-		private function toPreloader():void 
-		{	
-			ScreenManager.instance.crossSwitchScreen("Loading");
 			ScreenManager.instance.mcActiveScreen.begin();
 		}
 	}
