@@ -2,7 +2,9 @@
 {
 	import com.greensock.TweenMax;
 	import edu.ewu.components.attacks.Attack;
+	import edu.ewu.components.collectables.Burger;
 	import edu.ewu.components.collectables.Collectable;
+	import edu.ewu.components.collectables.Soda;
 	import edu.ewu.components.player.Player;
 	import edu.ewu.components.player.LocalPlayer;
 	import flash.display.MovieClip;
@@ -83,7 +85,7 @@
 		public function GameScreen()
 		{
 			this.bPlaying 		= false;
-			_collectableSpawnTimer = new Timer(Math.random() * 15000 + 5000);
+			_collectableSpawnTimer = new Timer(Math.random() * 60000 + 5000);
 			super();
 		}
 		
@@ -145,9 +147,12 @@
 				if(random < .333)
 					addChild(new Jalepeno());
 				else if (random > .333 && random < .666)
-					addChild(new Jalepeno());
+					addChild(new Burger());
 				else if (random > .666)
-					addChild(new Jalepeno());
+					addChild(new Soda());
+				_collectableSpawnTimer.stop();
+				_collectableSpawnTimer = new Timer(Math.random() * 60000 + 5000);
+				_collectableSpawnTimer.start();
 			}
 		}
 		
