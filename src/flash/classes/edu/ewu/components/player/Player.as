@@ -90,8 +90,8 @@ package edu.ewu.components.player
 			_namePlate = new TextField();
 			_namePlate.defaultTextFormat = fmt;
 			_namePlate.text = $pName.substr(0, 30); //max 30 character names
-			_namePlate.x = this.width / 2 - _namePlate.textWidth * .5;
-			_namePlate.y = -_namePlate.textHeight - 20;
+			_namePlate.x = -(_namePlate.textWidth / 2);
+			_namePlate.y = -_namePlate.textHeight - 40;
 			_namePlate.selectable = false;
 			
 			this.addChild(_namePlate);
