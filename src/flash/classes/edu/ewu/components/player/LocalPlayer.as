@@ -15,8 +15,10 @@
 	import edu.ewu.components.attacks.WendyBasicAttack;
 	import edu.ewu.components.attacks.WendyChargedAttack;
 	import edu.ewu.components.attacks.WendyRangedAttack;
+	import edu.ewu.components.collectables.Burger;
 	import edu.ewu.components.collectables.Collectable;
 	import edu.ewu.components.collectables.Jalepeno;
+	import edu.ewu.components.collectables.Soda;
 	import edu.ewu.components.Collideable;
 	import edu.ewu.components.CollisionManager;
 	import edu.ewu.networking.NetworkManager;
@@ -92,7 +94,7 @@
 			
 			//spawn a jalepeno to the screen
 			KeyboardManager.instance.addKeyDownListener(KeyCode.T, function() {
-				ScreenManager.instance.mcActiveScreen.addChild(new Jalepeno());
+				ScreenManager.instance.mcActiveScreen.addChild(new Soda());
 			});
 			
 			//commit suicide

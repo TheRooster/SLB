@@ -13,12 +13,12 @@ package edu.ewu.components.collectables
 	 * ...
 	 * @author Jon Roster
 	 */
-	public class Jalepeno extends Collectable
+	public class Soda extends Collectable
 	{
-		public function Jalepeno($gId:String="", $bNetwork=false)
+		public function Soda($gId:String="", $bNetwork=false)
 		{
-			_classPath = "edu.ewu.components.collectables.Jalepeno";
-			super($gId,"Jalepeno", $bNetwork);
+			_classPath = "edu.ewu.components.collectables.Soda";
+			super($gId,"Soda", $bNetwork);
 		}
 		
 	
@@ -31,7 +31,7 @@ package edu.ewu.components.collectables
 					
 				this._nOriginalValue = Player($oObjectCollidedWith)[_sAttribute];
 				Player($oObjectCollidedWith)[_sAttribute] *= _nAmount;
-				TweenMax.to($oObjectCollidedWith, .1, {glowFilter:{color:0x00FF00, alpha:1, blurX:30, blurY:30, repeat:-1, yoyo:true}});
+				TweenMax.to($oObjectCollidedWith, .1, {glowFilter:{color:0xFF0000, alpha:1, blurX:30, blurY:30, repeat:-1, yoyo:true}});
 				SoundManager.instance.playSound(this._sSound, true);
 					
 				TweenMax.delayedCall(this._iDuration, onComplete, [$oObjectCollidedWith]);
@@ -39,7 +39,7 @@ package edu.ewu.components.collectables
 			}
 			else if ($oObjectCollidedWith is NetworkPlayer )
 			{
-				TweenMax.to($oObjectCollidedWith, .01, {glowFilter:{color:0x00FF00, alpha:1, blurX:30, blurY:30, repeat:-1}});
+				TweenMax.to($oObjectCollidedWith, .01, {glowFilter:{color:0xFF0000, alpha:1, blurX:30, blurY:30, repeat:-1}});
 				CollisionManager.instance.remove(this);
 				ScreenManager.instance.mcActiveScreen.removeChild(this);
 				NetworkManager.instance.removeCollectable(this);
