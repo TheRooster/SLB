@@ -182,7 +182,10 @@
 			if (_bAlive)
 			{
 				this._up = false;
-				this.gotoAndPlaySprite("Walk_Exit");
+				if (_left == false && _right == false && _down == false)
+				{
+					this.gotoAndPlaySprite("Walk_Exit");
+				}
 			}
 		}
 
@@ -193,7 +196,10 @@
 			if (_bAlive)
 			{
 				this._left = false;
-				this.gotoAndPlaySprite("Walk_Exit");
+				if (_up == false && _right == false && _down == false)
+				{
+					this.gotoAndPlaySprite("Walk_Exit");
+				}
 			}
 		}
 		
@@ -204,7 +210,10 @@
 			if (_bAlive)
 			{
 				this._down = false;
-				this.gotoAndPlaySprite("Walk_Exit");
+				if (_left == false && _right == false && _up == false)
+				{
+					this.gotoAndPlaySprite("Walk_Exit");
+				}
 			}
 		}
 
@@ -215,7 +224,10 @@
 			if (_bAlive)
 			{
 				this._right = false;
-				this.gotoAndPlaySprite("Walk_Exit");
+				if (_left == false && _up == false && _down == false)
+				{
+					this.gotoAndPlaySprite("Walk_Exit");
+				}
 			}
 		}
 		
