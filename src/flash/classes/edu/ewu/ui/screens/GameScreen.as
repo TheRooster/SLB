@@ -15,6 +15,9 @@
 	import com.greensock.events.LoaderEvent;
 	import com.greensock.loading.LoaderMax;
 	import com.greensock.loading.XMLLoader;
+	import edu.ewu.components.collectables.Collectable;
+	import edu.ewu.components.collectables.Jalepeno;
+	import flash.utils.Timer;
 	
 	/**
 	 * Drives the GameScreen class.
@@ -96,6 +99,13 @@
 			
 			this.bPlaying = false;
 			CollisionManager.instance.begin();
+			
+			
+			
+			//var myTimer:Timer = new Timer(Math.random() * 15000 + 5000, 120);
+            //myTimer.addEventListener("timer", spawnItem);
+            //myTimer.start();
+			
 			super.begin();
 		}
 		
@@ -114,8 +124,18 @@
 			//player will now be created in GameScreen.
 			//var me:LocalPlayer = new LocalPlayer(name, "BurgerKing");
 			me = new LocalPlayer(playerName, character);
+		}
+		
+		private function spawnItem($e:Event = null):void
+		{
+			var random:Number = Math.random() * 1;
 			
-			
+			if(random < .333)
+				addChild(new Jalepeno(false));
+			else if (random > .333 && random < .666)
+				addChild(new Jalepeno(false));
+			else if (random > .666)
+				addChild(new Jalepeno(false));
 		}
 		
 		
