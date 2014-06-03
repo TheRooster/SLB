@@ -19,6 +19,8 @@
 	import edu.ewu.components.collectables.Collectable;
 	import edu.ewu.components.collectables.Jalepeno;
 	import flash.utils.Timer;
+	import com.natejc.input.KeyboardManager;
+	import com.natejc.input.KeyCode;
 	
 	/**
 	 * Drives the GameScreen class.
@@ -95,6 +97,7 @@
 			this.maxPlayerCount = 1;
 			this.currentPlayerCount = 1;
 			
+			KeyboardManager.instance.addKeyDownListener(KeyCode.ESC, escKeyDownHandler);
 			this.addEventListener(Event.ENTER_FRAME, this.enterFrameHandler);
 			NetworkManager.instance.playerJoinedSignal.add(playerAdded);
 			NetworkManager.instance.playerRemovedSignal.add(playerRemoved);
@@ -108,6 +111,12 @@
             _collectableSpawnTimer.start();
 			
 			super.begin();
+		}
+		
+		private function escKeyDownHandler():void
+		{
+			ScreenManager.instance.getScreen("Results").setKOs(this.me.kills, this.me.nLives);
+			this.end();
 		}
 		
 		
@@ -269,6 +278,8 @@
 			
 			_collectableSpawnTimer.removeEventListener(TimerEvent.TIMER, spawnItem);
 			_collectableSpawnTimer.stop();
+			
+			KeyboardManager.instance.removeKeyDownListener(KeyCode.ESC, escKeyDownHandler);
 			
 			super.end();
 		}
