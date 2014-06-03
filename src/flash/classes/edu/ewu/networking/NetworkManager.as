@@ -34,6 +34,7 @@
 	import edu.ewu.sounds.SoundManager;
 
 	import flash.utils.getDefinitionByName;
+	
 
 	
 
@@ -111,7 +112,7 @@
 
 		
 
-		
+		protected var		_dCollectables			:Dictionary		= new Dictionary();
 
 		/** Stores a reference to the singleton instance. */  
 
@@ -458,14 +459,20 @@
 			
 			else if (dataObj.OPCODE == NetworkManager.OPCODE_COLLECTABLE)
 			{
-				var customCollectable:Class = getDefinitionByName(dataObj.type) as Class;
-				var collectable:* = new customCollectable(true);
 				
-				collectable.visible = true;
-				collectable.x = dataObj.x;
-				collectable.y = dataObj.y;
-				
-				NetworkManager.instance.collectableAddedSignal.dispatch(collectable);
+				if (_dCollectables[dataObj.id] == null)
+				{
+					var customCollectable:Class = getDefinitionByName(dataObj.type) as Class;
+					var collectable:* = new customCollectable(dataObj.id, true);
+					
+					collectable.visible = true;
+					collectable.x = dataObj.x;
+					collectable.y = dataObj.y;
+					
+					_dCollectables[dataObj.id] = collectable;
+					
+					NetworkManager.instance.collectableAddedSignal.dispatch(collectable);
+				}
 			}
 			else if (dataObj.OPCODE == NetworkManager.OPCODE_DISCONNECT)
 			{
@@ -555,7 +562,7 @@
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_COLLECTABLE)
 					{
-						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_COLLECTABLE, type:$oObject.type, x:$oObject.x, y:$oObject.y } );
+						_connection.sendObject( { OPCODE:NetworkManager.OPCODE_COLLECTABLE, id:$oObject.id, type:$oObject.classPath, x:$oObject.x, y:$oObject.y } );
 					}
 					else if ($sOPCODE == NetworkManager.OPCODE_DISCONNECT)
 					{
@@ -644,6 +651,12 @@
 				result = _connection.userCount;
 			}
 			return result;
+		}
+		
+		public function removeCollectable(collectable:Collectable):void
+		{
+			_dCollectables[collectable.id] = null;
+			delete _dCollectables[collectable.id];
 		}
 		
 	}

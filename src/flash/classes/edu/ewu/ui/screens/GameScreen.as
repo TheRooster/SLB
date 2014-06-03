@@ -7,6 +7,7 @@
 	import edu.ewu.components.player.LocalPlayer;
 	import flash.display.MovieClip;
 	import flash.events.Event;
+	import flash.events.TimerEvent;
 	import flash.text.TextField;
 	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.sounds.MusicManager;
@@ -62,6 +63,8 @@
 		public var maxPlayerCount:uint;
 		public var currentPlayerCount:uint;
 		
+		private var _collectableSpawnTimer:Timer;
+		
 		private const SERVER:String = "rtmfp://p2p.rtmfp.net/";
 		
 		private var sessionName:String = "SimpleDemoGroup";
@@ -78,6 +81,7 @@
 		public function GameScreen()
 		{
 			this.bPlaying 		= false;
+			_collectableSpawnTimer = new Timer(Math.random() * 15000 + 5000);
 			super();
 		}
 		
@@ -100,11 +104,8 @@
 			this.bPlaying = false;
 			CollisionManager.instance.begin();
 			
-			
-			
-			//var myTimer:Timer = new Timer(Math.random() * 15000 + 5000, 120);
-            //myTimer.addEventListener("timer", spawnItem);
-            //myTimer.start();
+            _collectableSpawnTimer.addEventListener(TimerEvent.TIMER, spawnItem);
+            _collectableSpawnTimer.start();
 			
 			super.begin();
 		}
@@ -128,14 +129,17 @@
 		
 		private function spawnItem($e:Event = null):void
 		{
-			var random:Number = Math.random() * 1;
-			
-			if(random < .333)
-				addChild(new Jalepeno(false));
-			else if (random > .333 && random < .666)
-				addChild(new Jalepeno(false));
-			else if (random > .666)
-				addChild(new Jalepeno(false));
+			if (this.bPlaying)
+			{
+				var random:Number = Math.random() * 1;
+				
+				if(random < .333)
+					addChild(new Jalepeno());
+				else if (random > .333 && random < .666)
+					addChild(new Jalepeno());
+				else if (random > .666)
+					addChild(new Jalepeno());
+			}
 		}
 		
 		
@@ -262,6 +266,9 @@
 					this.removeChild(child);
 				}
 			}
+			
+			_collectableSpawnTimer.removeEventListener(TimerEvent.TIMER, spawnItem);
+			_collectableSpawnTimer.stop();
 			
 			super.end();
 		}

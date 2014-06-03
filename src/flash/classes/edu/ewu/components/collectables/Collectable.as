@@ -17,17 +17,32 @@
 	import flash.display.Sprite;
 	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.ui.screens.ScreenManager;
+	import edu.ewu.datastructures.Guid;
 	/**
 	 * ...
 	 * @author Jon Roster
 	 */
 	public class Collectable extends Collideable 
 	{
+		private var _gId:String;
+		
+		public function get id():String
+		{
+			return _gId;
+		}
+		
 		private var _sType:String;
 		
 		public function get type():String
 		{
 			return _sType;
+		}
+		
+		protected var _classPath:String
+		
+		public function get classPath():String
+		{
+			return _classPath;
 		}
 		
 		protected var _sAttribute:String;
@@ -46,9 +61,19 @@
 		protected var	_bNetwork	:Boolean;
 		
 		
-		public function Collectable($sType:String, $bNetwork = false) 
+		public function Collectable($gId, $sType:String, $bNetwork = false) 
 		{
 			super();
+			
+			if ($gId == "")
+			{
+				_gId = Guid.newGuid();
+			}
+			else
+			{
+				_gId = $gId;
+			}
+			
 			this._sType = $sType;
 			this.sCollisionType = CollisionManager.TYPE_COLLECTABLE;
 			this.addCollidesWithType(CollisionManager.TYPE_PLAYER);

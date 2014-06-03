@@ -92,7 +92,7 @@
 			
 			//spawn a jalepeno to the screen
 			KeyboardManager.instance.addKeyDownListener(KeyCode.T, function() {
-				ScreenManager.instance.mcActiveScreen.addChild(new Jalepeno(false));
+				ScreenManager.instance.mcActiveScreen.addChild(new Jalepeno());
 			});
 			
 			//commit suicide
