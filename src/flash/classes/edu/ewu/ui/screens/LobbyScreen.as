@@ -81,14 +81,18 @@ package edu.ewu.ui.screens
 		override public function begin():void
 		{
 			MusicManager.instance.crossSwitchMusic("Lobby");
+			
+			
 			_btSubmit.clickedSignal.add(onSubmit);
 			_btCredits.clickedSignal.add(toCredits);
 			_btRon.clickedSignal.add(changeCharacterToRon);
 			_btBK.clickedSignal.add(changeCharacterToBK);
 			_btWendy.clickedSignal.add(changeCharacterToWendy);
 			_btJack.clickedSignal.add(changeCharacterToJack);
+			_btPapa.clickedSignal.add(changeCharacterToPapa);
 			_btTrayMap.clickedSignal.add(changeMapToTray);
 			_btIslandMap.clickedSignal.add(changeMapToIsland);
+			
 			
 			super.begin();
 			fadeCharacters();
@@ -124,6 +128,13 @@ package edu.ewu.ui.screens
 			this.character = "Jack";
 			fadeCharacters();
 			this._btJack.alpha = 1;
+		}
+		
+		public function changeCharacterToPapa():void
+		{
+			this.character = "PapaJohn";
+			fadeCharacters();
+			this._btPapa.alpha = 1;
 		}
 		
 		public function fadeCharacters():void
