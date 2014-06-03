@@ -90,6 +90,7 @@ package edu.ewu.ui.screens
 			_btWendy.clickedSignal.add(changeCharacterToWendy);
 			_btJack.clickedSignal.add(changeCharacterToJack);
 			_btPapa.clickedSignal.add(changeCharacterToPapa);
+			_btColonel.clickedSignal.add(changeCharacterToColonel);
 			_btTrayMap.clickedSignal.add(changeMapToTray);
 			_btIslandMap.clickedSignal.add(changeMapToIsland);
 			
@@ -135,6 +136,13 @@ package edu.ewu.ui.screens
 			this.character = "PapaJohn";
 			fadeCharacters();
 			this._btPapa.alpha = 1;
+		}
+		
+		public function changeCharacterToColonel():void
+		{
+			this.character = "ColonelSanders";
+			fadeCharacters();
+			this._btColonel.alpha = 1;
 		}
 		
 		public function fadeCharacters():void
