@@ -6,6 +6,12 @@
 	import edu.ewu.components.attacks.BurgerKingBasicAttack;
 	import edu.ewu.components.attacks.BurgerKingChargedAttack;
 	import edu.ewu.components.attacks.BurgerKingRangedAttack;
+	import edu.ewu.components.attacks.JackBasicAttack;
+	import edu.ewu.components.attacks.JackChargedAttack;
+	import edu.ewu.components.attacks.JackRangedAttack;
+	import edu.ewu.components.attacks.PapaJohnBasicAttack;
+	import edu.ewu.components.attacks.PapaJohnChargedAttack;
+	import edu.ewu.components.attacks.PapaJohnRangedAttack;
 	import edu.ewu.components.attacks.RonaldMcDonaldChargedAttack;
 	import edu.ewu.components.attacks.WendyBasicAttack;
 	import edu.ewu.components.attacks.WendyChargedAttack;
@@ -107,6 +113,18 @@
 		private var 			_wRangedAttack		:WendyRangedAttack;
 		
 		private var 			_wChargedAttack		:WendyChargedAttack;
+		
+		private var				_jBasicAttack		:JackBasicAttack;
+		
+		private var				_jRangedAttack		:JackRangedAttack;
+		
+		private var				_jChargedAttack		:JackChargedAttack;
+		
+		private var				_pjBasicAttack		:PapaJohnBasicAttack;
+		
+		private var				_pjRangedAttack		:PapaJohnRangedAttack;
+		
+		private var				_pjChargedAttack	:PapaJohnChargedAttack;
 		
 		private var				_cJalepeno			:Jalepeno;
 
