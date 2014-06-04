@@ -63,6 +63,9 @@ package edu.ewu.ui.screens
 		public var			_btCredits				:CreditsButton;	
 		public var			character				:String = "RonaldMcDonald";
 		public var			map						:int = 2;
+		
+		//Number of players allowed
+		protected var _nNumberOfPlayers :uint = 4;
 		/* ---------------------------------------------------------------------------------------- */
 		
 		/**
@@ -197,7 +200,7 @@ package edu.ewu.ui.screens
 			ScreenManager.instance.mcActiveScreen.gotoAndPlay(map);
 			//ScreenManager.instance.mcActiveScreen.begin();
 			//ScreenManager.instance.mcActiveScreen.begin();
-			ScreenManager.instance.mcActiveScreen.setGame(name, character, sessionName);
+			ScreenManager.instance.mcActiveScreen.setGame(name, character, sessionName, _nNumberOfPlayers);
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
