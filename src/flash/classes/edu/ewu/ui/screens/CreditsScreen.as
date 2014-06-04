@@ -6,8 +6,11 @@ package edu.ewu.ui.screens
 	import edu.ewu.networking.NetworkManager;
 	import edu.ewu.sounds.MusicManager;
 	import edu.ewu.ui.buttons.SoundButton;
+	import flash.events.MouseEvent;
+	import flash.net.URLRequest;
 	import flash.text.TextField;
 	import org.osflash.signals.Signal;
+	import flash.net.navigateToURL;
 	
 	/**
 	 * Drives the CreditsScreen class.
@@ -20,6 +23,15 @@ package edu.ewu.ui.screens
 		public var			clickedSignal			:Signal = new Signal();
 		/** Reference to the back button */
 		public var			_btBack				:SoundButton;
+		
+		public var txtEmailJustin:TextField;
+		public var txtEmailTyler:TextField;
+		public var txtEmailJon:TextField;
+		public var txtEmailLindsey:TextField;
+		
+		public var txtLink1:TextField;
+		public var txtLink2:TextField;
+		public var txtLink3:TextField;
 		
 		/* ---------------------------------------------------------------------------------------- */
 		
@@ -41,8 +53,10 @@ package edu.ewu.ui.screens
 		{
 			MusicManager.instance.crossSwitchMusic("Victory");
 			_btBack.clickedSignal.addOnce(toLobby);
+			
 			super.begin();
 		}
+		
 		
 		/* ---------------------------------------------------------------------------------------- */
 		
