@@ -1,4 +1,4 @@
-﻿package edu.ewu.components.attacks 
+package edu.ewu.components.attacks 
 {
 	import edu.ewu.components.player.Player;
 	/**
