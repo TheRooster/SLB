@@ -16,8 +16,10 @@
 	import edu.ewu.components.attacks.WendyBasicAttack;
 	import edu.ewu.components.attacks.WendyChargedAttack;
 	import edu.ewu.components.attacks.WendyRangedAttack;
+	import edu.ewu.components.collectables.Burger;
 	import edu.ewu.components.collectables.Collectable;
 	import edu.ewu.components.collectables.Jalepeno;
+	import edu.ewu.components.collectables.Soda;
 	import edu.ewu.ui.screens.ResultsScreen;
 	import edu.ewu.ui.screens.ScreenManager;
 
@@ -127,6 +129,10 @@
 		private var				_pjChargedAttack	:PapaJohnChargedAttack;
 		
 		private var				_cJalepeno			:Jalepeno;
+		
+		private var				_cBurger			:Burger;
+		
+		private var				_cSoda				:Soda;
 
 		
 
