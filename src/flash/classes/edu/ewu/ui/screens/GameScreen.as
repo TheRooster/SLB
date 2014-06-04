@@ -66,6 +66,7 @@
 		
 		public var maxPlayerCount:uint;
 		public var currentPlayerCount:uint;
+		public var numPlayerInput :uint;
 		
 		private var _collectableSpawnTimer:Timer;
 		
@@ -127,7 +128,7 @@
 		/**
 		 * Creates the Local Player.
 		 */
-		override public function setGame(name:String, character:String, $sSessionName:String):void
+		override public function setGame(name:String, character:String, $sSessionName:String, numPlayers:uint):void
 		{
 			this.playerName = name;
 			this.sessionName = $sSessionName;
@@ -136,6 +137,17 @@
 			//player will now be created in GameScreen.
 			//var me:LocalPlayer = new LocalPlayer(name, "BurgerKing");
 			me = new LocalPlayer(playerName, character);
+			
+			if (numPlayers > 4)
+			{
+				numPlayers = 4;
+			}
+			else if (numPlayers < 2)
+			{
+				numPlayers = 2;
+			}
+			
+			this.numPlayerInput = numPlayers;
 		}
 		
 		private function spawnItem($e:Event = null):void
@@ -309,7 +321,7 @@
 				if(p4!=null)
 					txtP4Health.text = p4.nHealth + "%";
 					
-				if (this.maxPlayerCount >= 4)
+				if (this.maxPlayerCount >= this.numPlayerInput)
 				{
 					var stillHasLivesCount:uint = 0;
 					var stillAliveCount:uint = 0;
