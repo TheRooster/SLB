@@ -6,12 +6,20 @@
 	import edu.ewu.components.attacks.BurgerKingBasicAttack;
 	import edu.ewu.components.attacks.BurgerKingChargedAttack;
 	import edu.ewu.components.attacks.BurgerKingRangedAttack;
+	import edu.ewu.components.attacks.JackBasicAttack;
+	import edu.ewu.components.attacks.JackChargedAttack;
+	import edu.ewu.components.attacks.JackRangedAttack;
+	import edu.ewu.components.attacks.PapaJohnBasicAttack;
+	import edu.ewu.components.attacks.PapaJohnChargedAttack;
+	import edu.ewu.components.attacks.PapaJohnRangedAttack;
 	import edu.ewu.components.attacks.RonaldMcDonaldChargedAttack;
 	import edu.ewu.components.attacks.WendyBasicAttack;
 	import edu.ewu.components.attacks.WendyChargedAttack;
 	import edu.ewu.components.attacks.WendyRangedAttack;
+	import edu.ewu.components.collectables.Burger;
 	import edu.ewu.components.collectables.Collectable;
 	import edu.ewu.components.collectables.Jalepeno;
+	import edu.ewu.components.collectables.Soda;
 	import edu.ewu.ui.screens.ResultsScreen;
 	import edu.ewu.ui.screens.ScreenManager;
 
@@ -108,7 +116,23 @@
 		
 		private var 			_wChargedAttack		:WendyChargedAttack;
 		
+		private var				_jBasicAttack		:JackBasicAttack;
+		
+		private var				_jRangedAttack		:JackRangedAttack;
+		
+		private var				_jChargedAttack		:JackChargedAttack;
+		
+		private var				_pjBasicAttack		:PapaJohnBasicAttack;
+		
+		private var				_pjRangedAttack		:PapaJohnRangedAttack;
+		
+		private var				_pjChargedAttack	:PapaJohnChargedAttack;
+		
 		private var				_cJalepeno			:Jalepeno;
+		
+		private var				_cBurger			:Burger;
+		
+		private var				_cSoda				:Soda;
 
 		
 

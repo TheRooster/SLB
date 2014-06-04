@@ -9,7 +9,7 @@ package edu.ewu.components.attacks
 
 		public function PapaJohnChargedAttack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=0, $nDamage:uint=0, $bNetwork:Boolean = false) 
 		{
-			super($oCreator, $nX, $nY, $nAngle, $nForce, $nDamage, 500, "edu.ewu.components.attacks.WendyChargedAttack", "Thump",  $bNetwork);
+			super($oCreator, $nX, $nY, $nAngle, $nForce, $nDamage, 500, "edu.ewu.components.attacks.PapaJohnChargedAttack", "Thump",  $bNetwork);
 		}
 	}
 
