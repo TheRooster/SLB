@@ -62,6 +62,8 @@ package edu.ewu.components.player
 		
 		private var emitter:Emitter2D;
 		
+		protected var _bChargedAttackExecuting = false;
+		
 		
 		public function Player($pName:String, $charName:String)
 		{
@@ -135,6 +137,14 @@ package edu.ewu.components.player
 		public function get PlayerName()
 		{
 			return this._namePlate.text;
+		}
+		
+		
+		
+		public function chargedAttackComplete():void
+		{
+			this._bChargedAttackExecuting = false;
+			this.gotoAndPlaySprite("Idle");
 		}
 		
 

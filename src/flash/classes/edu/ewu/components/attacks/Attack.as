@@ -30,6 +30,7 @@ package edu.ewu.components.attacks
 		public var		angle		:Number;
 		public var 		_timer  	:Timer;
 		public var		sAttackName	:String;
+		public var		_nTime		:Number;
 
 		//$nTime is the time the attack will last in milliseconds.
 		public function Attack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint, 
@@ -42,6 +43,7 @@ package edu.ewu.components.attacks
 			this.x = $nX;
 			this.y = $nY;
 			this.angle = $nAngle;
+			this._nTime = $nTime;
 			/*
 			if ($bNetwork)
 			{
