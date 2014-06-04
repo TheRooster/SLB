@@ -1,6 +1,7 @@
 
 package edu.ewu.components.attacks 
 {
+	import edu.ewu.components.player.Player;
 	/**
 	 * ...
 	 * @author Lindsey
