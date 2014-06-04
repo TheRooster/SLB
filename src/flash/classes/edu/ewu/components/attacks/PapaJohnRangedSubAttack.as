@@ -1,6 +1,7 @@
 package edu.ewu.components.attacks 
 {
 	import com.greensock.TweenMax;
+	import edu.ewu.components.player.Player;
 	/**
 	 * ...
 	 * @author Jon Roster
