@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+	<affected>nBaseDamage</affected>
+	<amount>1.1</amount>
+	<duration>10</duration>
+	<sound>Chomp</sound>
+</data>
