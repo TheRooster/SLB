@@ -216,16 +216,5 @@ package edu.ewu.components.player
 			}
 		}
 		
-		
-		protected function chargeAnim()
-		{
-
-			emitter.start( );
-		}
-		
-		protected function stopChargeAnim()
-		{
-			emitter.stop();
-		}
 	}
 }

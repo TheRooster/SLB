@@ -272,9 +272,8 @@
 		{
 			if (_bAlive)
 			{
-				gotoAndPlaySprite("Charged_Attack");
+				this.gotoAndPlaySprite("Charged_Attack");
 				SoundManager.instance.playSound("Charge", true);
-				this.chargeAnim();
 				TweenMax.delayedCall(this._nChargeDelay, chargedAttackExecute);
 			}
 		}
@@ -285,7 +284,7 @@
 			{
 				gotoAndPlaySprite("Idle");
 				TweenMax.killTweensOf(chargedAttackExecute);//stop the delayed call
-				this.stopChargeAnim();
+
 			}
 		}
 		
@@ -293,10 +292,9 @@
 		{
 			if (_bAlive)
 			{
-				
+				this._bChargedAttackExecuting = true;
+				TweenMax.delayedCall(3, function() { this._bChargedAttackExecuting = false; } );//reset the execute flag
 				gotoAndPlaySprite("Charged_Execute");
-				KeyboardManager.instance.removeKeyUpListener(KeyCode.SPACEBAR, spaceUpHandler);
-				this.stopChargeAnim();
 				var customAttack:Class = getDefinitionByName("edu.ewu.components.attacks." + this._charName + "ChargedAttack") as Class;
 				new customAttack(this, this.x, this.y, this.SpriteRotation < 0 ? this.SpriteRotation + 360 : this.SpriteRotation, this.nBaseForce, this.nBaseDamage);
 			}
@@ -430,8 +428,6 @@
 				if (this.invulnerable == false)
 				{
 					var attack:Attack = $oObjectCollidedWith as Attack;
-					//stop the charging
-					this.stopChargeAnim();
 					TweenMax.killTweensOf(chargedAttackExecute);
 					attack.apply(this);
 				}
