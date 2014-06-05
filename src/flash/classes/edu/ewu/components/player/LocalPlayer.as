@@ -9,6 +9,16 @@
 	import edu.ewu.components.attacks.BurgerKingBasicAttack;
 	import edu.ewu.components.attacks.BurgerKingChargedAttack;
 	import edu.ewu.components.attacks.BurgerKingRangedAttack;
+	import edu.ewu.components.attacks.ColonelSandersBasicAttack;
+	import edu.ewu.components.attacks.ColonelSandersChargedAttack;
+	import edu.ewu.components.attacks.ColonelSandersChargedSubAttack;
+	import edu.ewu.components.attacks.ColonelSandersRangedAttack;
+	import edu.ewu.components.attacks.JackBasicAttack;
+	import edu.ewu.components.attacks.JackChargedAttack;
+	import edu.ewu.components.attacks.JackRangedAttack;
+	import edu.ewu.components.attacks.PapaJohnBasicAttack;
+	import edu.ewu.components.attacks.PapaJohnChargedAttack;
+	import edu.ewu.components.attacks.PapaJohnRangedAttack;
 	import edu.ewu.components.attacks.RonaldMcDonaldBasicAttack;
 	import edu.ewu.components.attacks.RonaldMcDonaldChargedAttack;
 	import edu.ewu.components.attacks.RonaldMcDonaldRangedAttack;
@@ -62,6 +72,18 @@
 		private var _wBasicAttack:WendyBasicAttack;
 		private var _wRangedAttack:WendyRangedAttack;
 		private var _wChargedAttack:WendyChargedAttack;
+		
+		private var _jBasicAttack:JackBasicAttack;
+		private var _jRangedAttack:JackRangedAttack;
+		private var _jChargedAttack:JackChargedAttack;
+		
+		private var _pBasicAttack:PapaJohnBasicAttack;
+		private var _pRangedAttack:PapaJohnRangedAttack;
+		private var _pChargedAttack:PapaJohnChargedAttack;
+		
+		private var _cBasicAttack:ColonelSandersBasicAttack;
+		private var _cRangedAttack:ColonelSandersRangedAttack;
+		private var _cChargedAttack:ColonelSandersChargedAttack;
 		
 		/** To help keep track of score */
 		public var sLastHitBy:String;
