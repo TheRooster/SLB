@@ -31,7 +31,7 @@ package edu.ewu.components.collectables
 					
 				this._nOriginalValue = Player($oObjectCollidedWith)[_sAttribute];
 				Player($oObjectCollidedWith)[_sAttribute] *= _nAmount;
-				TweenMax.to($oObjectCollidedWith, .1, {glowFilter:{color:0xFF0000, alpha:1, blurX:30, blurY:30, repeat:-1, yoyo:true}});
+				TweenMax.to($oObjectCollidedWith, .1, {glowFilter:{color:0xFF0000, alpha:1, blurX:30, blurY:30, repeat:50, yoyo:true}});
 				SoundManager.instance.playSound(this._sSound, true);
 					
 				TweenMax.delayedCall(this._iDuration, onComplete, [$oObjectCollidedWith]);

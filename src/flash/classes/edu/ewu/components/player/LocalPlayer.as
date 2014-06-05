@@ -117,7 +117,7 @@
 			
 			//spawn a jalepeno to the screen
 			KeyboardManager.instance.addKeyDownListener(KeyCode.T, function() {
-				ScreenManager.instance.mcActiveScreen.addChild(new Burger());
+				ScreenManager.instance.mcActiveScreen.addChild(new Soda());
 			});
 			
 			//commit suicide
