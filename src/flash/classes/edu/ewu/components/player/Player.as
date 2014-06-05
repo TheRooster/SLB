@@ -38,11 +38,10 @@ package edu.ewu.components.player
 		public var _pName:String;
 		
 		
-		public var nSpeed:uint = 5;
 		
-		public var nWeight:uint;
 		
-		protected var _nChargeDelay;
+		
+		
 		
 		
 		public var nBaseDamage:Number;
@@ -54,9 +53,11 @@ package edu.ewu.components.player
 		protected var _mcHeavyAttack:String;
 		protected var _mcChargedAttack:String;
 		
+		protected var _nChargeDelay;
+		public var nSpeed:uint = 5;
 		public var nLives:uint;
 		public var nHealth:uint;
-		public var weight:uint;
+		public var nWeight:uint;
 		
 		public var kills:uint;
 		
@@ -80,8 +81,7 @@ package edu.ewu.components.player
 			this._bAlive = true;
 			this.nLives = 3;
 			
-			this.weight = 1;
-			this._nChargeDelay = 2;
+			
 			this._charName = $charName;
 			this._pName = $pName;
 
@@ -107,7 +107,10 @@ package edu.ewu.components.player
 		protected function init(e:LoaderEvent):void
 		{
 			//init with xml
-			var stats:XML = LoaderMax.getContent(this._charName );
+			var stats:XML = XMLLoader(e.target).content;
+			this.nWeight = uint(stats.stats.weight);
+			this.nSpeed = uint(stats.stats.speed);
+			this._nChargeDelay = Number(stats.stats.delay);
 			
 			var loader:SWFLoader = new SWFLoader("resources/swfs/" + this._charName + ".swf", { name:this._charName + "_Sprite", onComplete:function() { initSprite( MovieClip(MovieClip(loader.rawContent).getChildAt(0))); }} );
 			loader.load();

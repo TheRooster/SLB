@@ -101,7 +101,7 @@ package edu.ewu.components.attacks
 				
 				//Convert this bitch to radians yo
 				this.angle = (this.angle / 180) * Math.PI;
-				TweenMax.to($oPlayer, 0.5, { x:$oPlayer.x + (((this.force / $oPlayer.weight) + ($oPlayer.nHealth + 1 / 100)) * Math.cos(this.angle)), y:$oPlayer.y + (((this.force / $oPlayer.weight) + ($oPlayer.nHealth + 1 / 100))) * Math.sin(this.angle) , ease: Linear.easeOut } );
+				TweenMax.to($oPlayer, 0.5, { x:$oPlayer.x + (((this.force / $oPlayer.nWeight) + ($oPlayer.nHealth + 1 / 100)) * Math.cos(this.angle)), y:$oPlayer.y + (((this.force / $oPlayer.nWeight) + ($oPlayer.nHealth + 1 / 100))) * Math.sin(this.angle) , ease: Linear.easeOut } );
 
 				this.destroy();
 			}
