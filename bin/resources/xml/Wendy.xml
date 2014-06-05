@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <data>
 	<stats>	
-		<weight>10</weight>
+		<weight>3</weight>
 		<speed>8</speed>
 		<delay>.5</delay>
 	</stats>

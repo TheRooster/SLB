@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <data>
 	<stats>	
-		<weight>10</weight>
-		<speed>3</speed>
+		<weight>8</weight>
+		<speed>4</speed>
 		<delay>.5</delay>
 	</stats>
 </data>
