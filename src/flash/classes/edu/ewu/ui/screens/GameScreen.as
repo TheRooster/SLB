@@ -151,9 +151,9 @@
 					addChild(new Burger());
 				else if (random > .666)
 					addChild(new Soda());
-				_collectableSpawnTimer.stop();
-				_collectableSpawnTimer = new Timer(Math.random() * 60000 + 5000);
-				_collectableSpawnTimer.start();
+				//_collectableSpawnTimer.stop();
+				//_collectableSpawnTimer = new Timer(Math.random() * 60000 + 5000);
+				//_collectableSpawnTimer.start();
 			}
 		}
 		
