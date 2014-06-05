@@ -1,4 +1,4 @@
-package edu.ewu.components.collectables 
+﻿package edu.ewu.components.collectables 
 {
 	import com.greensock.TweenMax;
 	import edu.ewu.components.Collideable;
@@ -31,7 +31,7 @@ package edu.ewu.components.collectables
 					
 				this._nOriginalValue = Player($oObjectCollidedWith)[_sAttribute];
 				Player($oObjectCollidedWith)[_sAttribute] *= _nAmount;
-				TweenMax.to($oObjectCollidedWith, .1, {glowFilter:{color:0x663300, alpha:1, blurX:30, blurY:30, repeat:-1, yoyo:true}});
+				TweenMax.to($oObjectCollidedWith, .1, {scaleX:1.1, scaleY:1.1});
 				SoundManager.instance.playSound(this._sSound, true);
 					
 				TweenMax.delayedCall(this._iDuration, onComplete, [$oObjectCollidedWith]);
@@ -39,11 +39,17 @@ package edu.ewu.components.collectables
 			}
 			else if ($oObjectCollidedWith is NetworkPlayer )
 			{
-				TweenMax.to($oObjectCollidedWith, .01, {glowFilter:{color:0x663300, alpha:1, blurX:30, blurY:30, repeat:-1}});
+				TweenMax.to($oObjectCollidedWith, .01, {scaleX:1.1, scaleY:1.1});
 				CollisionManager.instance.remove(this);
 				ScreenManager.instance.mcActiveScreen.removeChild(this);
 				NetworkManager.instance.removeCollectable(this);
 			}
 		}
+		
+		override public function onComplete($oObjectCollidedWith:Player)
+		{
+			$oObjectCollidedWith[_sAttribute] = _nOriginalValue;
+			TweenMax.to($oObjectCollidedWith, .1, {scaleX:1, scaleY:1});
+		} 
 	}
 }
