@@ -13,7 +13,7 @@
 	{
 		public function BurgerKingChargedAttack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=1, $nDamage:uint=1, $bNetwork:Boolean = false) 
 		{
-			super($oCreator, $nX, $nY, $nAngle, $nForce, $nDamage, 3000, "edu.ewu.components.attacks.BurgerKingChargedAttack", "Thump", $bNetwork); //maybe change attack sound to Yell?
+			super($oCreator, $nX, $nY, $nAngle, $nForce, $nDamage,"edu.ewu.components.attacks.BurgerKingChargedAttack", $bNetwork); //maybe change attack sound to Yell?
 			TweenMax.to(this, 1, { x:$nX + 300 * Math.cos(this.angle/180*Math.PI), y:$nY + 300 * Math.sin(this.angle/180*Math.PI) ,ease:Quad.easeIn } );
 			TweenMax.to($oCreator, 1, { x:$nX + 300 * Math.cos(this.angle / 180 * Math.PI), y:$nY + 300 * Math.sin(this.angle / 180 * Math.PI), ease:Quad.easeIn, onComplete:$oCreator.chargedAttackComplete } );
 		}

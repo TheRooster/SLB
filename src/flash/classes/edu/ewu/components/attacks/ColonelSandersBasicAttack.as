@@ -9,7 +9,7 @@
 	{
 		public function ColonelSandersBasicAttack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=1, $nDamage:uint=1, $bNetwork:Boolean = false) 
 		{
-			super($oCreator, $nX, $nY, $nAngle,  $nForce, $nDamage, 500, "edu.ewu.components.attacks.ColonelSandersBasicAttack", "Thump", $bNetwork);
+			super($oCreator, $nX, $nY, $nAngle,  $nForce, $nDamage,"edu.ewu.components.attacks.ColonelSandersBasicAttack", $bNetwork);
 		}		
 	}
 }

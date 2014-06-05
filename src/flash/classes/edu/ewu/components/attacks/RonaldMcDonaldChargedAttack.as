@@ -10,8 +10,8 @@
 	{
 		public function RonaldMcDonaldChargedAttack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=0, $nDamage:uint=0, $bNetwork:Boolean = false) 
 		{
-			super($oCreator, $nX, $nY, $nAngle, 10*$nForce, $nDamage, 500, "edu.ewu.components.attacks.RonaldMcDonaldChargedAttack", "Explosion",  $bNetwork);
-			TweenMax.to(this, .5, { scaleX:8, scaleY:8 } );
+			super($oCreator, $nX, $nY, $nAngle, $nForce, $nDamage, "edu.ewu.components.attacks.RonaldMcDonaldChargedAttack", $bNetwork);
+			TweenMax.to(this, this._nTime, { scaleX:8, scaleY:8 } );
 		}
 	}
 }

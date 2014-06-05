@@ -5,11 +5,11 @@
 	 * ...
 	 * @author Lindsey
 	 */
-	public class WendyRangedAttack extends RonaldMcDonaldRangedAttack
+	public class WendyRangedAttack extends Attack
 	{
 		public function WendyRangedAttack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=1, $nDamage:uint=1, $bNetwork:Boolean = false) 
 		{
-			super($oCreator, $nX, $nY, $nAngle, $nForce, $nDamage, $bNetwork);
+			super($oCreator, $nX, $nY, $nAngle, $nForce, $nDamage, "edu.ewu.components.attacks.WendyRangedAttack", $bNetwork);
 		}
 	}
 }
