@@ -134,18 +134,7 @@
 			this.sessionName = $sSessionName;
 			var loader:XMLLoader =  new XMLLoader("resources/xml/serverKey.xml", { name:"key", onComplete:initNetwork} );
 			loader.load();
-			//player will now be created in GameScreen.
-			//var me:LocalPlayer = new LocalPlayer(name, "BurgerKing");
 			me = new LocalPlayer(playerName, character);
-			
-			if (numPlayers > 4)
-			{
-				numPlayers = 4;
-			}
-			else if (numPlayers < 2)
-			{
-				numPlayers = 2;
-			}
 			
 			this.numPlayerInput = numPlayers;
 		}
@@ -200,6 +189,8 @@
 			
 			this.currentPlayerCount++;
 			
+			
+			
 			if (this.currentPlayerCount > this.maxPlayerCount)
 			{
 				this.maxPlayerCount = this.currentPlayerCount;
@@ -220,6 +211,11 @@
 			{
 				p4 = $oPlayer;
 				txtp4.text = p4._pName;
+				//this.start();
+			}
+			
+			if (this.currentPlayerCount >= this.numPlayerInput)
+			{
 				this.start();
 			}
 		}

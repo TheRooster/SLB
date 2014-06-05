@@ -33,6 +33,7 @@
 		/** References to the input text fields */
 		public var			_txtPlayerName			:TextField;
 		public var			_txtServer				:TextField;
+		public var			_txtPlayers				:TextField;
 		
 		/** Reference to the Submit button */
 		public var			_btSubmit				:SubmitButton;
@@ -201,8 +202,20 @@
 			{
 				sessionName = "SimpleDemoGroup";
 			}
+			_nNumberOfPlayers = int(_txtPlayers.text);
+			
+			if (_nNumberOfPlayers > 4)
+			{
+				_nNumberOfPlayers = 4;
+			}
+			else if (_nNumberOfPlayers < 2)
+			{
+				_nNumberOfPlayers = 2;
+			}
 			
 			sessionName += this.map.toString();
+			sessionName += this._nNumberOfPlayers.toString();
+			
 			
 			ScreenManager.instance.crossSwitchScreen("Game");
 			ScreenManager.instance.mcActiveScreen.gotoAndPlay(map);
