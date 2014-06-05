@@ -1,4 +1,4 @@
-package edu.ewu.ui.screens
+﻿package edu.ewu.ui.screens
 {
 	import edu.ewu.components.CreditsButton;
 	import edu.ewu.components.player.LocalPlayer;
@@ -217,7 +217,7 @@ package edu.ewu.ui.screens
 			ScreenManager.instance.crossSwitchScreen("Game");
 			ScreenManager.instance.mcActiveScreen.gotoAndPlay(map);
 			ScreenManager.instance.mcActiveScreen.begin();
-			ScreenManager.instance.mcActiveScreen.setGame(name, character, sessionName);
+			ScreenManager.instance.mcActiveScreen.setGame(name, character, sessionName, 4);
 		}
 		
 		private function toCredits():void 
