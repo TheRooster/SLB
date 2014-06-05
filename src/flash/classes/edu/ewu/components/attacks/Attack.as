@@ -1,4 +1,4 @@
-package edu.ewu.components.attacks  
+﻿package edu.ewu.components.attacks  
 {
 	import com.greensock.easing.Linear;
 	import com.greensock.events.LoaderEvent;
@@ -116,9 +116,8 @@ package edu.ewu.components.attacks
 				
 				//Convert this bitch to radians yo
 				this.angle = (this.angle / 180) * Math.PI;
-				var distance:Number = (this.force / $oPlayer.nWeight) + (($oPlayer.nHealth + 1) / 100);
-				trace(this.force + ":" + $oPlayer.nHealth + 1);
-				trace(distance + ":" + this.damage);
+				var distance:Number = (this.force / $oPlayer.nWeight) * (($oPlayer.nHealth + 1) / 10);
+
 				TweenMax.to($oPlayer, 0.5, { x:$oPlayer.x + (distance * Math.cos(this.angle)), y:$oPlayer.y + (distance * Math.sin(this.angle)) , ease: Linear.easeOut } );
 
 				this.destroy();
