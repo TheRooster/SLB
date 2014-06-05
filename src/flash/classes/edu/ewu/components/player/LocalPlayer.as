@@ -400,6 +400,8 @@
 					TweenMax.killTweensOf(this);
 					this.x = this._nLastX;
 					this.y = this._nLastY;
+					this._nLastX = this.x;
+					this._nLastY = this.y;
 				}
 			}
 

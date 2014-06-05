@@ -96,6 +96,7 @@
 			_btColonel.clickedSignal.add(changeCharacterToColonel);
 			_btTrayMap.clickedSignal.add(changeMapToTray);
 			_btIslandMap.clickedSignal.add(changeMapToIsland);
+			_btUFCMap.clickedSignal.add(changeMapToUFC);
 			
 			
 			super.begin();
@@ -177,6 +178,13 @@
 			this.map = 3;
 			fadeMaps();
 			_btIslandMap.alpha = 1;
+		}
+		
+		public function changeMapToUFC():void
+		{
+			this.map = 4;
+			fadeMaps();
+			_btUFCMap.alpha = 1;
 		}
 		
 		/* ---------------------------------------------------------------------------------------- */
