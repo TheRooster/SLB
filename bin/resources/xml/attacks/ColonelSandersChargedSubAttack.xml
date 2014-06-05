@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <data>
-	<force>1</force>
-	<damage>1</damage>
+	<force>250</force>
+	<damage>75</damage>
 	<time>500</time>
 	<hitSound>Explosion</hitSound>
 </data>
