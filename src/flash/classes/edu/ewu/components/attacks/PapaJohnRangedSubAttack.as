@@ -14,7 +14,7 @@ package edu.ewu.components.attacks
 			//these ones we will call super on, because they're actually going to be created
 			super($oCreator, $nX, $nY, $nAngle, $nForce, $nDamage, "edu.ewu.components.attacks.PapaJohnRangedSubAttack", $bNetwork);
 			
-			TweenMax.to(this, this._nTime, { x:$nX + (300 * Math.cos(($nAngle / 180) * Math.PI)), y:$nY + (300 * Math.sin(($nAngle / 180) * Math.PI)) } );
+			TweenMax.to(this, 1, { x:$nX + (300 * Math.cos(($nAngle / 180) * Math.PI)), y:$nY + (300 * Math.sin(($nAngle / 180) * Math.PI)) } );
 		}
 		
 	}

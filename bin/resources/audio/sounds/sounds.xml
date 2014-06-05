@@ -10,5 +10,6 @@
 		<MP3Loader name="Explosion" url="Explosion.mp3" autoPlay="false" />
 		<MP3Loader name="Slurp" url="Slurp.mp3" autoPlay="false" />
 		<MP3Loader name="Whip" url="Whip.mp3" autoPlay="false" />
+		<MP3Loader name="Watersplash" url="Watersplash.mp3" autoPlay="false" />
 	</LoaderMax>
 </data>

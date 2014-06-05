@@ -13,7 +13,7 @@ package edu.ewu.components.attacks
 		public function ColonelSandersRangedAttack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint, $nDamage:uint, $bNetwork:Boolean=false) 
 		{
 			super($oCreator, $nX, $nY, $nAngle, $nForce, $nDamage, "edu.ewu.components.attacks.ColonelSandersRangedAttack", $bNetwork);
-			TweenMax.to(this, this._nTime, { scaleX:40} );
+			TweenMax.to(this, .3, { scaleX:40} );
 			
 		}
 		

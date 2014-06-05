@@ -12,7 +12,7 @@
 		public function JackRangedAttack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=1, $nDamage:uint=1, $bNetwork:Boolean = false) 
 		{
 			super($oCreator, $nX, $nY, $nAngle, $nForce, $nDamage,"edu.ewu.components.attacks.JackRangedAttack", $bNetwork);
-			TweenMax.to(this, this._nTime, { x:$nX + 250 * Math.cos(this.angle/180*Math.PI), y:$nY + 250 * Math.sin(this.angle/180*Math.PI) } );
+			TweenMax.to(this, .5, { x:$nX + 250 * Math.cos(this.angle/180*Math.PI), y:$nY + 250 * Math.sin(this.angle/180*Math.PI) } );
 		}
 		
 

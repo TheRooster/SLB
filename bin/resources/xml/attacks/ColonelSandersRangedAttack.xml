@@ -3,5 +3,5 @@
 	<force>1</force>
 	<damage>1</damage>
 	<time>500</time>
-	<hitSound>Thump</hitSound>
+	<hitSound>Watersplash</hitSound>
 </data>
