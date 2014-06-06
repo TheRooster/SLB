@@ -9,7 +9,7 @@
 	{
 		public function WendyChargedAttack($oCreator:Player, $nX:uint, $nY:uint, $nAngle:uint, $nForce:uint=0, $nDamage:uint=0, $bNetwork:Boolean = false) 
 		{
-			super($oCreator, $nX, $nY, $nAngle, -1*$nForce, $nDamage, "edu.ewu.components.attacks.WendyChargedAttack", $bNetwork);
+			super($oCreator, $nX, $nY, $nAngle, $nForce, $nDamage, "edu.ewu.components.attacks.WendyChargedAttack", $bNetwork);
 		}
 	}
 }

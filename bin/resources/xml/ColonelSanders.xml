@@ -3,6 +3,6 @@
 	<stats>	
 		<weight>8</weight>
 		<speed>4</speed>
-		<delay>.5</delay>
+		<delay>1</delay>
 	</stats>
 </data>
