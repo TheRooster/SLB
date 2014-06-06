@@ -100,7 +100,7 @@
 			this.maxPlayerCount = 1;
 			this.currentPlayerCount = 1;
 			
-			KeyboardManager.instance.addKeyDownListener(KeyCode.ESC, escKeyDownHandler);
+			//KeyboardManager.instance.addKeyDownListener(KeyCode.ESC, escKeyDownHandler);
 			this.addEventListener(Event.ENTER_FRAME, this.enterFrameHandler);
 			NetworkManager.instance.playerJoinedSignal.add(playerAdded);
 			NetworkManager.instance.playerRemovedSignal.add(playerRemoved);
@@ -292,7 +292,7 @@
 			_collectableSpawnTimer.removeEventListener(TimerEvent.TIMER, spawnItem);
 			_collectableSpawnTimer.stop();
 			
-			KeyboardManager.instance.removeKeyDownListener(KeyCode.ESC, escKeyDownHandler);
+			//KeyboardManager.instance.removeKeyDownListener(KeyCode.ESC, escKeyDownHandler);
 			
 			super.end();
 		}
