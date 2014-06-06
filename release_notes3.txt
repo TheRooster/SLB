@@ -1,0 +1,89 @@
+4AM-- Justin Breitenbach, Tyler Peek, Jon Roster, Lindsey Corn
+Gold Build
+June 5th, 2014
+
+Delivery Notes
+
+---------[Gameplay instructions]----------
+
+
+-----------------Movement---------------
+----W 			-- move up
+----S 			-- move down
+----A 			-- move left
+----D 			-- move right
+----move mouse  	-- rotate character
+
+------------------Attacks---------------
+----E			-- ranged attack
+----right click 	-- basic attack
+----space bar(hold)   	-- charged attack
+
+----------------Easter eggs-------------
+----T 			-- spawn Burger
+----L			-- commit suicide
+
+
+-----------[State of Delivery]-------------
+
+
+ ----------------Current------------------
+
+Gold:
+6 Characters			-- partially complete (Papa John's charged attack)		
+--Related sounds		-- complete
+--Related animations		-- complete
+3 Maps				-- complete
+Implement player list		-- complete
+
+Bonus: 
+Choose number of players	-- complete
+
+
+ ---------------Previous------------------
+
+
+Beta:
+Full gameplay mechanics  	-- complete
+3 Characters           		-- complete
+-All attacks			-- complete
+-Related sounds			-- complete
+-Related animations		-- complete
+2 Maps				-- complete
+Item drops			-- complete
+-Related sounds			-- complete
+Player health			-- complete
+Player lives			-- complete
+Map selection			-- complete	
+Server name input		-- complete
+
+
+Alpha:
+Basic gameplay mechanics	-- complete
+   Death and respawn		-- complete
+2 Characters			-- complete
+   2 Attacks			-- complete
+   Related sounds		-- complete
+   Related animations		-- complete
+Player name input		-- complete
+Complete lobby screen		-- complete
+Complete results screen		-- complete
+Complete credits screen		-- complete
+Music for all screens		-- complete
+1 Map				-- complete
+Networked SFX			-- complete
+
+Bonus:
+Player health displayed		-- complete
+Player names displayed		-- complete
+Preloader			-- complete
+
+
+ ----------------Known Bugs---------------
+Wall doesn't work in one spot on the UFC map (Difficult to do- its a feature!)
+Sometimes character spawns at (0,0) before game starts
+Animation does not resume upon attack completion
+
+
+---------------[For Placement Only]------------
+Nothing
